@@ -1,23 +1,28 @@
 import React, { ReactNode, CSSProperties } from 'react';
 
 interface SectionProps {
-  children: ReactNode;
+  children?: ReactNode;
   background?: string;
+  fixHeight?: number;
+  position?: CSSProperties['position'];
 }
 
-export const Section: React.FC<SectionProps> = ({ children, background }) => {
+export const Section: React.FC<SectionProps> = ({ children, background, fixHeight, position }) => {
   const containerStyle: CSSProperties = {
     width: '100%',
     margin: '0 auto',
     padding:'20px 0 15px',
+    overflow: 'hidden',
     background: background || 'transparent',
+    position: position || 'static',
+    height: fixHeight || 'auto'
   };
 
   return <div style={containerStyle}>{children}</div>;
 };
 
 interface ContainerProps {
-  children: ReactNode;
+  children?: ReactNode;
   background?: string;
 }
 
@@ -32,22 +37,24 @@ export const Container: React.FC<ContainerProps> = ({ children, background }) =>
 };
 
 interface RowProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const Row: React.FC<RowProps> = ({ children }) => {
   const rowStyle: CSSProperties = {
     display: 'flex',
+    width:'100%',
     flexWrap: 'wrap',
     flexDirection: 'row',
     margin: '-8px',
+    justifyContent: 'space-between'
   };
 
   return <div style={rowStyle}>{children}</div>;
 };
 
 interface ColProps {
-  children: ReactNode;
+  children?: ReactNode;
   flex?: string;
 }
 

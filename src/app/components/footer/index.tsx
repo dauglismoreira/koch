@@ -1,21 +1,18 @@
 "use client"
 
-import {useState, useEffect} from 'react';
 import { Col, Container, Row, Section } from '../grid';
-import { CallNumber } from './components/callNumber';
-import { ItemMenu } from './components/itemMenu';
-import { ToogleMenu } from './components/toogleMenu';
 import useScreenSize from '../../hooks/useScreenSize';
 import { Logo } from '../logo';
+import { FooterTitle } from './components/footerTitle';
 
 interface MenuItem {
     text: string;
     href?: string;
   }
 
-export const Header = () => {
+export const Footer = () => {
 
-    const isLargeScreen = useScreenSize(1280);
+    // const isLargeScreen = useScreenSize(1280);
 
     const itemMenuList: MenuItem[] = [
         {href:'#', text:'Sobre'},
@@ -30,10 +27,11 @@ export const Header = () => {
     ]
 
     return(
-        <Section background="var(--background-primary)" fixHeight={70} position="fixed">
+        <div style={{paddingTop:'400px'}}>
+        <Section background="var(--background-primary)">
             <Container>
                 <Row>
-                    <Col>
+                    {/* <Col>
                         <Logo desktop={140} mobile={140} color="white" />
                     </Col>
                     {isLargeScreen ?
@@ -49,9 +47,26 @@ export const Header = () => {
                         <Col>
                             <ToogleMenu itens={itemMenuList}/>
                         </Col>
-                    }
+                    } */}
+                    <Col>
+                        <FooterTitle text="Entre em contato"/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col></Col>
+                    <Col></Col>
+                </Row>
+                <Row>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col></Col>
+                </Row>
+                <Row>
+                    <Col></Col>
+                    <Col></Col>
                 </Row>
             </Container>
         </Section>
+        </div>
     )
 }
