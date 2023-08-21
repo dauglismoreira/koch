@@ -4,14 +4,15 @@ interface SectionProps {
   children?: ReactNode;
   background?: string;
   fixHeight?: number;
+  padding?: string;
   position?: CSSProperties['position'];
 }
 
-export const Section: React.FC<SectionProps> = ({ children, background, fixHeight, position }) => {
+export const Section: React.FC<SectionProps> = ({ children, padding, background, fixHeight, position }) => {
   const containerStyle: CSSProperties = {
     width: '100%',
     margin: '0 auto',
-    padding:'20px 0 15px',
+    padding: padding || '20px 0 15px',
     overflow: 'hidden',
     background: background || 'transparent',
     position: position || 'static',
@@ -55,7 +56,7 @@ export const Row: React.FC<RowProps> = ({ children }) => {
 
 interface ColProps {
   children?: ReactNode;
-  flex?: string;
+  flex?: number;
 }
 
 export const Col: React.FC<ColProps> = ({ children, flex }) => {
