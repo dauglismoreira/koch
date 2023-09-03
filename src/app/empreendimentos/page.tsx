@@ -1,4 +1,4 @@
-import { EnterprisePage } from './EnterprisePage';
+import { EnterprisePage } from './enterprisePage';
 import {
     situationOptions,
     aboutInfo,
