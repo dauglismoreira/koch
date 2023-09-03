@@ -1,101 +1,86 @@
 "use client"
 
 import styled from 'styled-components';
-import { Col, Container, Row, Section } from '../grid';
-import useScreenSize from '../../hooks/useScreenSize';
+import { Col, Container, Section } from "../grid";
+import { FooterTitle } from "./components/footerTitle";
+import { FooterMenu } from "./components/footerMenu";
+import { FooterSocial, Text } from "./components/footerSocial";
+import { FooterRights } from "./components/footerRights";
+import useScreenSize from '../../../hooks/useScreenSize';
+import { ItemMenu } from '../itemMenu';
 import { Logo } from '../logo';
-import { FooterTitle } from './components/footerTitle';
-import { ItemMenu } from '../header/components/itemMenu';
-import { CopyRight } from './components/copyRight';
-import { ImpacteText } from './components/impacte';
-import { CallNumber } from './components/callNumber';
-
-interface MenuItem {
-    text: string;
-    href?: string;
-  }
 
 export const Footer = () => {
 
-    // const isLargeScreen = useScreenSize(1280);
+    const {isLargeScreen} = useScreenSize(768)
 
-    const itemMenuList: MenuItem[] = [
-        {href:'#', text:'Sobre'},
-        {href:'#', text:'Empreendimentos'},
-        {href:'#', text:'Central de vendas'},
-        {href:'#', text:'Trabalhe conosco'},
-        {href:'#', text:'Contato'},
-        {href:'#', text:'Blog'}
+    const phone = '47999999999';
+    const email = 'koch@kockempreendimentos.com.br';
+    const street = 'R. 210 - Meia Praia, Itapema';
+    const city = 'Santa Catarina'; 
+  
+    const itemMenuList = [
+      {href:'./../sobre', text:'Sobre'},
+      {href:'./../empreendimentos', text:'Empreendimentos'},
+      {href:'./../atendimento', text:'Central de vendas'},
+      {href:'./../trabalhe-conosco', text:'Trabalhe conosco'},
+      {href:'./../contato', text:'Contato'},
+      {href:'./../blog', text:'Blog'}
     ]
-
-    const itemSocialList: MenuItem[] = [
-        {href:'#', text:'Instagram'},
-        {href:'#', text:'Linkedin'},
-        {href:'#', text:'Youtube'}
+  
+    const itemSocialList = [
+      {href:'#', text:'Instagram'},
+      {href:'#', text:'Linkedin'},
+      {href:'#', text:'Youtube'}
     ]
 
     return(
-        <div style={{paddingTop:'400px'}}>
-        <Section background="var(--background-primary)" padding="160px 0 100px">
+        <Section
+            background="var(--background-primary)"
+            padding={isLargeScreen ? "160px 0 100px" : "60px 10px 40px"}
+        >
             <Container>
-                <Row>
-                    <Col>
-                        <FooterTitle text={`Entre \n em contato`}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <LineDivider></LineDivider>
-                </Row>
-                <Row>
-                    <Col flex={6}>
-                        <CallNumber
-                            number='47999999999'
-                            email='koch@kockempreendimentos.com.br'
-                        />
-                    </Col>
-                    <Col flex={6}>
-                        <Row>
-                            {itemMenuList.map((item, index) => (
-                                <Col key={index}><ItemMenu href={item.href} text={item.text}/></Col>
-                            ))}
-                        </Row>
-                    </Col>
-                </Row>
-                <Row>
-                    <LineDivider></LineDivider>
-                </Row>
-                <Row>
-                    <Col flex={8}>
-                        R. 210 - Meia Praia, Itapema<br></br>
-                        Santa Catarina
-                    </Col>
-                    {itemSocialList.map((item, index) => (
-                        <Col flex={1} key={index}><ItemMenu href={item.href} text={item.text}/></Col>
-                    ))}
-                    <Col flex={1}>
-                        <Logo desktop={180} mobile={180} color="white" />
-                    </Col>
-                </Row>
-                <Row>
-                    <LineDivider></LineDivider>
-                </Row>
-                <Row>
-                    <Col>
-                        <CopyRight text="Política de Privacidade e Segurança, ©2023 - Todos os direitos reservados"/>
-                    </Col>
-                    <Col>
-                        <ImpacteText text="Desenvolvido por impacte"/>
-                    </Col>
-                </Row>
+                <FooterTitle text={`Entre \n em contato`}/>
+                {isLargeScreen && <LineDivider/>}
+                <FooterMenu activeBreak={isLargeScreen} items={itemMenuList} number={phone} email={email}/>
+                <LineDivider/>
+                {!isLargeScreen && <Text>{street} - {city}</Text>}
+                {!isLargeScreen && <LineDivider/>}
+                <FooterSocial activeBreak={isLargeScreen} street={street} city={city} color='white' items={itemSocialList}/>
+                <LineDivider/>
+                {!isLargeScreen && 
+                    <MenuMobileContainerGrid>
+                        {itemMenuList && itemMenuList.map((item, index) => (
+                            <Col key={index} padding='15px 0 0' align="left"><ItemMenu href={item.href} text={item.text}/></Col>
+                        ))}
+                    </MenuMobileContainerGrid>
+                }
+                {!isLargeScreen && <LineDivider/> }
+                {!isLargeScreen && <ContainerLogo><Logo  padding="0 0 0 40px" desktop={180} mobile={180} color="white"/></ContainerLogo> }
+                <FooterRights/>
             </Container>
         </Section>
-        </div>
     )
-}
+} 
 
 const LineDivider = styled.div`
     height:1px;
     width:100%;
     margin:35px 0;
     background-color:rgba(255,255,255,0.3);
+
+    @media(max-width:768px){
+        margin:25px 0;
+    }
+`;
+
+const MenuMobileContainerGrid = styled.div`
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    margin:-10px 0 30px;
+`;
+
+const ContainerLogo = styled.div`
+    position:relative;
+    margin:-15px 0 0 -22px;
 `;

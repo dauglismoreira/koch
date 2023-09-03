@@ -1,6 +1,5 @@
-"use client"
-
 import styled from 'styled-components';
+import { Col, Row } from '../../grid';
 
 interface ItemProps {
     text?: string;
@@ -9,16 +8,24 @@ interface ItemProps {
 export const FooterTitle: React.FC<ItemProps> = ({text}) => {
 
     return(
-        <Title>{text}</Title>
+        <Row>
+            <Col>
+                <Title>{text}</Title>
+            </Col>
+        </Row>
     )
 }
 
 const Title = styled.div`
     font-size:3.8rem;
     color:var(--text-white);
-    font-family: 'Libre Baskerville', serif;
+    font-family: var(--font-primary);
     white-space: pre-line;
     line-height:1;
     font-weight:600;
     text-transform:uppercase;
+
+    @media(max-width:768px){
+        font-size:1.4rem;
+    }
 `;

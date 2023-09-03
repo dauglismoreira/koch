@@ -1,5 +1,3 @@
-"use client"
-
 import styled from 'styled-components';
 import {FaWhatsapp} from 'react-icons/fa';
 
@@ -47,8 +45,22 @@ const Call = styled.div`
     }
 
     & a span{
-        font-size:14px;
+        font-size:12px;
         margin-right:5px;
         margin-left:5px;
+    }
+
+    @media(max-width:768px){
+        margin:20px 0;
+        gap:15px;
+
+        & a {
+            font-size:14px;
+            font-weight:400;
+        }
+    
+        & a span{
+            font-size:12px;
+        }
     }
 `;

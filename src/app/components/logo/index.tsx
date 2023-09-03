@@ -1,17 +1,16 @@
-"use client"
-
 import styled from 'styled-components';
 import {useState, useEffect} from 'react';
-import useScreenSize from '../../hooks/useScreenSize';
+import useScreenSize from '../../../hooks/useScreenSize';
 import Image from 'next/image';
 
 interface LogoProps {
     desktop: number;
     mobile: number;
     color?: string;
+    padding?: string;
   }
 
-export const Logo: React.FC<LogoProps> = ({desktop, mobile, color}) => {
+export const Logo: React.FC<LogoProps> = ({desktop, mobile, color, padding}) => {
 
   const isLargeScreen = useScreenSize(1280);
     const [imageUrl, setImageUrl] = useState('/logos/LOGO-KOCH-1.png');
@@ -27,7 +26,8 @@ export const Logo: React.FC<LogoProps> = ({desktop, mobile, color}) => {
             desktop={desktop}
             mobile={mobile}
             color={color}
-            windowWidth={isLargeScreen}
+            style={{padding: padding || '0 20px'}}
+            windowWidth={isLargeScreen.isLargeScreen}
         >
             <a href="./../"><Image
                 src={imageUrl}
@@ -45,16 +45,15 @@ const LogoContainer = styled.div<LogoProps & { windowWidth: boolean }>`
       ? `${props.desktop}px`
       : `${props.mobile}px`};
 
-  padding:0 20px;
-
   img {
     max-width: 100%;
     height: auto;
+    margin-left:-10px;
   }
 
   @media(max-width:768px){
     position:absolute;
-    top:20px;
+    top:22px;
     z-index:99;
   }
 `;

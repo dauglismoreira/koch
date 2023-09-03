@@ -16,7 +16,8 @@ export const Section: React.FC<SectionProps> = ({ children, padding, background,
     overflow: 'hidden',
     background: background || 'transparent',
     position: position || 'static',
-    height: fixHeight || 'auto'
+    height: fixHeight || 'auto',
+    zIndex: 99,
   };
 
   return <div style={containerStyle}>{children}</div>;
@@ -29,7 +30,7 @@ interface ContainerProps {
 
 export const Container: React.FC<ContainerProps> = ({ children, background }) => {
   const containerStyle: CSSProperties = {
-    maxWidth: '1360px',
+    maxWidth: '1560px',
     margin: '0 auto',
     background: background || 'transparent',
   };
@@ -39,17 +40,32 @@ export const Container: React.FC<ContainerProps> = ({ children, background }) =>
 
 interface RowProps {
   children?: ReactNode;
+  margin?: string;
+  padding?: string;
+  break?: boolean;
+  reverse?:boolean;
+  gap?:string;
 }
 
-export const Row: React.FC<RowProps> = ({ children }) => {
+export const Row: React.FC<RowProps> = ({ children, gap, reverse, break: shouldBreak, margin, padding }) => {
   const rowStyle: CSSProperties = {
     display: 'flex',
-    width:'100%',
+    width: '100%',
     flexWrap: 'wrap',
     flexDirection: 'row',
-    margin: '-8px',
-    justifyContent: 'space-between'
+    margin: margin || '-8px 0',
+    padding: padding || '0',
+    justifyContent: 'space-between',
+    gap: gap || '0',
   };
+
+  if (shouldBreak) {
+    if(reverse){
+      rowStyle.flexDirection = 'column-reverse';
+    }else{
+      rowStyle.flexDirection = 'column';
+    }
+  }
 
   return <div style={rowStyle}>{children}</div>;
 };
@@ -57,13 +73,21 @@ export const Row: React.FC<RowProps> = ({ children }) => {
 interface ColProps {
   children?: ReactNode;
   flex?: number;
+  border?:string;
+  padding?:string;
+  align?:'left' | 'center' | 'right' | undefined;
+  className?: string;
 }
 
-export const Col: React.FC<ColProps> = ({ children, flex }) => {
+export const Col: React.FC<ColProps> = ({ children, align, border, padding, flex, className }) => {
   const colStyle: CSSProperties = {
     flex: flex || 'auto',
-    padding: '8px',
+    padding: padding || '8px',
+    border: border || 'none',
+    textAlign: align || 'left',
   };
 
-  return <div style={colStyle}>{children}</div>;
+  const combinedClassName = `${className || ''} col`;
+
+  return <div className={combinedClassName} style={colStyle}>{children}</div>;
 };

@@ -18,4 +18,10 @@ const Impacte = styled.div`
     font-weight:300;
     color:var(--text-white);
     text-align:right;
+
+    @media(max-width:768px){
+        text-align:left;
+        font-size:0.9rem;
+        margin-top:20px;
+    }
 `;

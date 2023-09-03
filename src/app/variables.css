@@ -1,7 +1,15 @@
 :root {
     --background-primary: #0F1828;
+    --background-primary-variation: #1A2C49;
     --background-secondary: #F4F4F3;
+    --background-secondary-variation: #636D7A;
+    --background-grey: #636D7A;
+    --background-white: #fff;
     --text-primary: #0F1828;
     --text-secondary: #636D7A;
     --text-white: #fff;
+    --border-grey: #dadada;
+
+    --font-primary: 'Libre Baskerville', serif;
+    --font-secondary: 'Open Sans', sans-serif;
   }

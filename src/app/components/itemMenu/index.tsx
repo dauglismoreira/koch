@@ -21,9 +21,8 @@ const Link = styled.a`
   font-weight:300;
   position:relative;
   text-align:center;
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-secondary);
   letter-spacing:1.15px;
-  padding-top:7px;
 
   &::after {
     content:'';
