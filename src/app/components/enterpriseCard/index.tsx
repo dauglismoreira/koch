@@ -29,7 +29,7 @@ export const EnterpriseCard: React.FC<{ data: CardProps }> = ({ data }) => {
                     <span>{garage}</span>
                     <span>{area}</span>
                 </Skills>
-                <Link><a href={url}>Veja mais</a></Link>
+                <Link><a href={`./../empreendimento/${url}`}>Veja mais</a></Link>
             </Content>
         </Card>
     );

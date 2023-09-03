@@ -40,7 +40,7 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
         <>
         <Section padding={!isLargeScreen.isLargeScreen ? "120px 0 60px" : "120px 0"} background="var(--background-primary-variation)">
             <Container>
-                <Row break={!isLargeScreen.isLargeScreen}>
+                <Row breakpoint={!isLargeScreen.isLargeScreen}>
                     <Col flex={2}>
                         <SectionSubTitle text={contactInfo.sectionTitle} color="var(--text-white)"/>
                     </Col>
@@ -60,7 +60,7 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                         </SocialLinks>
                     </Col>
                 </Row>
-                <Row break={!isLargeScreen.isLargeScreen} margin="20px 0 0">
+                <Row breakpoint={!isLargeScreen.isLargeScreen} margin="20px 0 0">
                 {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
                     <Col flex={5} >
                         <ContainerForm>

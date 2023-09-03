@@ -12,7 +12,7 @@ export const EnterMenuSection = () => {
                     <MenuItem>Sobre</MenuItem>
                     <MenuItem>Imagens</MenuItem>
                     {isLargeScreen.isLargeScreen && <MenuItem>Plantas</MenuItem>}
-                    <MenuItem className={isLargeScreen ? "last" : ''}>Localização</MenuItem>
+                    <MenuItem className={!isLargeScreen.isLargeScreen ? "last" : ''}>Localização</MenuItem>
                     {isLargeScreen.isLargeScreen && <MenuItem className="last">Acompanhamento de obra</MenuItem>}
                 </TopMenuContainer>
             </Container>

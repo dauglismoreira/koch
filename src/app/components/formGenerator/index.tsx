@@ -37,7 +37,7 @@ export const InputGenerate: React.FC<InputProps> = ({ leftInputs, singleColumn, 
 
     return (
         <>
-            <Row break={!isLargeScreen.isLargeScreen} gap="20px">
+            <Row breakpoint={!isLargeScreen.isLargeScreen} gap="20px">
                 <Col flex={5} padding="15px 0px">
                     <Form color={color}>
                         {leftInputs.map((input, index) => (

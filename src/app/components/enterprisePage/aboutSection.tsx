@@ -20,7 +20,7 @@ export const EnterAboutSection: React.FC<EnterAboutSectionProps> = ({
 
     return (
         <AboutSection>
-            <Row break={!isLargeScreen.isLargeScreen}>
+            <Row breakpoint={!isLargeScreen.isLargeScreen}>
                 <Col flex={2}>
                     <SectionSubTitle text={`Sobre o\nempreendimento`} color="var(--text-secondary)"/>
                 </Col>

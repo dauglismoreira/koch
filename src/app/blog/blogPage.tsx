@@ -21,7 +21,7 @@ export const BlogPage: React.FC<BlogProps> = ({
         <>
         <Section padding={!isLargeScreen.isLargeScreen ? "120px 0" : "120px 0"} background="var(--background-secondary)">
             <Container>
-                <Row break={!isLargeScreen.isLargeScreen}>
+                <Row breakpoint={!isLargeScreen.isLargeScreen}>
                     <Col flex={2}>
                         <SectionSubTitle text={blogInfo.sectionTitle} color="var(--text-secondary)"/>
                     </Col>

@@ -29,7 +29,7 @@ export const Accordion: React.FC<AccordionProps> = ({ data }) => {
                 <Item
                     key={index}
                     active={activeIndex === index}
-                    activeIndex={activeIndex}
+                    activeindex={activeIndex}
                     onClick={() => handleItemClick(index)}
                 >
                     <Title>
@@ -53,9 +53,9 @@ const AccordionContainer = styled.div`
     }
 `;
 
-const Item = styled.div<{active: boolean; activeIndex: number}>`
+const Item = styled.div<{active: boolean; activeindex: number}>`
   height: 100px;
-  height:${props => props.activeIndex !== -1 ? (props.active ? 200 : 50) : 100}px;
+  height:${props => props.activeindex !== -1 ? (props.active ? 200 : 50) : 100}px;
   border-bottom:solid 1px rgba(255,255,255,0.3);
   display:flex;
   flex-direction:column;
@@ -68,7 +68,7 @@ const Item = styled.div<{active: boolean; activeIndex: number}>`
 
     @media(max-width:768px){
       padding:0 10px;
-      height:${props => props.activeIndex !== -1 ? (props.active ? 200 : 50) : 80}px;
+      height:${props => props.activeindex !== -1 ? (props.active ? 200 : 50) : 80}px;
     }
     
 `;

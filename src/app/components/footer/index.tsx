@@ -12,7 +12,7 @@ import { Logo } from '../logo';
 
 export const Footer = () => {
 
-    const {isLargeScreen} = useScreenSize(768)
+    const isLargeScreen = useScreenSize(768)
 
     const phone = '47999999999';
     const email = 'koch@kockempreendimentos.com.br';
@@ -37,26 +37,26 @@ export const Footer = () => {
     return(
         <Section
             background="var(--background-primary)"
-            padding={isLargeScreen ? "160px 0 100px" : "60px 10px 40px"}
+            padding={!isLargeScreen.isLargeScreen ? "160px 0 100px" : "60px 10px 40px"}
         >
             <Container>
                 <FooterTitle text={`Entre \n em contato`}/>
-                {isLargeScreen && <LineDivider/>}
-                <FooterMenu activeBreak={isLargeScreen} items={itemMenuList} number={phone} email={email}/>
+                {isLargeScreen.isLargeScreen && <LineDivider/>}
+                <FooterMenu activeBreak={isLargeScreen.isLargeScreen} items={itemMenuList} number={phone} email={email}/>
                 <LineDivider/>
-                {!isLargeScreen && <Text>{street} - {city}</Text>}
-                {!isLargeScreen && <LineDivider/>}
-                <FooterSocial activeBreak={isLargeScreen} street={street} city={city} color='white' items={itemSocialList}/>
+                {!isLargeScreen.isLargeScreen && <Text>{street} - {city}</Text>}
+                {!isLargeScreen.isLargeScreen && <LineDivider/>}
+                <FooterSocial activeBreak={isLargeScreen.isLargeScreen} street={street} city={city} color='white' items={itemSocialList}/>
                 <LineDivider/>
-                {!isLargeScreen && 
+                {!isLargeScreen.isLargeScreen && 
                     <MenuMobileContainerGrid>
                         {itemMenuList && itemMenuList.map((item, index) => (
                             <Col key={index} padding='15px 0 0' align="left"><ItemMenu href={item.href} text={item.text}/></Col>
                         ))}
                     </MenuMobileContainerGrid>
                 }
-                {!isLargeScreen && <LineDivider/> }
-                {!isLargeScreen && <ContainerLogo><Logo  padding="0 0 0 40px" desktop={180} mobile={180} color="white"/></ContainerLogo> }
+                {!isLargeScreen.isLargeScreen && <LineDivider/> }
+                {!isLargeScreen.isLargeScreen && <ContainerLogo><Logo  padding="0 0 0 40px" width={180} color="white"/></ContainerLogo> }
                 <FooterRights/>
             </Container>
         </Section>

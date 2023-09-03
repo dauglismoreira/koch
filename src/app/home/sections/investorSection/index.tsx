@@ -25,7 +25,7 @@ export const InvestorSection: React.FC<InvestorSection> = ({ buttonsList, info }
         {isLargeScreen?.isLargeScreen &&
             <Section padding={!isLargeScreen.isLargeScreen ? "40px 0" : "120px 0"} background="var(--background-grey)">
                 <Container>
-                    <Row break={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}>
                             <SectionSubTitle text={info && info.sectionTitle} color="var(--text-white)"/>
                         </Col>

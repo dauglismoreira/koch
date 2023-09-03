@@ -29,7 +29,7 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
         <>
             <Section padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-secondary-variation)">
                 <Container>
-                    <Row break={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}>
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-white)"/>
                         </Col>
@@ -37,7 +37,7 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
                             <SectionTitle text={aboutInfo && aboutInfo.title} color="var(--text-white)"/>
                         </Col>
                     </Row>
-                    <Row break={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}></Col>
                         <Col flex={10}>
                             <Content>
@@ -51,7 +51,7 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
                             </Content>
                         </Col>
                     </Row>
-                    <Row break={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
                         <Col flex={5}>
                             <ActionContainer>

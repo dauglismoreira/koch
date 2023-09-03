@@ -33,7 +33,7 @@ export const EnterProgressSection: React.FC<EnterProgressSectionProps> = ({
 
     return (
         <ProgressSection>
-            <Row break={!isLargeScreen.isLargeScreen}>
+            <Row breakpoint={!isLargeScreen.isLargeScreen}>
                 <Col flex={2}>
                     <SectionSubTitle text={`Acompanhamento\nde obra`} color="var(--text-secondary)"/>
                     <ContainerButton>
@@ -62,7 +62,7 @@ export const EnterProgressSection: React.FC<EnterProgressSectionProps> = ({
 }
 
 
-const ContainerButton = styled.button`
+const ContainerButton = styled.div`
     display:flex;
     flex-direction:column;
     gap:10px;

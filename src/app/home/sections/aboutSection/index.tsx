@@ -24,7 +24,7 @@ export const AboutSection: React.FC<AboutProps> = ({ accordionDate, info }) => {
     return (
         <Section padding={!isLargeScreen.isLargeScreen ? "40px 0" : "120px 0"} background="var(--background-primary)">
             <Container>
-                <Row break={!isLargeScreen.isLargeScreen}>
+                <Row breakpoint={!isLargeScreen.isLargeScreen}>
                     <Col flex={2}>
                         <SectionSubTitle text={info && info.sectionTitle} color="var(--text-white)"/>
                     </Col>
@@ -49,14 +49,14 @@ export const AboutSection: React.FC<AboutProps> = ({ accordionDate, info }) => {
     );
 }
 
-const Content = styled.a`
+const Content = styled.div`
     height:100%;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
 `;
 
-const Title = styled.a`
+const Title = styled.div`
 
 `;
 

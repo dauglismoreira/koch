@@ -23,7 +23,7 @@ export const OpportunitiesSection: React.FC<OpportunitiesProps> = ({ buttonsList
     return (
         <Section padding={!isLargeScreen.isLargeScreen ? "40px 0" : "120px 0"} background="var(--background-secondary)">
             <Container>
-                <Row break={!isLargeScreen.isLargeScreen}>
+                <Row breakpoint={!isLargeScreen.isLargeScreen}>
                     <Col flex={2}>
                         <SectionSubTitle text={info && info.sectionTitle} color="var(--text-secondary)"/>
                     </Col>

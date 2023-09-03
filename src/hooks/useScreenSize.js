@@ -3,34 +3,28 @@
 import { useState, useEffect } from 'react';
 
 function useScreenSize(breakpoint) {
-    const [screenSize, setScreenSize] = useState({
-        isLargeScreen: false,
-        width: 0, 
-    });
+  const [screenSize, setScreenSize] = useState({
+    isLargeScreen: true,
+    width: 1920,
+  });
 
-    useEffect(() => {
-        const handleResize = () => {
-            const newWidth = window.innerWidth;
-            setScreenSize({
-                isLargeScreen: newWidth > breakpoint,
-                width: newWidth,
-            });
-        };
+  useEffect(() => {
+    const handleResize = () => {
+      const newWidth = window.innerWidth;
+      setScreenSize({
+        isLargeScreen: newWidth > breakpoint,
+        width: newWidth,
+      });
+    };
 
-        const initialWidth = window.innerWidth;
-        setScreenSize({
-            isLargeScreen: initialWidth > breakpoint,
-            width: initialWidth,
-        });
+    window.addEventListener('resize', handleResize);
 
-        window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [breakpoint]);
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [breakpoint]);
-
-    return screenSize;
+  return screenSize;
 }
 
 export default useScreenSize;

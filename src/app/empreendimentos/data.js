@@ -33,7 +33,7 @@ export const aboutInfo = {
         suites:'1 ou 2 suítes',
         garage:'1 vaga',
         area: 'até 69,69 m²',
-        url: '#'
+        url: 'teste'
     },
     {
         cover:'./tmp/image(462x524).webp',
@@ -44,7 +44,7 @@ export const aboutInfo = {
         suites:'1 ou 2 suítes',
         garage:'1 vaga',
         area: 'até 69,69 m²',
-        url: '#'
+        url: 'teste'
     },
     {
         cover:'./tmp/image(462x524).webp',
@@ -55,7 +55,7 @@ export const aboutInfo = {
         suites:'1 ou 2 suítes',
         garage:'1 vaga',
         area: 'até 69,69 m²',
-        url: '#'
+        url: 'teste'
     },
     {
         cover:'./tmp/image(462x524).webp',
@@ -66,7 +66,7 @@ export const aboutInfo = {
         suites:'1 ou 2 suítes',
         garage:'1 vaga',
         area: 'até 69,69 m²',
-        url: '#'
+        url: 'teste'
     },
     {
         cover:'./tmp/image(462x524).webp',
@@ -77,7 +77,7 @@ export const aboutInfo = {
         suites:'1 ou 2 suítes',
         garage:'1 vaga',
         area: 'até 69,69 m²',
-        url: '#'
+        url: 'teste'
     },
     {
         cover:'./tmp/image(462x524).webp',
@@ -88,6 +88,6 @@ export const aboutInfo = {
         suites:'1 ou 2 suítes',
         garage:'1 vaga',
         area: 'até 69,69 m²',
-        url: '#'
+        url: 'teste'
     }
   ]

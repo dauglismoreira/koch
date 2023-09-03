@@ -27,7 +27,7 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
         <>
             <Section padding={!isLargeScreen.isLargeScreen ? "120px 0 40px" : "160px 0"} background="var(--background-secondary)">
                 <Container>
-                    <Row break={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}>
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-secondary)"/>
                         </Col>

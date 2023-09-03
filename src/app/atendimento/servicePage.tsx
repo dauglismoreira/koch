@@ -54,7 +54,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         <>
         <Section padding={!isLargeScreen.isLargeScreen ? "120px 0" : "120px 0"} background="var(--background-secondary)">
             <Container>
-                <Row break={!isLargeScreen.isLargeScreen}>
+                <Row breakpoint={!isLargeScreen.isLargeScreen}>
                     <Col flex={2}>
                         <SectionSubTitle text={oportunitiesInfo.sectionTitle} color="var(--text-secondary)"/>
                     </Col>
@@ -81,7 +81,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 <Row>
                     <LineDivider></LineDivider>
                 </Row>
-                <Row break={!isLargeScreen.isLargeScreen}>
+                <Row breakpoint={!isLargeScreen.isLargeScreen}>
                     <Col flex={2}>
                         <SectionSubTitle text={contactInfo.sectionTitle} color="var(--text-secondary)"/>
                     </Col>
@@ -94,7 +94,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                         </Content>
                     </Col>
                 </Row>
-                <Row break={!isLargeScreen.isLargeScreen}>
+                <Row breakpoint={!isLargeScreen.isLargeScreen}>
                     <Col flex={2}></Col>
                     <Col flex={4}>
                         <ContactInfos
@@ -115,7 +115,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 <Row>
                     <LineDivider></LineDivider>
                 </Row>
-                <Row break={!isLargeScreen.isLargeScreen}>
+                <Row breakpoint={!isLargeScreen.isLargeScreen}>
                     <Col flex={2}>
                         <SectionSubTitle text={formInfo.sectionTitle} color="var(--text-secondary)"/>
                     </Col>
@@ -128,7 +128,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                         </Content>
                     </Col>
                 </Row>
-                <Row break={!isLargeScreen.isLargeScreen}>
+                <Row breakpoint={!isLargeScreen.isLargeScreen}>
                 {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
                 <Col flex={10} padding="15px 10px">
                     <InputGenerate

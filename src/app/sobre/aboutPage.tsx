@@ -22,7 +22,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ aboutItemsAccordion, about
         <>
             <Section padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-primary-variation)">
                 <Container>
-                    <Row break={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}>
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-white)"/>
                         </Col>
@@ -30,7 +30,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ aboutItemsAccordion, about
                             <SectionTitle text={aboutInfo && aboutInfo.title} color="var(--text-white)"/>
                         </Col>
                     </Row>
-                    <Row break={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}></Col>
                         <Col flex={5}>
                             <Content>

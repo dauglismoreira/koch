@@ -21,7 +21,7 @@ export const EnterLocalSection: React.FC<EnterLocalSectionProps> = ({
 
     return (
         <LocalSection>
-            <Row break={!isLargeScreen.isLargeScreen}>
+            <Row breakpoint={!isLargeScreen.isLargeScreen}>
                 <Col flex={2}>
                     <SectionSubTitle text={`A localização`} color="var(--text-secondary)"/>
                 </Col>

@@ -17,7 +17,7 @@ export const GridCarouselTitle: React.FC<InfoProps> = ({ info }) => {
     const isLargeScreen = useScreenSize(768);
     
     return (
-        <Row break={!isLargeScreen.isLargeScreen}>
+        <Row breakpoint={!isLargeScreen.isLargeScreen}>
             <Col flex={2}>
                 <SectionSubTitle text={info && info.subTitle} color="var(--text-secondary)"/>
             </Col>

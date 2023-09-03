@@ -34,7 +34,7 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
         <>
             <Section padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-secondary)">
                 <Container>
-                    <Row break={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}>
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-primary)"/>
                         </Col>
@@ -42,12 +42,12 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
                             <SectionTitle text={aboutInfo && aboutInfo.title} color="var(--text-primary)"/>
                         </Col>
                     </Row>
-                    <Row break={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}></Col>
                         <Col flex={10}>
                             <Content>
                                 <SectionBodyText text={aboutInfo && aboutInfo.content} color="var(--text-secondary)"/>
-                                <Row break={!isLargeScreen.isLargeScreen} reverse={false}>
+                                <Row breakpoint={!isLargeScreen.isLargeScreen} reverse={false}>
                                     <InputGenerate
                                         leftInputs={formInputsLeft}
                                         rightInputs={formInputsRight}

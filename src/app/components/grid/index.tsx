@@ -42,12 +42,12 @@ interface RowProps {
   children?: ReactNode;
   margin?: string;
   padding?: string;
-  break?: boolean;
+  breakpoint?: boolean;
   reverse?:boolean;
   gap?:string;
 }
 
-export const Row: React.FC<RowProps> = ({ children, gap, reverse, break: shouldBreak, margin, padding }) => {
+export const Row: React.FC<RowProps> = ({ children, gap, reverse, breakpoint, margin, padding }) => {
   const rowStyle: CSSProperties = {
     display: 'flex',
     width: '100%',
@@ -59,7 +59,7 @@ export const Row: React.FC<RowProps> = ({ children, gap, reverse, break: shouldB
     gap: gap || '0',
   };
 
-  if (shouldBreak) {
+  if (breakpoint) {
     if(reverse){
       rowStyle.flexDirection = 'column-reverse';
     }else{

@@ -14,7 +14,7 @@ interface MenuItem {
 
 export const Header = () => {
 
-    const {isLargeScreen} = useScreenSize(768)
+    const isLargeScreen = useScreenSize(768)
 
     const itemMenuList: MenuItem[] = [
         {href:'./../sobre', text:'Sobre'},
@@ -36,9 +36,9 @@ export const Header = () => {
             <Container>
                 <Row>
                     <Col flex={2}>
-                        <Logo desktop={140} mobile={140} color="white" />
+                        <Logo width={140} color="white" />
                     </Col>
-                    {isLargeScreen ?
+                    {isLargeScreen.isLargeScreen ?
                     <Col flex={10}>
                         <Row>
                             <ContainerItemsMenu>

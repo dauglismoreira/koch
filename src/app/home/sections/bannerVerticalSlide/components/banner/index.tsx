@@ -28,7 +28,7 @@ export const Banner: React.FC<BannerProps> = ({
                 {images.map((image, index) => (
                     <Image
                         key={index}
-                        backgroundImage={image}
+                        background={image}
                         width={width}
                     />
                 ))}
@@ -67,12 +67,12 @@ const ImageContainer = styled.div<{ activeIndex: number; width: number }>`
     }
 `;
 
-const Image = styled.div<{ backgroundImage: string; width: number }>`
+const Image = styled.div<{ background: string; width: number }>`
     height: ${(props) => ((props.width - 337) / 1.7) - 40}px;
     width: 100%;
     background-position: center center;
     background-size: cover;
-    background-image: ${(props) => `url('${props.backgroundImage}')`};
+    background-image: ${(props) => `url('${props.background}')`};
 
     @media(max-width:900px){
         height: ${(props) => (props.width / 1.7) - 10}px;

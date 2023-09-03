@@ -29,7 +29,7 @@ export const FooterSocial: React.FC<FooterSocialProps> = ({activeBreak, items, c
             <Col flex={3}><FooterSocialMenu activeBreak={activeBreak} items={items}/></Col>
             {activeBreak && <VerticalDivider margin="-27px 0 -27px 10px"/>}
             {activeBreak && <Col flex={1}>
-                <Logo padding="0 0 0 40px" desktop={180} mobile={180} color={color} />
+                <Logo padding="0 0 0 40px" width={180} color={color} />
             </Col>}
         </Row>
     )

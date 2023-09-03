@@ -1,18 +1,15 @@
 import styled from 'styled-components';
 import {useState, useEffect} from 'react';
-import useScreenSize from '../../../hooks/useScreenSize';
 import Image from 'next/image';
 
 interface LogoProps {
-    desktop: number;
-    mobile: number;
+    width?: number;
     color?: string;
     padding?: string;
   }
 
-export const Logo: React.FC<LogoProps> = ({desktop, mobile, color, padding}) => {
+export const Logo: React.FC<LogoProps> = ({width, color, padding}) => {
 
-  const isLargeScreen = useScreenSize(1280);
     const [imageUrl, setImageUrl] = useState('/logos/LOGO-KOCH-1.png');
 
       useEffect(() => {
@@ -23,11 +20,9 @@ export const Logo: React.FC<LogoProps> = ({desktop, mobile, color, padding}) => 
 
     return(
         <LogoContainer
-            desktop={desktop}
-            mobile={mobile}
+            width={width || 140}
             color={color}
             style={{padding: padding || '0 20px'}}
-            windowWidth={isLargeScreen.isLargeScreen}
         >
             <a href="./../"><Image
                 src={imageUrl}
@@ -39,12 +34,8 @@ export const Logo: React.FC<LogoProps> = ({desktop, mobile, color, padding}) => 
     )
 }
 
-const LogoContainer = styled.div<LogoProps & { windowWidth: boolean }>`
-  width: ${(props) =>
-    props.windowWidth
-      ? `${props.desktop}px`
-      : `${props.mobile}px`};
-
+const LogoContainer = styled.div<{ width:number }>`
+  width: ${props => props.width}px;
   img {
     max-width: 100%;
     height: auto;

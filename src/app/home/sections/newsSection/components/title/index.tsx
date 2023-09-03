@@ -19,7 +19,7 @@ export const NewsTitleSection: React.FC<NewsSectionTitleProps> = ({ info }) => {
     const isLargeScreen = useScreenSize(768);
 
     return (
-        <Row break={!isLargeScreen.isLargeScreen}>
+        <Row breakpoint={!isLargeScreen.isLargeScreen}>
             <Col flex={2}>
                 <SectionSubTitle text={info && info.sectionTitle} color="var(--text-secondary)"/>
             </Col>

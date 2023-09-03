@@ -48,7 +48,7 @@ export const EnterImagesSection: React.FC<EnterImagesSectionProps> = ({
 
     return (
         <ImagesSection>
-            <Row break={!isLargeScreen.isLargeScreen}>
+            <Row breakpoint={!isLargeScreen.isLargeScreen}>
                 <Col flex={2}>
                     <SectionSubTitle text={`Imagens\ndo empreendimento`} color="var(--text-secondary)"/>
                     <small>Clique para ampliar as imagens</small>

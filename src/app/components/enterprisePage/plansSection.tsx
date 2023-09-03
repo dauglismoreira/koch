@@ -26,7 +26,7 @@ export const EnterPlansSection: React.FC<EnterPlansSectionProps> = ({
 
     return (
         <PlansSection>
-            <Row break={!isLargeScreen.isLargeScreen}>
+            <Row breakpoint={!isLargeScreen.isLargeScreen}>
                 <Col flex={2}>
                     <SectionSubTitle text={`Plantas do\nempreendimento`} color="var(--text-secondary)"/>
                     <ContainerButton>
@@ -103,7 +103,7 @@ const SkillsGrid = styled.div`
     }
 `;
 
-const ContainerButton = styled.button`
+const ContainerButton = styled.div`
     display:flex;
     flex-direction:column;
     gap:10px;

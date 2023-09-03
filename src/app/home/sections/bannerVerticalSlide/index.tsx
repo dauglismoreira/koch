@@ -51,12 +51,12 @@ export const BannerVerticalSlide: React.FC<BannerProps> = ({ autoPlayTime, auto,
         <Section padding="0 0 15px" background="var(--background-secondary)">
             <Content>
                 <LeftCol
-                    widthScreen={isLargeScreen.width}
+                    widthscreen={isLargeScreen.width}
                 >
                     <span>{text}</span>
                 </LeftCol>
                 <CenterCol
-                    widthScreen={isLargeScreen.width}
+                    widthscreen={isLargeScreen.width}
                 >
                     <Banner
                         width={isLargeScreen.width}
@@ -67,7 +67,7 @@ export const BannerVerticalSlide: React.FC<BannerProps> = ({ autoPlayTime, auto,
                     />
                 </CenterCol>
                 <RightCol
-                    widthScreen={isLargeScreen.width}
+                    widthscreen={isLargeScreen.width}
                 >
                     <SlideControllers
                         images={images}
@@ -86,12 +86,12 @@ const Content = styled.div`
     flex-direction:row;
 `;
 
-const CenterCol = styled.div<{widthScreen : number}>`
+const CenterCol = styled.div<{widthscreen : number}>`
     width: 100%;
-    max-width:${(props) => (props.widthScreen - 337)}px;
+    max-width:${(props) => (props.widthscreen - 337)}px;
 
     @media(max-width:1360px) and (min-width:900px){
-        max-width:${(props) => (props.widthScreen - 97)}px;
+        max-width:${(props) => (props.widthscreen - 97)}px;
     }
 
     @media(max-width:900px){
@@ -100,8 +100,8 @@ const CenterCol = styled.div<{widthScreen : number}>`
     }
 `;
 
-const LeftCol = styled.div<{widthScreen : number}>`
-    width:${(props) => (props.widthScreen - 100) - (props.widthScreen - 337)}px;
+const LeftCol = styled.div<{widthscreen : number}>`
+    width:${(props) => (props.widthscreen - 100) - (props.widthscreen - 337)}px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -133,7 +133,7 @@ const LeftCol = styled.div<{widthScreen : number}>`
     }
 
     @media(max-width:1360px) and (min-width:900px){
-        width:${(props) => (props.widthScreen - 220) - (props.widthScreen - 337)}px;
+        width:${(props) => (props.widthscreen - 220) - (props.widthscreen - 337)}px;
     }
 
     @media(max-width:900px){
@@ -141,14 +141,14 @@ const LeftCol = styled.div<{widthScreen : number}>`
     }
 `;
 
-const RightCol = styled.div<{widthScreen : number}>`
-    width:${(props) => (props.widthScreen - 100) - (props.widthScreen - 337)}px;
+const RightCol = styled.div<{widthscreen : number}>`
+    width:${(props) => (props.widthscreen - 100) - (props.widthscreen - 337)}px;
     display:flex;
     justify-content:flex-start;
     align-items:flex-end;
 
     @media(max-width:1360px) and (min-width:900px){
-        width:${(props) => (props.widthScreen - 220) - (props.widthScreen - 337)}px;
+        width:${(props) => (props.widthscreen - 220) - (props.widthscreen - 337)}px;
     }
 
     @media(max-width:900px){
