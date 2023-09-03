@@ -20,7 +20,7 @@ export const CheckFormAccept: React.FC<CheckContainerProps> = ({ onAcceptChange,
                 checked={accept}
                 onChange={handleAcceptChange}
             ></input>
-            <label htmlFor="accept">A Koch Construtora respeita sua privacidade e utiliza seus dados pessoais para contatá-lo por e-mail ou telefone aqui registrados. Para saber mais, acesse nossa Política de Privacidade.<br></br>Ao clicar em "Enviar", você concorda em permitir que a Koch Construtora armazene e processe dos dados pessoais fornecidos por você par a finalidade informada.</label>
+            <label htmlFor="accept">A Koch Construtora respeita sua privacidade e utiliza seus dados pessoais para contatá-lo por e-mail ou telefone aqui registrados. Para saber mais, acesse nossa Política de Privacidade.<br></br>Ao clicar em &quot;Enviar&quot;, você concorda em permitir que a Koch Construtora armazene e processe dos dados pessoais fornecidos por você para a finalidade informada.</label>
         </CheckContainer>
     )
 }
