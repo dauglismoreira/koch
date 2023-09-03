@@ -17,7 +17,7 @@ export const ContactInfos: React.FC<ContactInfosProps> = ({ phone, street, city,
             </InfoTitle>
             <InfoContent>
                 <p>{street}</p>
-                <p>{city}}</p>
+                <p>{city}</p>
             </InfoContent>
         </InfoContactContainer>
         <InfoContactContainer>

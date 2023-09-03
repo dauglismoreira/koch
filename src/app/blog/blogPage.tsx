@@ -28,7 +28,7 @@ export const BlogPage: React.FC<BlogProps> = ({
                     <Col flex={10}>
                         <BlogListContainer>
                             {blog.map((post, index) => (
-                                <BlogCard data={post} />
+                                <BlogCard key={index} data={post} />
                             ))}
                         </BlogListContainer>
                     </Col>
