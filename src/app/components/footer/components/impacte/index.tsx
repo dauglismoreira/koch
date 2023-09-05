@@ -1,15 +1,17 @@
 "use client"
 
 import styled from 'styled-components';
+import {ReactNode} from "react";
 
 interface ItemProps {
     text?: string;
+    children: ReactNode
 }
 
-export const ImpacteText: React.FC<ItemProps> = ({text}) => {
+export const ImpacteText: React.FC<ItemProps> = ({text, children}) => {
 
     return(
-        <Impacte>{text}</Impacte>
+        <Impacte>{text} {children}</Impacte>
     )
 }
 

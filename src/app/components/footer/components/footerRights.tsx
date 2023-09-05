@@ -1,6 +1,7 @@
 import { Col, Row } from '../../grid';
 import { CopyRight } from './copyRight';
 import { ImpacteText } from './impacte';
+import ImpacteIcon from "@/impacte/ImpacteIcon";
 
 export const FooterRights = ({}) => {
 
@@ -10,7 +11,9 @@ export const FooterRights = ({}) => {
                 <CopyRight text="Política de Privacidade e Segurança, ©2023 - Todos os direitos reservados"/>
             </Col>
             <Col>
-                <ImpacteText text="Desenvolvido por impacte"/>
+                <ImpacteText text="Desenvolvido por ">
+                    <ImpacteIcon />
+                </ImpacteText>
             </Col>
         </Row>
     )
