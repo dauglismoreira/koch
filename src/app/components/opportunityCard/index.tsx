@@ -16,7 +16,7 @@ export const OpportunityCard: React.FC<{ data: CardProps }> = ({ data }) => {
     
     return (
         <Card>
-            <Cover
+            <a href={url}><Cover
                 image={cover || ''}
             ></Cover>
             <Content>
@@ -27,8 +27,8 @@ export const OpportunityCard: React.FC<{ data: CardProps }> = ({ data }) => {
                     <span>{garage}</span>
                     <span>{area}</span>
                 </Skills>
-                <Link><a href={url}>Veja mais</a></Link>
-            </Content>
+                <Link>Veja mais</Link>
+            </Content></a>
         </Card>
     );
 }
@@ -112,7 +112,6 @@ const Skills = styled.div`
 `;
 
 const Link = styled.div`
-    a {
      color:var(--text-primary);
      font-size:12px;
      cursor:pointer;
@@ -124,19 +123,13 @@ const Link = styled.div`
         content:'';
         width:0%;
         height:1px;
-        background-color:var(--text-primary);
+        background-color:var(--text-white);
         position:absolute;
         bottom:-5px;
         left:0px;
         transition:0.3s;
       }
     
-      &:hover{
-        &::after {
-            width:100%;
-        }
-      }
-    }
 `;
 
 const Card = styled.div`
@@ -157,8 +150,12 @@ const Card = styled.div`
         transform: rotate(2deg) scale(1.2);
       }
 
-      ${Link} a {
+      ${Link} {
             color:var(--text-white);
+
+            &::after {
+                width:100%;
+            }
       }
 
       ${High} h5 {
@@ -172,5 +169,6 @@ const Card = styled.div`
       ${Place} {
         color:var(--text-white);
       }
+
     }
 `;

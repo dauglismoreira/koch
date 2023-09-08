@@ -25,30 +25,17 @@ export const BlogCard: React.FC<{ data: BlogCardProps }> = ({ data }) => {
     
     return (
         <Card>
-            <Cover
+            <a href={`./../blog/${link}`}><Cover
                 image={cover || ''}
             ></Cover>
             <Content>
                 <Name><h3>{title}</h3></Name>
                 <Text><p>{truncatedContent}</p></Text>
-                <Link><a href={`./../post/${link}`}>Leia mais</a></Link>
-            </Content>
+                <Link>Leia mais</Link>
+            </Content></a>
         </Card>
     );
 }
-
-const Card = styled.div`
-    width:100%;
-    border:solid 1px var(--border-grey);
-    padding:40px;
-    height:515px;
-
-    @media(max-width:768px){
-        height:515px;
-        margin:auto;
-        width:85%;
-    }
-`;
 
 const Cover = styled.div<{image : string}>`
     position: relative;
@@ -73,7 +60,7 @@ const Cover = styled.div<{image : string}>`
     }
 
     &:hover::before {
-        transform: rotate(2deg) scale(1.04);
+        transform: scale(1.04);
     }
 `;
 
@@ -115,7 +102,6 @@ const Text = styled.div`
 `;
 
 const Link = styled.div`
-    a {
      color:var(--text-primary);
      font-size:12px;
      cursor:pointer;
@@ -133,11 +119,29 @@ const Link = styled.div`
         left:0px;
         transition:0.3s;
       }
+
+`;
+
+const Card = styled.div`
+    width:100%;
+    border:solid 1px var(--border-grey);
+    padding:40px;
+    height:515px;
+
+    @media(max-width:768px){
+        height:515px;
+        margin:auto;
+        width:85%;
+    }
+    &:hover {
+        ${Link}{
+            color:var(--text-primary);
     
-      &:hover{
-        &::after {
-            width:100%;
-        }
+            &::after {
+                width:100%;
+            }
       }
     }
+
+
 `;

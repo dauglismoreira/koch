@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Col, Row } from "../../components/grid";
 import useScreenSize from '../../../hooks/useScreenSize';
-import { HighSkills } from '@/app/empreendimento/[slug]/enterPage';
+import { HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
 
 interface EnterTitleSectionProps {
     title:string;

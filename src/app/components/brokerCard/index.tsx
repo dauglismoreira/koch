@@ -36,7 +36,7 @@ export const BrokerCard: React.FC<{ data: CardProps }> = ({ data }) => {
                 </Info>
                 <ContainerButtons>
                     <Button><a href={`mailto:` + email} target="_blank">Email</a></Button>
-                    <Button><a href={`https://wa.me/55` + phone} target="_blank">Whatsapp</a></Button>
+                    <Button><a href={`https://api.whatsapp.com/send?phone=55` + phone} target="_blank">Whatsapp</a></Button>
                     <Button>Ligue agora</Button>
                 </ContainerButtons>
             </Content>
@@ -87,6 +87,10 @@ const ContainerButtons = styled.div`
     flex-direction:column;
     align-items:center;
     gap:10px;
+
+    @media(max-width:640px){
+        width:100%;
+    }
 `;
 
 const Name = styled.div`
@@ -136,6 +140,8 @@ const Button = styled.a`
 
     @media(max-width:640px){
         padding:12px 15px;
+        width:100%;
+        text-align:center;
     }
 `;
 

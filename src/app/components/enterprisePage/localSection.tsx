@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
 import useScreenSize from '../../../hooks/useScreenSize';
-import { Localization } from '@/app/empreendimento/[slug]/enterPage';
+import { Localization } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionBodyText } from '../sectionBodyText';
 import { SectionSubTitle } from '../sectionSubTitle';
 import Maps from '@/app/components/map';

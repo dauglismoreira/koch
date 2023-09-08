@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
 import useScreenSize from '../../../hooks/useScreenSize';
-import { AboutCharacteristics, HighSkills } from '@/app/empreendimento/[slug]/enterPage';
+import { AboutCharacteristics, HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionBodyText } from '../sectionBodyText';
 import { SectionSubTitle } from '../sectionSubTitle';
 

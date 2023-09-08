@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
 import useScreenSize from '../../../hooks/useScreenSize';
-import { Progress } from '@/app/empreendimento/[slug]/enterPage';
+import { Progress } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionSubTitle } from '../sectionSubTitle';
 import { ProgressBar } from '../progressBar';
 import { useState } from 'react';

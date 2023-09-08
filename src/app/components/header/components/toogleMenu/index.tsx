@@ -18,7 +18,17 @@ export const ToogleMenu: React.FC<ItemProps> = ({itens, burgerItens}) => {
 
     const[open, setOpen] = useState(false)
 
+    useEffect(() => {
+      if (open && !isLargeScreen) {
+        document.documentElement.classList.add('no-scroll');
+      } else {
+        document.documentElement.classList.remove('no-scroll');
+      }
+    }, [open]);
+
     return(
+      <>
+      <BgAnimation></BgAnimation>
         <ToogleContainer>
             <Button open={open} onClick={() => setOpen(!open)}>
                 <span></span>
@@ -34,6 +44,7 @@ export const ToogleMenu: React.FC<ItemProps> = ({itens, burgerItens}) => {
                 ))}
             </Menu>
         </ToogleContainer>
+      </>
     )
 }
 
@@ -45,6 +56,17 @@ type ButtonProps = {
     @media(min-width:768px){
       position:relative;
     }
+`;
+
+const BgAnimation = styled.div`
+    position:absolute;
+    top:0;
+    width:100%;
+    right:0;
+    left:0;
+    bottom:0;
+    z-index:-1;
+    background-color:var(--background-primary);
 `;
 
   const Button = styled.div<ButtonProps>`
@@ -103,6 +125,7 @@ const Menu = styled.div`
   align-items:center;
   justify-content:center;
   gap:20px;
+  z-index:-2;
 
   &.slideDown {
     transform: translateY(0);

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
 import useScreenSize from '../../../hooks/useScreenSize';
-import { EnterpriseGalleryItem } from '@/app/empreendimento/[slug]/enterPage';
+import { EnterpriseGalleryItem } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionSubTitle } from '../sectionSubTitle';
 import { Fancybox as NativeFancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";

@@ -37,7 +37,7 @@ export const Footer = () => {
     return(
         <Section
             background="var(--background-primary)"
-            padding={!isLargeScreen.isLargeScreen ? "160px 10px 100px" : "60px 10px 40px"}
+            padding={isLargeScreen.isLargeScreen ? "160px 10px 100px" : "60px 10px 40px"}
         >
             <Container>
                 <FooterTitle text={`Entre \n em contato`}/>

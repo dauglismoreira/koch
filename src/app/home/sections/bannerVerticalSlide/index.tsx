@@ -145,7 +145,7 @@ const RightCol = styled.div<{widthscreen : number}>`
     width:${(props) => (props.widthscreen - 100) - (props.widthscreen - 337)}px;
     display:flex;
     justify-content:flex-start;
-    align-items:flex-end;
+    align-items:center;
 
     @media(max-width:1360px) and (min-width:900px){
         width:${(props) => (props.widthscreen - 220) - (props.widthscreen - 337)}px;

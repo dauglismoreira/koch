@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
 import useScreenSize from '../../../hooks/useScreenSize';
-import { Plan } from '@/app/empreendimento/[slug]/enterPage';
+import { Plan } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionSubTitle } from '../sectionSubTitle';
 import {useState} from 'react';
 

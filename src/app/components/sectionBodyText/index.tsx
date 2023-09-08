@@ -8,15 +8,15 @@ interface SectionBodyTexProps {
 export const SectionBodyText: React.FC<SectionBodyTexProps> = ({ text, color }) => {
 
     return (
-        <Text
+        <TextContent
             color={color || "var(--text-white)"}
         >
             {text && <div dangerouslySetInnerHTML={{ __html: text }} />}
-        </Text>
+        </TextContent>
     );
 }
 
-const Text = styled.div<{color: string}>`
+const TextContent = styled.div<{color: string}>`
     h3 {
         color:${props => props.color};
         font-family: var(--font-primary);
