@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { InputGenerate, LocalFormData } from '../components/formGenerator';
 import { Mandatory } from '../components/formGenerator/components/notice';
 import { CheckFormAccept } from '../components/formGenerator/components/check';
+import SvgComponent from '../components/SvgComponent';
 
 interface SendWorkProps {
     aboutInfo:any;
@@ -31,7 +32,7 @@ export const SendWorkPage: React.FC<SendWorkProps> = ({
 
     return (
         <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-secondary)">
+            <Section position="relative" padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-secondary)">
                 <Container>
                     <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}>
@@ -68,6 +69,9 @@ export const SendWorkPage: React.FC<SendWorkProps> = ({
                         <Col flex={5}></Col>
                     </Row>
                 </Container>
+                <SvgContainer>
+                    <SvgComponent className="sv3" color="var(--background-secondary)" border="var(--background-grey)"/>
+                </SvgContainer>
             </Section>
             </>
     )
@@ -142,5 +146,18 @@ const ButtonContainer = styled.div`
         @media(max-width:768px){
             width:100%;
         }
+    }
+`;
+
+const SvgContainer = styled.div`
+    position:absolute;
+    top:-160px;
+    bottom:0;
+    left:65%;
+    z-index:-1;
+    width:1400px;
+
+    @media(max-width:768px){
+        display:none;
     }
 `;

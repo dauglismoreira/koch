@@ -7,6 +7,7 @@ import { SectionSubTitle } from '../../../components/sectionSubTitle';
 import { SectionTitle } from '../../../components/sectionTitle';
 import { SectionBodyText } from '../../../components/sectionBodyText';
 import { ButtonsProps, ContainerButtons } from '../../../components/containerButtons';
+import SvgComponent from '@/app/components/SvgComponent/';
 
 interface InvestorSection {
     buttonsList?:ButtonsProps[];
@@ -23,7 +24,7 @@ export const InvestorSection: React.FC<InvestorSection> = ({ buttonsList, info }
     return (
         <>
         {isLargeScreen?.isLargeScreen &&
-            <Section padding={!isLargeScreen.isLargeScreen ? "40px 0" : "120px 0"} background="var(--background-grey)">
+            <Section position="relative" padding={!isLargeScreen.isLargeScreen ? "40px 0" : "120px 0"} background="var(--background-grey)">
                 <Container>
                     <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}>
@@ -40,6 +41,9 @@ export const InvestorSection: React.FC<InvestorSection> = ({ buttonsList, info }
                         </Col>
                     </Row>
                 </Container>
+                <SvgContainer>
+                    <SvgComponent className="sv2" color="var(--background-grey)" border="white"/>
+                </SvgContainer>
             </Section>
         }
         </>
@@ -55,4 +59,13 @@ const Content = styled.div`
 
 const Title = styled.div`
 
+`;
+
+const SvgContainer = styled.div`
+    position:absolute;
+    top:-180px;
+    bottom:0;
+    right:0;
+    z-index:-1;
+    width:700px;
 `;

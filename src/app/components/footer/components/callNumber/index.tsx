@@ -22,7 +22,7 @@ export const CallNumber: React.FC<ItemProps> = ({number, email}) => {
 
     return(
         <Call>
-            <a href={`https://wa.me/55` + number} target="_blank"><FaWhatsapp/>{formatPhoneNumber(number)}</a>
+            <a href={`https://api.whatsapp.com/send?phone=55` + number} target="_blank"><FaWhatsapp/>{formatPhoneNumber(number)}</a>
             <a href={`mailto:` + email} target="_blank">{email}</a>
         </Call>
     )

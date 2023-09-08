@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { InputGenerate, LocalFormData } from '../components/formGenerator';
 import {CheckFormAccept} from '../components/formGenerator/components/check';
 import {Mandatory} from '../components/formGenerator/components/notice';
+import SvgComponent from '../components/SvgComponent';
 
 interface InvestorPageProps {
     aboutInfo:any;
@@ -27,7 +28,7 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
 
     return (
         <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-secondary-variation)">
+            <Section position='relative' padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-secondary-variation)">
                 <Container>
                     <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}>
@@ -67,6 +68,9 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
                         {isLargeScreen.isLargeScreen && <Col flex={5}></Col>}
                     </Row>
                 </Container>
+                <SvgContainer>
+                    <SvgComponent className="sv2" color="var(--background-grey)" border="white"/>
+                </SvgContainer>
             </Section>
             </>
     )
@@ -134,5 +138,18 @@ const ActionContainer = styled.div`
         margin-top:-40px;
         padding:0 10px;
         margin-bottom:30px;
+    }
+`;
+
+const SvgContainer = styled.div`
+    position:absolute;
+    top:-160px;
+    bottom:0;
+    left:65%;
+    z-index:-1;
+    width:1400px;
+
+    @media(max-width:768px){
+        display:none;
     }
 `;

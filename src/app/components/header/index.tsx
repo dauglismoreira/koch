@@ -32,7 +32,7 @@ export const Header = () => {
     ]
 
     return(
-        <Section background="var(--background-primary)" fixHeight={70} position="fixed">
+        <Section background="var(--background-primary)" fixHeight={70} position="fixed" zIndex='999'>
             <Container>
                 <Row>
                     <Col flex={2}>

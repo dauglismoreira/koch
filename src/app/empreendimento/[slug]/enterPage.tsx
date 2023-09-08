@@ -64,29 +64,29 @@ export const EnterPage: React.FC<EnterpriseProps> = ({enterprise}) => {
                         enterprise_logo={enterprise.enterprise_logo}
                         high_skills={enterprise.high_skills}
                     />
-                    <EnterAboutSection
+                    <div id="sobre"><EnterAboutSection
                         about_text={enterprise.about_text}
                         about_characteristics={enterprise.about_characteristics}
                         about_image={enterprise.about_image}
-                    />
+                    /></div>
                     <Row><LineDivider></LineDivider></Row>
-                    <EnterImagesSection
+                    <div id="imagens"></div><EnterImagesSection
                         data={enterprise.enterprise_gallery}
                     />
                     <Row><LineDivider></LineDivider></Row>
-                    {isLargeScreen.isLargeScreen && <EnterPlansSection
+                    {isLargeScreen.isLargeScreen && <div id="plantas"><EnterPlansSection
                         plans={enterprise.plans}
-                    />}
+                    /></div>}
                     {isLargeScreen.isLargeScreen && <Row><LineDivider></LineDivider></Row>}
-                    <EnterLocalSection
+                    <div id="localizacao"><EnterLocalSection
                         data={enterprise.localization}
                         district={enterprise.district}
                         city={enterprise.city}
-                    />
+                    /></div>
                     {isLargeScreen.isLargeScreen && <Row><LineDivider></LineDivider></Row>}
-                    {isLargeScreen.isLargeScreen && <EnterProgressSection
+                    {isLargeScreen.isLargeScreen && <div id="obra"><EnterProgressSection
                         data={enterprise.progress}
-                    />}
+                    /></div>}
                 </Container>
             </Section>
             </>

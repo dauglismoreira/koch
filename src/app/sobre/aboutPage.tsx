@@ -8,6 +8,7 @@ import { SectionSubTitle } from '../components/sectionSubTitle';
 import useScreenSize from '../../hooks/useScreenSize';
 import { Accordion } from '../components/accordion';
 import {AboutImageBanner} from '../components/aboutImageBanner';
+import SvgComponent from '../components/SvgComponent';
 
 interface AboutPageProps {
     aboutItemsAccordion: any;
@@ -20,7 +21,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ aboutItemsAccordion, about
 
     return (
         <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-primary-variation)">
+            <Section position="relative" padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-primary-variation)">
                 <Container>
                     <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}>
@@ -44,6 +45,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ aboutItemsAccordion, about
                     </Row>
                 </Container>
                 <AboutImageBanner data={aboutSecondInfo}/>
+                <SvgContainer>
+                    <SvgComponent className="sv1" color="#182842" border="#182842"/>
+                </SvgContainer>
             </Section>
             </>
     )
@@ -76,5 +80,19 @@ const Image = styled.div`
     @media(max-width: 768px){
         width:calc(100% - 20px);
         height:455px;
+    }
+`;
+
+const SvgContainer = styled.div`
+    position:absolute;
+    top:-100px;
+    bottom:0;
+    right:-600px;
+    z-index:-1;
+    width:1800px;
+
+    @media(max-width:768px){
+        width:700px;
+        left:50px;
     }
 `;

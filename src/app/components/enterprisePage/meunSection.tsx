@@ -2,6 +2,17 @@ import styled from 'styled-components';
 import { Container } from "../grid";
 import useScreenSize from '../../../hooks/useScreenSize';
 
+const scrollToSection = (sectionId : string) => {
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+        window.scrollTo({
+            top: section.offsetTop,
+            behavior: 'smooth', // Rola suavemente
+        });
+    }
+};
+
 export const EnterMenuSection = () => {
     const isLargeScreen = useScreenSize(768);
 
@@ -9,11 +20,11 @@ export const EnterMenuSection = () => {
         <TopMenu>
             <Container>
                 <TopMenuContainer>
-                    <MenuItem>Sobre</MenuItem>
-                    <MenuItem>Imagens</MenuItem>
-                    {isLargeScreen.isLargeScreen && <MenuItem>Plantas</MenuItem>}
-                    <MenuItem className={!isLargeScreen.isLargeScreen ? "last" : ''}>Localização</MenuItem>
-                    {isLargeScreen.isLargeScreen && <MenuItem className="last">Acompanhamento de obra</MenuItem>}
+                    <MenuItem onClick={() => scrollToSection('sobre')}>Sobre</MenuItem>
+                    <MenuItem onClick={() => scrollToSection('imagens')}>Imagens</MenuItem>
+                    <MenuItem onClick={() => scrollToSection('plantas')}>Plantas</MenuItem>
+                    <MenuItem onClick={() => scrollToSection('localizacao')}>Localização</MenuItem>
+                    <MenuItem className="last"  onClick={() => scrollToSection('obra')}>Acompanhamento de obra</MenuItem>
                 </TopMenuContainer>
             </Container>
         </TopMenu>

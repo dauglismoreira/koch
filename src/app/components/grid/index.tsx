@@ -5,10 +5,11 @@ interface SectionProps {
   background?: string;
   fixHeight?: number;
   padding?: string;
+  zIndex?: string;
   position?: CSSProperties['position'];
 }
 
-export const Section: React.FC<SectionProps> = ({ children, padding, background, fixHeight, position }) => {
+export const Section: React.FC<SectionProps> = ({ children, zIndex, padding, background, fixHeight, position }) => {
   const containerStyle: CSSProperties = {
     width: '100%',
     margin: '0 auto',
@@ -17,7 +18,7 @@ export const Section: React.FC<SectionProps> = ({ children, padding, background,
     background: background || 'transparent',
     position: position || 'static',
     height: fixHeight || 'auto',
-    zIndex: 99,
+    zIndex: zIndex || 99,
   };
 
   return <div style={containerStyle}>{children}</div>;

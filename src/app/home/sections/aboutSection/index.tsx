@@ -7,6 +7,7 @@ import { Accordion, AccordionItemProps } from '../../../components/accordion';
 import { SectionSubTitle } from '../../../components/sectionSubTitle';
 import { SectionTitle } from '../../../components/sectionTitle';
 import { SectionBodyText } from '../../../components/sectionBodyText';
+import SvgComponent from './../../../components/SvgComponent';
 
 interface AboutProps {
     accordionDate?:AccordionItemProps[];
@@ -22,7 +23,7 @@ export const AboutSection: React.FC<AboutProps> = ({ accordionDate, info }) => {
     const isLargeScreen = useScreenSize(768);
 
     return (
-        <Section padding={!isLargeScreen.isLargeScreen ? "40px 0" : "120px 0"} background="var(--background-primary)">
+        <Section position="relative" padding={!isLargeScreen.isLargeScreen ? "40px 0" : "120px 0"} background="var(--background-primary)">
             <Container>
                 <Row breakpoint={!isLargeScreen.isLargeScreen}>
                     <Col flex={2}>
@@ -45,6 +46,9 @@ export const AboutSection: React.FC<AboutProps> = ({ accordionDate, info }) => {
                     </Col>
                 </Row>
             </Container>
+            <SvgContainer>
+                <SvgComponent className="sv1" color="#182842" border="#182842"/>
+            </SvgContainer>
         </Section>
     );
 }
@@ -89,5 +93,19 @@ const Link = styled.a`
 
     @media(max-width:768px){
         display:none;
+    }
+`;
+
+const SvgContainer = styled.div`
+    position:absolute;
+    top:-100px;
+    bottom:0;
+    right:0;
+    z-index:-1;
+    width:1100px;
+
+    @media(max-width:768px){
+        width:800px;
+        left:100px;
     }
 `;
