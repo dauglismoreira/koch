@@ -45,12 +45,12 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                         <SectionSubTitle text={contactInfo.sectionTitle} color="var(--text-white)"/>
                     </Col>
                     <Col flex={6}>
-                        <Content>
+                        <ContentContact>
                             <div>
                                 <SectionTitle text={contactInfo.title} color="var(--text-white)"/>
                                 <SectionBodyText  text={contactInfo.content} color="var(--text-white)"/>
                             </div>
-                        </Content>
+                        </ContentContact>
                     </Col>
                     <Col flex={4}>
                         <SocialLinks>
@@ -97,7 +97,7 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
     )
 }
 
-const Content = styled.div`
+const ContentContact = styled.div`
     height:100%;
     display:flex;
     flex-direction:column;
