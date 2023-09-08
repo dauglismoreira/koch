@@ -17,8 +17,6 @@ export const SectionBodyText: React.FC<SectionBodyTexProps> = ({ text, color }) 
 }
 
 const TextContent = styled.div<{color: string}>`
-    border:none!important;
-    height:auto!important;
 
     h3 {
         color:${props => props.color};
@@ -34,6 +32,8 @@ const TextContent = styled.div<{color: string}>`
         font-weight:300;
         font-size:16px;
         margin-top:20px;
+        border:none!important;
+        height:auto!important;
 
         @media(max-width:768px){
             padding:0 10px 10px;
