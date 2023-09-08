@@ -46,10 +46,10 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                     </Col>
                     <Col flex={6}>
                         <Content>
-                            <Title>
+                            <div>
                                 <SectionTitle text={contactInfo.title} color="var(--text-white)"/>
                                 <SectionBodyText  text={contactInfo.content} color="var(--text-white)"/>
-                            </Title>
+                            </div>
                         </Content>
                     </Col>
                     <Col flex={4}>
@@ -102,10 +102,6 @@ const Content = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-`;
-
-const Title = styled.div`
-
 `;
 
 const ContainerForm = styled.div`
