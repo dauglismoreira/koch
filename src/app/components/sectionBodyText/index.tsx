@@ -17,6 +17,9 @@ export const SectionBodyText: React.FC<SectionBodyTexProps> = ({ text, color }) 
 }
 
 const TextContent = styled.div<{color: string}>`
+    border:none!important;
+    height:auto!important;
+
     h3 {
         color:${props => props.color};
         font-family: var(--font-primary);
