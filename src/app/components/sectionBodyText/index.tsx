@@ -28,8 +28,6 @@ const TextContent = styled.div<{color: string}>`
     p {
         color:${props => props.color};
         line-height:1.4;
-        border:none;
-        height:auto;
         font-weight:300;
         font-size:16px;
         margin-top:20px;

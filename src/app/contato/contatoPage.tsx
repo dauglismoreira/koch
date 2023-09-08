@@ -102,6 +102,9 @@ const ContentContact = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:space-between;
+
+    border:none!important;
+    height:auto!important;
 `;
 
 const ContainerForm = styled.div`
