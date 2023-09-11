@@ -29,6 +29,7 @@ const ControllersWrapper = styled.div`
     gap: 10px;
 `;
 
+
 const Option = styled.div<{ isActive: boolean }>`
     font-size: var(--small-text-size);
     font-weight: var(--small-text-weight);

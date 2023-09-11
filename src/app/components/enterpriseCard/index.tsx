@@ -87,6 +87,7 @@ const Name = styled.div`
         letter-spacing:0px;
         font-weight:var(--medium-title-weight);
         padding-top:10px;
+        text-align:center;
 
         @media(max-width:768px){
             font-size:var(--small-title-size);

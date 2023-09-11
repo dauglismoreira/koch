@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface InputProps {
@@ -7,11 +7,13 @@ interface InputProps {
   onChange?: (textValue: string) => void;
   open:boolean;
   param:string;
+  clearFilter:number;
 }
 
-export const TextInput: React.FC<InputProps> = ({ placeholder, icon, onChange, open, param }) => {
+export const TextInput: React.FC<InputProps> = ({ placeholder, clearFilter, icon, onChange, open, param }) => {
     const [isFocused, setIsFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    
 
     const handleInputFocus = () => {
       setIsFocused(true);
@@ -20,6 +22,21 @@ export const TextInput: React.FC<InputProps> = ({ placeholder, icon, onChange, o
     const handleInputBlur = () => {
       setIsFocused(false);
     };
+
+    const handleInputChange = useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+          const newValue = event.target.value;
+          setInputValue(newValue);
+          if (onChange) {
+              onChange(newValue);
+          }
+      },
+      [onChange]
+  );
+
+    useEffect(() => {
+      setInputValue('')
+    }, [clearFilter])
 
     useEffect(() => {
       const queryParams = new URLSearchParams(window.location.search);
@@ -32,16 +49,8 @@ export const TextInput: React.FC<InputProps> = ({ placeholder, icon, onChange, o
       } as React.ChangeEvent<HTMLInputElement>;
 
       handleInputChange(fakeEvent)
-    }, [param, open]);
+    }, [param, open, handleInputChange]);
 
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = event.target.value;
-        setInputValue(newValue);
-        if (onChange) {
-          onChange(newValue);
-        }
-      };
 
   return (
     <InputContainer>

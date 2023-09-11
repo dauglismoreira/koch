@@ -105,11 +105,11 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                         />
                     </Col>
                     <Col flex={6}>
-                        <Maps
+                        {/* <Maps
                             latI={-27.120616076517972}
                             lngI={-48.6081570743573}
                             zoomLevel={16}
-                        />
+                        /> */}
                     </Col>
                 </Row>
                 <Row>

@@ -28,6 +28,7 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
         const [textFilter, setTextFilter] = useState('')
         const [cityFilter, setCityFilter] = useState('')
         const [situationFilter, setSituationFilter] = useState('')
+        const [clearFilter, setClearFilter] = useState(0)
     
         useEffect(() => {
             const urlSearchParams = new URLSearchParams(window.location.search);
@@ -72,16 +73,20 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
                                 onSearchChange={(textValue) => {
                                     setTextFilter(textValue);
                                 }}
+                                clearFilter={clearFilter}
                            />
                            <ListFilters>
                                 {textFilter !== '' && <Filter onClick={() => {
                                     setTextFilter('')
+                                    setClearFilter(clearFilter => clearFilter + 1)
                                 }}>{textFilter}<AiOutlineClose/></Filter>}
                                 {cityFilter !== '' && <Filter onClick={() => {
                                     setCityFilter('')
+                                    setClearFilter(clearFilter => clearFilter + 1)
                                 }}>{cityFilter}<AiOutlineClose/></Filter>}
                                 {situationFilter !== '' && <Filter onClick={() => {
                                     setSituationFilter('')
+                                    setClearFilter(clearFilter => clearFilter + 1)
                                 }}>{situationFilter}<AiOutlineClose/></Filter>}
                            </ListFilters>
                         </Col>

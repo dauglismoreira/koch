@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Col, Row } from "../grid";
 import useScreenSize from '../../../hooks/useScreenSize';
 import { AboutCharacteristics, HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
-import { SectionBodyText } from '../sectionBodyText';
 import { SectionSubTitle } from '../sectionSubTitle';
 
 interface OpportunityAboutSectionProps {
@@ -40,7 +39,7 @@ export const OpportunityAboutSection: React.FC<OpportunityAboutSectionProps> = (
                     </Content>
                 </Col>
                 <Col flex={5}>
-                    <Image image={about_image}></Image>
+                    <BannerImage background={about_image}></BannerImage>
                 </Col>
             </Row>
         </AboutSection>
@@ -56,11 +55,11 @@ const AboutSection = styled.div`
     }
 `;
 
-const Image = styled.div<{image: string}>`
+const BannerImage = styled.div<{background: string}>`
     margin:auto;
     width:100%;
     height:940px;
-    background-image:url('${props => props.image}');
+    background-image:url('${props => props.background}');
     background-position: center center;
     background-size:cover;
 

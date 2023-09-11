@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface BannerProps {
     images: string[];
@@ -16,6 +16,7 @@ export const Banner: React.FC<BannerProps> = ({
     handleBannerMouseEnter,
     handleBannerMouseLeave,
 }) => {
+    
     return (
         <BannerWrapper
             onMouseEnter={handleBannerMouseEnter}
@@ -26,7 +27,7 @@ export const Banner: React.FC<BannerProps> = ({
                 width={width}
                 activeIndex={activeIndex}>
                 {images.map((image, index) => (
-                    <Image
+                    <BannerImage
                         key={index}
                         background={image}
                         width={width}
@@ -67,7 +68,7 @@ const ImageContainer = styled.div<{ activeIndex: number; width: number }>`
     }
 `;
 
-const Image = styled.div<{ background: string; width: number }>`
+const BannerImage = styled.div<{ background: string; width: number }>`
     height: ${(props) => ((props.width - 337) / 1.7) - 40}px;
     width: 100%;
     background-position: center center;

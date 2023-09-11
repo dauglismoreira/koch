@@ -37,7 +37,7 @@ export const BannerVerticalSlide: React.FC<BannerProps> = ({ autoPlayTime, auto,
         return () => {
             clearInterval(intervalId);
         };
-    }, [autoPlay, images]);
+    }, [autoPlay, images, autoPlayInterval]);
 
     const handleBannerMouseEnter = () => {
         setAutoPlay(false);

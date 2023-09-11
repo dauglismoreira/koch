@@ -40,7 +40,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ aboutItemsAccordion, about
                             </Content>
                         </Col>
                         <Col flex={5}>
-                            <Image></Image>
+                            <BannerImage></BannerImage>
                         </Col>
                     </Row>
                 </Container>
@@ -73,7 +73,7 @@ const Content = styled.div`
     }
 `;
 
-const Image = styled.div`
+const BannerImage = styled.div`
     margin:auto;
     width:80%;
     height:657px;

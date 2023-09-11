@@ -16,6 +16,7 @@ interface EnterpriseFiltersProps {
   onCityChange: (selectedValue: string) => void;
   onSituationChange: (selectedValue: string) => void;
   onSearchChange: (textValue: string) => void;
+  clearFilter: number
 }
 
 export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
@@ -23,7 +24,8 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
   situationOptions,
   onCityChange,
   onSituationChange,
-  onSearchChange
+  onSearchChange,
+  clearFilter
 }) => {
 
     const isLargeScreen = useScreenSize(768);
@@ -74,12 +76,14 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
               <Select
                 options={citiesOptions}
                 onChange={onCityChange}
+                clearFilter={clearFilter}
               />
             </Col>
             <Col flex={2}>
               <Select
                 options={situationOptions}
                 onChange={onSituationChange}
+                clearFilter={clearFilter}
               />
             </Col>
             <Col flex={3}>
@@ -89,6 +93,7 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
                 onChange={onSearchChange}
                 param='textFilter'
                 open={showModal}
+                clearFilter={clearFilter}
               />
             </Col>
           </Row>
@@ -154,6 +159,7 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
                 onChange={onSearchChange}
                 param='textFilter'
                 open={showModal}
+                clearFilter={clearFilter}
               />
             </TextInputContainer>
 

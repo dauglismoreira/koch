@@ -33,3 +33,12 @@ html.no-scroll {
 ::-webkit-scrollbar-track {
   background-color: var(--background-secondary);
 }
+
+#impacte-link svg {
+  width: 68px;
+  margin-bottom: -3px;
+}
+
+.impacte-color {
+  fill: #636D7A;
+}

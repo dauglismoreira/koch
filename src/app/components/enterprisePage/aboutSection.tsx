@@ -37,7 +37,7 @@ export const EnterAboutSection: React.FC<EnterAboutSectionProps> = ({
                     </Content>
                 </Col>
                 <Col flex={5}>
-                    <Image image={about_image}></Image>
+                    <CoverImage image={about_image}></CoverImage>
                 </Col>
             </Row>
         </AboutSection>
@@ -53,7 +53,7 @@ const AboutSection = styled.div`
     }
 `;
 
-const Image = styled.div<{image: string}>`
+const CoverImage = styled.div<{image: string}>`
     margin:auto;
     width:100%;
     height:940px;

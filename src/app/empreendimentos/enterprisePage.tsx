@@ -22,6 +22,7 @@ export const EnterprisePage: React.FC<EnterprisePageProps> = ({ situationOptions
     const [textFilter, setTextFilter] = useState('')
     const [cityFilter, setCityFilter] = useState('')
     const [situationFilter, setSituationFilter] = useState('')
+    const [clearFilter, setClearFilter] = useState(0)
 
     useEffect(() => {
         const urlSearchParams = new URLSearchParams(window.location.search);
@@ -65,19 +66,25 @@ export const EnterprisePage: React.FC<EnterprisePageProps> = ({ situationOptions
                                 onSearchChange={(textValue) => {
                                     setTextFilter(textValue);
                                 }}
+                                clearFilter={clearFilter}
                            />
-                           <ListFilters>
-                                {textFilter !== '' && <Filter onClick={() => {
-                                    setTextFilter('')
-                                }}>{textFilter}<AiOutlineClose/></Filter>}
-                                {cityFilter !== '' && <Filter onClick={() => {
-                                    setCityFilter('')
-                                }}>{cityFilter}<AiOutlineClose/></Filter>}
-                                {situationFilter !== '' && <Filter onClick={() => {
-                                    setSituationFilter('')
-                                }}>{situationFilter}<AiOutlineClose/></Filter>}
-                           </ListFilters>
                         </Col>
+                    </Row>
+                    <Row>
+                        <ListFilters>
+                            {textFilter !== '' && <Filter onClick={() => {
+                                setTextFilter('')
+                                setClearFilter(clearFilter => clearFilter + 1)
+                            }}>{textFilter}<AiOutlineClose/></Filter>}
+                            {cityFilter !== '' && <Filter onClick={() => {
+                                setCityFilter('')
+                                setClearFilter(clearFilter => clearFilter + 1)
+                            }}>{cityFilter}<AiOutlineClose/></Filter>}
+                            {situationFilter !== '' && <Filter onClick={() => {
+                                setSituationFilter('')
+                                setClearFilter(clearFilter => clearFilter + 1)
+                            }}>{situationFilter}<AiOutlineClose/></Filter>}
+                        </ListFilters>
                     </Row>
                     <Row>
                         <EnterpriseListContainer>
@@ -116,14 +123,21 @@ const ListFilters = styled.div`
   display:flex;
   padding:15px 10px 0;
   gap:5px;
+
+  @media(min-width:768px){
+    padding:15px 0 0;
+  }
 `;
 
 const Filter = styled.div`
   color:var(--text-primary);
   text-decoration:underline;
+  font-size:var(--labels-size);
+  font-weight:var(--buttons-weight);
   text-transform:uppercase;
   padding:3px 8px;
   display:flex;
   align-items:center;
   gap:3px;
+  cursor:pointer;
 `;

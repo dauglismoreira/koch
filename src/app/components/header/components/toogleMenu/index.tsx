@@ -17,7 +17,7 @@ export interface ItemProps {
 
 export const ToogleMenu: React.FC<ItemProps> = ({itemSocialList, itens, burgerItens, initial}) => {
 
-  const {isLargeScreen} = useScreenSize(992)
+  const {isLargeScreen}= useScreenSize(992)
 
     const[open, setOpen] = useState(false)
 
@@ -27,7 +27,7 @@ export const ToogleMenu: React.FC<ItemProps> = ({itemSocialList, itens, burgerIt
       } else {
         document.documentElement.classList.remove('no-scroll');
       }
-    }, [open]);
+    }, [open, isLargeScreen]);
 
     return(
       <>
@@ -212,7 +212,6 @@ const Menu = styled.div`
 `;
 
 const SocialLinks = styled.div`
-    height:50px;
     display:flex;
     flex-direction:row;
     align-items:flex-start;
@@ -221,12 +220,12 @@ const SocialLinks = styled.div`
     padding-bottom:50px;
     position:fixed;
     z-index:9999;
-    bottom:60px;
+    bottom:0px;
     left:0;
     right:0;
 
     @media(max-width:768px){
-        padding:70px 0 0;
+        padding:0;
     }
 `;
 
