@@ -113,7 +113,8 @@ const Skills = styled.div`
     font-size:var(--small-text-size);
 
     @media(max-width:768px){
-        padding:0 20px 20px;
+        padding:0 0 20px;
+        gap:35px;
     }
 `;
 

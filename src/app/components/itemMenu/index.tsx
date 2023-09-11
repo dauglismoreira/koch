@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface ItemProps {
@@ -8,8 +9,17 @@ interface ItemProps {
 }
 
 export const ItemMenu: React.FC<ItemProps> = ({href, text}) => {
+
+    const [active, setActive] = useState(false)
+
+    useEffect(() => {
+      if(href?.replace('./../', '') === window.location.pathname.replace('/', '')){
+        setActive(true)
+      }
+    }, [href])
+
     return(
-        <Link href={href}>{text}</Link>
+        <Link href={href} className={active ? 'active' : ''}>{text}</Link>
     )
 }
 
@@ -33,12 +43,18 @@ const Link = styled.a`
     left:0px;
     transition:0.3s;
   }
+  
 
   &:hover{    
     &::after {
         width:100%;
     }
   }
+  
+  &.active::after {
+      width:100%;
+  }
+  
 
   @media(max-width:768px){
     font-size:var(--mini-text-size);

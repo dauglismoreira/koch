@@ -75,6 +75,7 @@ const Name = styled.div`
         letter-spacing:0px;
         font-weight:var(--medium-title-weight);
         padding-top:10px;
+        text-align:center;
 
         @media(max-width:768px){
             font-size:var(--small-title-size);
@@ -89,19 +90,20 @@ const Place = styled.div`
 `;
 
 const Skills = styled.div`
-    display:flex;
-    width:100%;
-    flex-direction:row;
-    justify-content:center;
-    gap:40px;
-    color:var(--text-secondary);
-    font-weight:var(--medium-title-weight);
-    padding-bottom:20px;
-    font-size:var(--small-text-size);
+        display:flex;
+        width:100%;
+        flex-direction:row;
+        justify-content:center;
+        gap:40px;
+        color:var(--text-secondary);
+        font-weight:var(--medium-title-weight);
+        padding-bottom:20px;
+        font-size:var(--small-text-size);
 
-    @media(max-width:768px){
-        padding:0 20px 20px;
-    }
+        @media(max-width:768px){
+            padding:0 0 20px;
+            gap:35px;
+        }
 `;
 
 const Link = styled.div`

@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 interface FilterItemProps {
     label: string;
+    param: string;
     options: { label: string; value: string }[];
+    onItemClick: (value: string) => void;
+    open: boolean;
   }
+
+
   
-  const FilterItem: React.FC<FilterItemProps> = ({ label, options }) => {
+  const FilterItem: React.FC<FilterItemProps> = ({ label, options, onItemClick, param, open }) => {
   const [isBodyVisible, setIsBodyVisible] = useState(true);
+  const [paramValue, setParamValue] = useState<string | null>(null);
 
   const toggleBodyVisibility = () => {
     setIsBodyVisible(!isBodyVisible);
   };
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const valueFromParam = queryParams.get(param);
+    setParamValue(valueFromParam);
+  }, [param, open]);
 
   return (
     <FilterItemContainer>
@@ -22,7 +34,15 @@ interface FilterItemProps {
       </Item>
       <Body className={isBodyVisible ? 'visible' : 'hidden'}>
         {options.map((item, index) => (
-          index === 0 ? null : <li key={index}>{item.label}</li>
+          index === 0 ? null :
+            <li
+            key={index}
+            onClick={() => {
+              onItemClick(item.value)
+              setParamValue(item.value)
+            }}
+            className={item.value === paramValue ? 'highlighted' : ''}
+          >{item.label}</li>
         ))}
       </Body>
     </FilterItemContainer>
@@ -32,7 +52,7 @@ interface FilterItemProps {
 export default FilterItem;
 
 const FilterItemContainer = styled.div`
-  // Adicione estilos para o container do FilterItem se necessário
+  
 `;
 
 const Item = styled.div`
@@ -62,5 +82,13 @@ const Body = styled.div`
     padding: 7px 0;
     font-size: var(--labels-size);
     font-weight: var(--labels-weight);
+  }
+
+  .highlighted {
+    background-color:var(--background-secondary-variation);
+    margin:0 -10px;
+    width:calc(100% + 20px);
+    padding: 7px 10px;
+    color:var(--text-white);
   }
 `;

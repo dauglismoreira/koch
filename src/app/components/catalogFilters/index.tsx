@@ -3,10 +3,12 @@ import { Select } from './../select';
 import { TextInput } from './../textInput';
 import { FaSearch } from 'react-icons/fa';
 import { FiFilter } from 'react-icons/fi';
+import { AiOutlineClose } from 'react-icons/ai';
 import { Col, Row } from '../grid';
 import FilterItem from '../filterItemAccordion';
 import useScreenSize from '@/hooks/useScreenSize';
 import { useState } from 'react';
+import { BsArrowLeft } from "react-icons/bs";
 
 interface EnterpriseFiltersProps {
   citiesOptions: { label: string; value: string }[];
@@ -26,21 +28,42 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
 
     const isLargeScreen = useScreenSize(768);
 
-    const [isOptionsListVisible, setIsOptionsListVisible] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [isOptionsListVisible, setIsOptionsListVisible] = useState(true);
+    const [isTextInputVisible, setTextInputVisible] = useState(false);
     const [showClear, setShowClear] = useState(false);
 
     const toggleOptionsList = () => {
-      setIsOptionsListVisible(!isOptionsListVisible);
+      setShowModal(!showModal);
+      setTextInputVisible(false)
+      setIsOptionsListVisible(true)
 
       if(!showClear){
         setTimeout(() => {
-            setShowClear(!isOptionsListVisible);
+            setShowClear(!showModal);
           }, 300);
       }else{
-        setShowClear(!isOptionsListVisible);
+        setShowClear(!showModal);
       }
 
     };
+
+    const toggleTextSearch = () => {
+      setTextInputVisible(!isTextInputVisible);
+      setIsOptionsListVisible(!isOptionsListVisible);
+    };
+
+    const CityHandleItemClick = (value: string) => {
+        onCityChange(value)
+    };
+
+    const SituationHandleItemClick = (value: string) => {
+        onSituationChange(value)
+    };
+
+    function clearAllURLParams() {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
 
   return (
     <>
@@ -64,34 +87,76 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
                 placeholder="PESQUISAR"
                 icon={<FaSearch />}
                 onChange={onSearchChange}
+                param='textFilter'
+                open={showModal}
               />
             </Col>
           </Row>
         </InputContainer>
       ) : (
         <FilterMobileContainer>
-          <FilterButton
-            onClick={toggleOptionsList}
-            open={isOptionsListVisible}
-          >
-            <span>
-              Filtro<FiFilter />
-            </span>
-            {showClear ? <Clear>Limpar filtros</Clear> : <></>}
-          </FilterButton>
-          <OptionsList
-            className={isOptionsListVisible ? 'slideRight' : 'slideLeft'}
-          >
-            <FilterItem label={citiesOptions[0].label} options={citiesOptions} />
-            <FilterItem label={situationOptions[0].label} options={situationOptions} />
-            <FilterItemSearch className="search">
+          <FilterButtonContainer open={showModal}>
+            <FilterButton
+              onClick={toggleOptionsList}
+            >
+              <span>
+                Filtro{showClear ? <AiOutlineClose /> : <FiFilter />}
+              </span>
+            </FilterButton>
+            <FilterClearContainer>
+              {showClear ? <Clear onClick={() => {
+                  clearAllURLParams()
+                  setShowModal(!showModal)
+                  setShowClear(!showModal)
+                  setTextInputVisible(false)
+                  onCityChange('')
+                  onSituationChange('')
+                  onSearchChange('')
+                }}>Limpar filtros</Clear> : <></>}
+              {showClear && <TextSearchActive
+                onClick={toggleTextSearch}
+                active={isTextInputVisible}
+              >
+                  <FaSearch />
+                </TextSearchActive>}
+            </FilterClearContainer>
+          </FilterButtonContainer>
+
+            <OptionsList
+              className={showModal ? 'slideRight' : 'slideLeft'}
+            >
+              <SelectsList className={isOptionsListVisible ? 'slideRight' : 'slideLeft'}>
+                <FilterItem
+                  label={citiesOptions[0].label}
+                  options={citiesOptions}
+                  onItemClick={CityHandleItemClick} 
+                  param='cityFilter'
+                  open={showModal}
+                />
+                <FilterItem
+                  label={situationOptions[0].label}
+                  options={situationOptions}
+                  onItemClick={SituationHandleItemClick} 
+                  param='situationFilter'
+                  open={showModal}
+                />
+                <FilterItemSearch className="search"></FilterItemSearch>
+              </SelectsList>
+            </OptionsList>
+
+            <TextInputContainer
+              className={isTextInputVisible ? 'slideRight' : 'slideLeft'}
+            >
+              <span onClick={toggleTextSearch}><BsArrowLeft/>Voltar</span>
               <TextInput
                 placeholder="PESQUISAR"
                 icon={<FaSearch />}
                 onChange={onSearchChange}
+                param='textFilter'
+                open={showModal}
               />
-            </FilterItemSearch>
-          </OptionsList>
+            </TextInputContainer>
+
         </FilterMobileContainer>
       )}
     </>
@@ -102,11 +167,28 @@ const InputContainer = styled.div`
     max-width:660px;
 `;
 
-const FilterButton = styled.div<{open: boolean}>`
+const FilterButton = styled.div`
+  height:40px;
+  transition: 0.2s ease-in-out 100ms;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:10px;
+  width:100px;então
+
+  span{
+    display:flex;
+    flex-direction:row;
+    gap:5px;
+    align-items:center;
+  }
+`;
+
+const FilterButtonContainer = styled.div<{open: boolean}>`
   height:40px;
   border:solid 1px var(--background-primary);
   transition: 0.2s ease-in-out 100ms;
-  width:${props => props.open ? 262 : 100}px;
+  width:${props => props.open ? 'calc(100% - 20px)' : '100px'};
   display:flex;
   flex-direction:row;
   align-items:center;
@@ -126,18 +208,30 @@ const FilterButton = styled.div<{open: boolean}>`
 const OptionsList = styled.div`
   position:absolute;
   z-index:10;
-  background-color:var(--background-secondary);
-  width:280px;
+  width:calc(100% - 20px);
   transition: transform 0.3s ease-in-out;
-  border:solid 1px var(--background-primary);
-  padding:20px 30px;
 
   &.slideRight {
-    transform: translateX(-8px);
+    transform: translateX(10px);
   }
 
   &.slideLeft {
     transform: translateX(-110%);
+  }
+`;
+
+const SelectsList = styled.div`
+  background-color:var(--background-secondary);
+  border:solid 1px var(--background-primary);
+  transition: transform 0.3s ease-in-out;
+  padding:10px 30px 0;
+
+  &.slideRight {
+    transform: translateX(0px);
+  }
+
+  &.slideLeft {
+    transform: translateX(-120%);
   }
 `;
 
@@ -151,9 +245,59 @@ const FilterItemSearch = styled.div`
     }
 `;
 
+const FilterClearContainer = styled.div`
+    width:calc(100% - 100px);
+    display:flex;
+    justify-content:flex-end;
+    gap:20px;
+    height:100%;
+    align-items:center;
+`;
+
 const Clear = styled.a`
     font-size:var(--buttons-size);
     color:var(--text-primary);
     text-decoration:underline;
-    width:80px;
+    white-space:nowrap;
+`;
+
+const TextSearchActive = styled.div<{active: boolean}>`
+    border-left:solid 1px var(--background-primary);
+    margin:0px -20px 0 0;
+    height:100%;
+    width:50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:0.2s;
+    background-color:${props => props.active ? 'var(--background-primary)' : ''};
+
+    svg {
+      color:${props => props.active ? 'var(--text-white)' : 'var(--text-primary)'};
+    }
+`;
+
+const TextInputContainer = styled.div`
+  position:absolute;
+  z-index:10;
+  background-color:var(--background-secondary);
+  width:calc(100% - 20px);
+  transition: transform 0.3s ease-in-out;
+  border:solid 1px var(--background-primary);
+  padding:10px 30px 20px;
+
+  &.slideRight {
+    transform: translateX(10px);
+  }
+
+  &.slideLeft {
+    transform: translateX(-110%);
+  }
+
+  span{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:15px;
+  }
 `;

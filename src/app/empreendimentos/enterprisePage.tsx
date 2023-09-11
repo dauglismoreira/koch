@@ -6,6 +6,8 @@ import { SectionSubTitle } from '../components/sectionSubTitle';
 import useScreenSize from '../../hooks/useScreenSize';
 import { CardProps, EnterpriseCard } from '../components/enterpriseCard';
 import { EnterpriseFilters } from '../components/catalogFilters';
+import { useEffect, useState } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 
 interface EnterprisePageProps {
     situationOptions:any;
@@ -16,6 +18,31 @@ interface EnterprisePageProps {
 
 export const EnterprisePage: React.FC<EnterprisePageProps> = ({ situationOptions, aboutInfo, citiesOptions, enterprises}) => {
     const isLargeScreen = useScreenSize(768);
+
+    const [textFilter, setTextFilter] = useState('')
+    const [cityFilter, setCityFilter] = useState('')
+    const [situationFilter, setSituationFilter] = useState('')
+
+    useEffect(() => {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        urlSearchParams.set('textFilter', textFilter);
+        const newUrl = `${window.location.pathname}?${urlSearchParams.toString()}`;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+    }, [textFilter])
+
+    useEffect(() => {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        urlSearchParams.set('cityFilter', cityFilter);
+        const newUrl = `${window.location.pathname}?${urlSearchParams.toString()}`;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+    }, [cityFilter])
+
+    useEffect(() => {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        urlSearchParams.set('situationFilter', situationFilter);
+        const newUrl = `${window.location.pathname}?${urlSearchParams.toString()}`;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+    }, [situationFilter])
     
     return (
         <>
@@ -30,15 +57,26 @@ export const EnterprisePage: React.FC<EnterprisePageProps> = ({ situationOptions
                                 citiesOptions={citiesOptions}
                                 situationOptions={situationOptions}
                                 onCityChange={(selectedValue) => {
-                                    console.log(selectedValue);
+                                    setCityFilter(selectedValue);
                                 }}
                                 onSituationChange={(selectedValue) => {
-                                    console.log(selectedValue);
+                                    setSituationFilter(selectedValue);
                                 }}
                                 onSearchChange={(textValue) => {
-                                    console.log(textValue);
+                                    setTextFilter(textValue);
                                 }}
                            />
+                           <ListFilters>
+                                {textFilter !== '' && <Filter onClick={() => {
+                                    setTextFilter('')
+                                }}>{textFilter}<AiOutlineClose/></Filter>}
+                                {cityFilter !== '' && <Filter onClick={() => {
+                                    setCityFilter('')
+                                }}>{cityFilter}<AiOutlineClose/></Filter>}
+                                {situationFilter !== '' && <Filter onClick={() => {
+                                    setSituationFilter('')
+                                }}>{situationFilter}<AiOutlineClose/></Filter>}
+                           </ListFilters>
                         </Col>
                     </Row>
                     <Row>
@@ -72,4 +110,20 @@ const EnterpriseListContainer = styled.div`
     padding:0 20px;
     margin:30px 0;
   }
+`;
+
+const ListFilters = styled.div`
+  display:flex;
+  padding:15px 10px 0;
+  gap:5px;
+`;
+
+const Filter = styled.div`
+  color:var(--text-primary);
+  text-decoration:underline;
+  text-transform:uppercase;
+  padding:3px 8px;
+  display:flex;
+  align-items:center;
+  gap:3px;
 `;
