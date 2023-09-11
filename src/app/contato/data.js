@@ -28,7 +28,7 @@ export const meta = {
 
   export  const contactInfo = {
     sectionTitle:'contato',
-    title:`Falce com\na koch`,
+    title:`Fale com\na koch`,
     content:`<p>Preencha os campos abaixo para falar com a gente.</p>`,
     link:'#'
   };
