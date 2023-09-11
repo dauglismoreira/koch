@@ -129,7 +129,7 @@ const BgAnimation = styled.div`
 `;
 
 const Menu = styled.div`
-  height: 100vh;
+  height: 100%;
   background-color: var(--background-primary);
   position: fixed;
   top: 0;
