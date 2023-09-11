@@ -215,7 +215,7 @@ const SocialLinks = styled.div`
     height:50px;
     display:flex;
     flex-direction:row;
-    align-items:flex-end;
+    align-items:flex-start;
     justify-content:space-around;
     gap:20px;
     padding-bottom:50px;
