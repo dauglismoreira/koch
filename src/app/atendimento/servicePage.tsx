@@ -68,7 +68,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                         </Content>
                     </Col>
                 </Row>
-                {/* <Row>
+                <Row>
                     {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
                     <Col flex={10}>
                         <BrokersListContainer>
@@ -77,7 +77,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                             ))}
                         </BrokersListContainer>
                     </Col>
-                </Row> */}
+                </Row>
                 <Row>
                     <LineDivider></LineDivider>
                 </Row>

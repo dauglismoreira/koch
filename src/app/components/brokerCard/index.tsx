@@ -9,8 +9,13 @@ export interface CardProps {
     phone?: any;
 }
 
-export const BrokerCard: React.FC<{ data: CardProps }> = ({ data }) => {
-    const { photo, name, creci, phone, email } = data;
+interface CardPropsData {
+    data:CardProps
+}
+
+export const BrokerCard: React.FC<CardPropsData> = ({ 
+    data
+ }) => {
 
     const formatPhoneNumber = (phoneNumber: string) => {
         const part1 = phoneNumber.substring(0, 2);
@@ -27,17 +32,17 @@ export const BrokerCard: React.FC<{ data: CardProps }> = ({ data }) => {
     return (
         <Card>
             <Cover
-                image={photo || ''}
+                image={data.photo || ''}
             ></Cover>
             <Content>
                 <Info>
-                    <Name className={`${Baskerville.className}`}><h3>{name}</h3></Name>
-                    <Creci><p>CRECI - {creci}</p></Creci>
-                    <Phone>{formatPhoneNumber(phone)}</Phone>
+                    <Name className={`${Baskerville.className}`}><h3>{data.name}</h3></Name>
+                    <Creci><p>CRECI - {data.creci}</p></Creci>
+                    <Phone>{formatPhoneNumber(data.phone)}</Phone>
                 </Info>
                 <ContainerButtons>
-                    <Button><a href={`mailto:` + email} target="_blank">Email</a></Button>
-                    <Button><a href={`https://api.whatsapp.com/send?phone=55` + phone} target="_blank">Whatsapp</a></Button>
+                    <Button><a href={`mailto:` + data.email} target="_blank">Email</a></Button>
+                    <Button><a href={`https://api.whatsapp.com/send?phone=55` + data.phone} target="_blank">Whatsapp</a></Button>
                     <Button>Ligue agora</Button>
                 </ContainerButtons>
             </Content>
