@@ -13,5 +13,5 @@ export const Mandatory: React.FC<MandatoryProps> = ({ color }) => {
 
 const Notice = styled.div<{color: string}>`
     color:${props => props.color};
-    font-size:12px;
+    font-size:--var(small-text-size);
 `;

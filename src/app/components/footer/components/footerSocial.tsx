@@ -36,12 +36,12 @@ export const FooterSocial: React.FC<FooterSocialProps> = ({activeBreak, items, c
 }
 
 export const Text = styled.p`
-    font-size:0.8rem;
+    font-size:var(--labels-size);
     color:var(--text-white);
     line-height:1.4;
-    font-weight:200;
+    font-weight:var(--labels-weight);
 
     @media(max-width:768px){
-        font-weight:300;
+        padding:0 5px;
     }
 `;

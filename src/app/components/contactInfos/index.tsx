@@ -65,17 +65,25 @@ const InfoContactContainer = styled.div`
 
 const InfoTitle = styled.div`
     h5{
-        color:var(--text-secondary);
-        font-size:11px;
+        color:var(--text-secondary-variation);
+        font-size:var(--mini-text-size);
         text-transform:uppercase;
-        font-weight:400;
+        font-weight:var(--desktop-text-weight);
     }
 `;
 
 const InfoContent = styled.div`
     p{
         color:var(--text-secondary);
-        font-size:13px;
-        font-weight:400;
+        font-size:var(--desktop-text-size);
+        font-weight:var(--desktop-text-size);
     }
+
+    @media(max-width:768px){
+        p{
+            font-size:var(--mobile-text-size);
+            font-weight:var(--mobile-text-weight);
+        }
+    }
+    
 `;

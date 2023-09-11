@@ -37,7 +37,7 @@ export const Footer = () => {
     return(
         <Section
             background="var(--background-primary)"
-            padding={isLargeScreen.isLargeScreen ? "160px 10px 100px" : "60px 10px 40px"}
+            padding={isLargeScreen.isLargeScreen ? "160px 10px 100px" : "56px 10px 40px"}
         >
             <Container>
                 <FooterTitle text={`Entre \n em contato`}/>
@@ -70,7 +70,8 @@ const LineDivider = styled.div`
     background-color:rgba(255,255,255,0.3);
 
     @media(max-width:768px){
-        margin:25px 0;
+        margin:25px auto;
+        width:calc(100% - 10px);
     }
 `;
 
@@ -78,6 +79,10 @@ const MenuMobileContainerGrid = styled.div`
     display:grid;
     grid-template-columns: 1fr 1fr;
     margin:-10px 0 30px;
+
+    @media(max-width:768px){
+        padding:0 5px;
+    }
 `;
 
 const ContainerLogo = styled.div`

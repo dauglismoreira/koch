@@ -69,6 +69,12 @@ const ContainerButton = styled.div`
     border:none;
     margin:20px 0 0;
     background-color:var(--background-secondary);
+
+    @media(max-width:768px){
+        flex-direction:row;
+        flex-wrap:wrap;
+        padding:0 10px;
+    }
 `;
 
 const Button = styled.button`
@@ -79,7 +85,8 @@ const Button = styled.button`
     cursor:pointer;
     padding: 0 15px;
     text-transform:uppercase;
-    font-weight:600;
+    font-weight:var(--buttons-weight);
+    font-size:var(--buttons-size);
     transition:0.2s;
 
     &:hover{
@@ -91,28 +98,43 @@ const Button = styled.button`
         background-color: var(--background-primary);
         color: var(--text-white);
     }
+
+    @media(max-width:768px){
+        flex:1;
+    }
 `;
 
 const ProgressSection = styled.div`
     padding:140px 0;
+
+    @media(max-width:768px){
+        padding:70px 0;
+    }
 `;
 
 const Start = styled.div`
     color:var(--text-secondary);
-    font-weight:600;
-    font-size:16px;
+    font-weight:var(--medium-title-weight);
+    font-size:var(--small-title-size);
 
     span{
-        font-weight:400;
+        font-weight:var(--small-title-weight);
+    }
+
+    @media(max-width:768px){
+        padding:0 10px;
     }
 `;
 
 const Forecast = styled.div`
     color:var(--text-secondary);
-    font-weight:600;
-    font-size:16px;
+    font-weight:var(--medium-title-weight);
+    font-size:var(--small-title-size);
 
     span{
-        font-weight:400;
+        font-weight:var(--small-title-weight);
+    }
+    @media(max-width:768px){
+        padding:0 10px;
     }
 `;

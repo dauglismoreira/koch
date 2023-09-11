@@ -152,7 +152,7 @@ const FilterItemSearch = styled.div`
 `;
 
 const Clear = styled.a`
-    font-size:12px;
+    font-size:var(--buttons-size);
     color:var(--text-primary);
     text-decoration:underline;
     width:80px;

@@ -34,4 +34,11 @@ const Select = styled.select<{color: string}>`
     height:35px;
     color:${props => props.color};
     padding:0 10px;
+    font-size:var(--labels-size);
+    font-weight:var(--labels-weight);
+    text-transform:uppercase;
+
+    option {
+      color:var(--text-secondary-variation);
+    }
 `;

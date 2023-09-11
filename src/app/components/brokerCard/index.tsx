@@ -1,3 +1,4 @@
+import { Baskerville } from '@/app/fonts';
 import styled from 'styled-components';
 
 export interface CardProps {
@@ -30,8 +31,8 @@ export const BrokerCard: React.FC<{ data: CardProps }> = ({ data }) => {
             ></Cover>
             <Content>
                 <Info>
-                    <Name><h3>{name}</h3></Name>
-                    <Creci>CRECI - {creci}</Creci>
+                    <Name className={`${Baskerville.className}`}><h3>{name}</h3></Name>
+                    <Creci><p>CRECI - {creci}</p></Creci>
                     <Phone>{formatPhoneNumber(phone)}</Phone>
                 </Info>
                 <ContainerButtons>
@@ -96,29 +97,35 @@ const ContainerButtons = styled.div`
 const Name = styled.div`
     h3 {
         color:var(--text-primary);
-        font-family: var(--font-primary);
-        font-size:1.2rem;
+        font-size:var(--desktop-text-size);
         text-transform:uppercase;
         letter-spacing:0px;
-        font-weight:900;
+        font-weight:var(--medium-title-weight);
         padding-top:10px;
+        max-width:90%;
+        margin:auto;
+        text-align:center;
 
         @media(max-width:768px){
-            font-size:1.2rem;
+            font-size:var(--mobile-text-size);
         }
     }
 `;
 
 const Creci = styled.div`
     color:var(--text-secondary);
-    font-size:12px;
+    font-size:var(--small-text-size);
     margin-top:8px;
 `;
 
 const Phone = styled.div`
     color:var(--text-secondary);
-    font-size:15px;
-    margin-top:15px;
+    font-size:var(--desktop-text-size);
+    margin-top:5px;
+
+    @media(max-width:768px){
+        font-size:var(--mobile-text-size);
+    }
 `;
 
 const Button = styled.a`
@@ -128,9 +135,9 @@ const Button = styled.a`
     text-transform:uppercase;
     border-radius:5px;
     padding:8px 15px;
-    font-size:12px;
+    font-size:var(--buttons-size);
     cursor:pointer;
-    font-weight:500;
+    font-weight:var(--buttons-weight);
     transition: 0.3s ease-in-out;
 
     &:hover {

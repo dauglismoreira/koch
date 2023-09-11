@@ -13,7 +13,7 @@ const scrollToSection = (sectionId : string) => {
     }
 };
 
-export const EnterMenuSection = () => {
+export const OpportunityMenuSection = () => {
     const isLargeScreen = useScreenSize(768);
 
     return (
@@ -22,9 +22,7 @@ export const EnterMenuSection = () => {
                 <TopMenuContainer>
                     <MenuItem onClick={() => scrollToSection('sobre')}>Sobre</MenuItem>
                     <MenuItem onClick={() => scrollToSection('imagens')}>Imagens</MenuItem>
-                    <MenuItem onClick={() => scrollToSection('plantas')}>Plantas</MenuItem>
-                    <MenuItem onClick={() => scrollToSection('localizacao')}>Localização</MenuItem>
-                    <MenuItem className="last"  onClick={() => scrollToSection('obra')}>Acompanhamento de obra</MenuItem>
+                    <MenuItem className="last" onClick={() => scrollToSection('localizacao')}>Localização</MenuItem>
                 </TopMenuContainer>
             </Container>
         </TopMenu>

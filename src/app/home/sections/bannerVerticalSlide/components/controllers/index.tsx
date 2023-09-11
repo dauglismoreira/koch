@@ -30,10 +30,11 @@ const ControllersWrapper = styled.div`
 `;
 
 const Option = styled.div<{ isActive: boolean }>`
-    font-size: 14px;
+    font-size: var(--small-text-size);
+    font-weight: var(--small-text-weight);
     padding: 0 10px;
     color: ${(props) => (props.isActive ? 'var(--text-primary)' : 'var(--text-secondary)')};
-    font-weight: ${(props) => (props.isActive ? '600' : '300')};
+    font-weight: ${(props) => (props.isActive ? '700' : 'var(--small-text-weight)')};
     cursor: pointer;
     transition: color 0.5s ease-in-out;
 

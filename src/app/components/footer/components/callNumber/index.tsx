@@ -33,19 +33,19 @@ const Call = styled.div`
     flex-direction:column;
     align-items:flex-start;
     color:var(--text-white);
-    font-size:18px;
+    font-size:var(--buttons-size);
     font-weight:300;
     gap:5px;
 
     & a {
-        font-size:16px;
+        font-size:var(--buttons-size);
         display:flex;
         font-weight:500;
         cursor:pointer;
     }
 
     & a span{
-        font-size:12px;
+        font-size:11px;
         margin-right:5px;
         margin-left:5px;
     }
@@ -54,13 +54,5 @@ const Call = styled.div`
         margin:20px 0;
         gap:15px;
 
-        & a {
-            font-size:14px;
-            font-weight:400;
-        }
-    
-        & a span{
-            font-size:12px;
-        }
     }
 `;

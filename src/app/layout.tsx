@@ -5,7 +5,7 @@ import './variables.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import StyledComponentsRegistry from './lib/registry'
-import React, { Suspense } from 'react';
+import { OpenSans } from './fonts'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +22,7 @@ export default function RootLayout({
   
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${OpenSans.className}`}>
           <StyledComponentsRegistry>
             <Header/>
             {children}

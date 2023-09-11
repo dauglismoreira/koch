@@ -51,12 +51,17 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 
 const ContainerProgressStage = styled.div`
     margin:30px 0;
+
+    @media(max-width:768px){
+        width:calc(100% - 20px);
+        margin:20px auto 0;
+    }
 `;
 
 const Title = styled.div`
     color:var(--text-primary);
-    font-weight:400;
-    font-size:14px;
+    font-weight:var(--small-text-weight);
+    font-size:var(--small-text-size);
 `;
 
 
@@ -89,7 +94,7 @@ const ProgressBarContainer = styled.div`
 
 const Value = styled.div`
     color:var(--text-primary);
-    font-weight:400;
-    font-size:14px;
+    font-weight:var(--small-text-weight);
+    font-size:var(--small-text-size);
     padding-bottom:3px;
 `;

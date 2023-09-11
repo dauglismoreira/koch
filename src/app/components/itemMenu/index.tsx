@@ -16,30 +16,31 @@ export const ItemMenu: React.FC<ItemProps> = ({href, text}) => {
 const Link = styled.a`
   color:var(--text-white);
   text-transform:uppercase;
-  font-size:0.70rem;
+  font-size:var(--buttons-size);
   cursor:pointer;
-  font-weight:300;
+  font-weight:var(--buttons-weight);
   position:relative;
   text-align:center;
-  font-family: var(--font-secondary);
   letter-spacing:1.15px;
 
   &::after {
     content:'';
     width:0%;
     height:1px;
-    background-color:#fff;
+    background-color:var(--text-white);
     position:absolute;
     bottom:-5px;
     left:0px;
     transition:0.3s;
   }
 
-  &:hover{
-    font-weight:500;
-    
+  &:hover{    
     &::after {
         width:100%;
     }
+  }
+
+  @media(max-width:768px){
+    font-size:var(--mini-text-size);
   }
 `;

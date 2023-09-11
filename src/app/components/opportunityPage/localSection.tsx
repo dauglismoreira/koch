@@ -7,13 +7,13 @@ import { SectionSubTitle } from '../sectionSubTitle';
 import Maps from '@/app/components/map';
 import { Baskerville } from '@/app/fonts';
 
-interface EnterLocalSectionProps {
+interface OpportunityLocalSectionProps {
     data:Localization;
     district:string;
     city:string;
 }
 
-export const EnterLocalSection: React.FC<EnterLocalSectionProps> = ({
+export const OpportunityLocalSection: React.FC<OpportunityLocalSectionProps> = ({
     data,
     district,
     city
@@ -33,11 +33,6 @@ export const EnterLocalSection: React.FC<EnterLocalSectionProps> = ({
                         <Title className={`${Baskerville.className}`}>{city}</Title>
                     </TitleContainer>
                     <SectionBodyText text={data.local_description} color="var(--text-secondary)"/>
-                    <LocalContainer>
-                        {data.nearby.map((nearby, index) => (
-                            <span key={index}>{nearby}</span>
-                        ))}
-                    </LocalContainer>
                 </Col>
                 <Col flex={6}>
                     <Maps
@@ -82,29 +77,3 @@ const Title = styled.h4`
         text-align:center;
     }
 `;
-
-const LocalContainer = styled.div`
-    display:flex;
-    flex-direction:column;
-    margin:30px 0;
-
-    span{
-        width:100%;
-        display:block;
-        border-bottom:solid 1px var(border-grey);
-        padding:20px 0;
-        color:var(--text-secondary);
-    }
-
-    @media(max-width:768px){
-        margin:10px 0;
-
-        span {
-            padding:15px 0;
-            width:calc(100% - 20px);
-            margin:auto;
-            border-bottom:solid 1px var(--border-grey);
-        }
-    }
-`;
-

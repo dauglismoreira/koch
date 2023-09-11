@@ -48,17 +48,18 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                         <ContentContact>
                             <div>
                                 <SectionTitle text={contactInfo.title} color="var(--text-white)"/>
-                                <SectionBodyText  text={contactInfo.content} color="var(--text-white)"/>
+                                {/* <SectionBodyText  text={contactInfo.content} color="var(--text-white)"/> */}
+                                <p>Preencha os campos abaixo para falar com a gente.</p>
                             </div>
                         </ContentContact>
                     </Col>
-                    <Col flex={4}>
+                    {isLargeScreen.isLargeScreen && <Col flex={4}>
                         <SocialLinks>
                             {itemSocialList.map((item, index) => (
                                 <Link key={index}><a href={item.href} target="_blank">{item.text}</a></Link>
                             ))}
                         </SocialLinks>
-                    </Col>
+                    </Col>}
                 </Row>
                 <Row breakpoint={!isLargeScreen.isLargeScreen} margin="20px 0 0">
                 {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
@@ -73,7 +74,7 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                             />
                         </ContainerForm>
                         <ContainerActionForm>
-                            <Mandatory color="var(--text-secondary)"/>
+                            <Mandatory color="var(--text-white)"/>
                             <CheckFormAccept color="var(--text-white)"  onAcceptChange={setAccept}/>
                                 {accept ?
                                     <ButtonContainer><button onClick={handleFormSubmit}>Enviar</button></ButtonContainer>
@@ -90,6 +91,13 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                         />
                         <Local>R. 210 - Meia Praia, Itapema - Santa Catarina</Local>
                     </Col>
+                    {!isLargeScreen.isLargeScreen && <Col flex={4}>
+                        <SocialLinks>
+                            {itemSocialList.map((item, index) => (
+                                <Link key={index}><a href={item.href} target="_blank">{item.text}</a></Link>
+                            ))}
+                        </SocialLinks>
+                    </Col>}
                 </Row>
             </Container>
         </Section>
@@ -102,10 +110,23 @@ const ContentContact = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:space-between;
+
+    p{
+        font-size:var(--desktop-text-size);
+        font-weight:var(--desktop-text-weight);
+        color:var(--text-white);
+    }
+
+    @media(max-width:768px){
+        p {
+            font-size:var(--mobile-text-size);
+            font-weight:var(--mobile-text-weight);
+        }
+    }
 `;
 
 const ContainerForm = styled.div`
-    margin:-40px 0 0;
+    margin:-30px 10px 0;
 `;
 
 const ContainerActionForm = styled.div`
@@ -115,7 +136,7 @@ const ContainerActionForm = styled.div`
     margin:2px 0 0;
 
     @media(max-width:768px){
-        margin:0px 0 20px;
+        margin:0px 10px 20px;
     }
 `;
 
@@ -134,6 +155,8 @@ const ButtonContainer = styled.div`
         text-transform:uppercase;
         cursor:pointer;
         border-radius:5px;
+        font-size:var(--buttons-size);
+        font-weight:var(--buttons-weight);
 
         &:hover {
             background-color:var(--text-white);
@@ -158,23 +181,58 @@ const SocialLinks = styled.div`
     display:flex;
     flex-direction:row;
     align-items:flex-end;
-    justify-content:flex-end;
+    justify-content:space-around;
     gap:20px;
     padding-bottom:50px;
+
+    @media(max-width:768px){
+        padding:70px 0 0;
+    }
 `;
 
-const Link = styled.a`
+const Link = styled.div`
     color:var(--text-white);
     text-transform:uppercase;
-    font-size:14px;
-    text-decoration:underline;
+    font-size:var(--buttons-size);
+    font-weight:var(--buttons-weight);
     cursor:pointer;
+    
+    a {
+        position:relative;
+    }
+
+    & a::after {
+        content:'';
+        width:0%;
+        height:1px;
+        background-color:#fff;
+        position:absolute;
+        bottom:-5px;
+        left:0;
+        transition:0.3s;
+      }
+    
+      & a:hover{    
+        &::after {
+            width:100%;
+        }
+      }
+
+      @media(max-width:768px){
+        text-decoration:underline;
+    }
 `;
 
 const Local = styled.div`
     color:var(--text-white);
     text-align:right;
     width:100%;
-    font-size:12px;
+    font-size:var(--small-text-size);
+    font-weight:var(--small-text-weight);
     margin:30px 0 0;
+
+    @media(max-width:768px){
+        margin:30px 10px 0;
+        width:calc(100% - 20px);
+    }
 `;

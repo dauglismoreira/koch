@@ -22,27 +22,33 @@ export const CallNumber: React.FC<ItemProps> = ({number}) => {
     return(
         <Call>
             <small>ATENDIMENTO</small>
-            <a href={`https://api.whatsapp.com/send?phone=55` + number} target="_blank"><FaWhatsapp/>{formatPhoneNumber(number)}</a>
+            <a href={`https://api.whatsapp.com/send?phone=55` + number} target="_blank"><small><FaWhatsapp/></small>{formatPhoneNumber(number)}</a>
         </Call>
     )
 }
 
 const Call = styled.div`
+    margin-top:-5px;
     display:flex;
     flex-direction:column;
     align-items:flex-end;
     color:var(--text-white);
-    font-size:12px;
-    font-weight:300;
+    font-size:var(mini-text-size);
+    font-weight:var(small-text-weight);
 
     & a {
-        font-size:13px;
         display:flex;
         cursor:pointer;
     }
 
     & a span{
-        font-size:12px;
+        font-size:11px;
         margin-right:5px;
+    }
+
+        & a small{
+        font-size:16px;
+        margin-right:8px;
+        margin-top:2px;
     }
 `;

@@ -27,10 +27,10 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ data, info }) => {
     const isLargeScreen = useScreenSize(768);
 
     return (
-        <Section padding={!isLargeScreen.isLargeScreen ? "40px 0" : "120px 0"} background="var(--background-secondary)">
+        <Section padding={!isLargeScreen.isLargeScreen ? "48px 0" : "120px 0"} background="var(--background-secondary)">
             <Container>
                 <NewsTitleSection info={info}/>
-                <Row padding="50px 0">
+                <Row padding="50px 0 50px 10px">
                     <Col flex={2}></Col>
                     <SwiperContainer>
                         <Swiper

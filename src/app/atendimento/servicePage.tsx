@@ -196,7 +196,8 @@ const LineDivider = styled.div`
   margin:30px 0 100px;
 
   @media(max-width:768px){
-    margin:30px 0;
+    margin:30px 10px;
+    width:calc(100% - 20px);
   }
 `;
 
@@ -214,6 +215,8 @@ const ButtonContainer = styled.div`
         text-transform:uppercase;
         cursor:pointer;
         border-radius:5px;
+        font-size:(--buttons-size);
+        font-weight:(--buttons-weight);
 
         &:hover {
             background-color:var(--text-primary);

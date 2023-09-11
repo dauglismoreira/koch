@@ -26,7 +26,7 @@ export const NewsTitleSection: React.FC<NewsSectionTitleProps> = ({ info }) => {
             <Col flex={8}>
                 <Content>
                     <Title>
-                        <SectionTitle size="24px" text={info && info.title} color="var(--text-primary)"/>
+                        <SectionTitle size="var(--medium-title-size)" text={info && info.title} color="var(--text-primary)"/>
                     </Title>
                 </Content>
             </Col>

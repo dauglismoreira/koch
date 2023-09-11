@@ -74,19 +74,19 @@ export const EnterPage: React.FC<EnterpriseProps> = ({enterprise}) => {
                         data={enterprise.enterprise_gallery}
                     />
                     <Row><LineDivider></LineDivider></Row>
-                    {isLargeScreen.isLargeScreen && <div id="plantas"><EnterPlansSection
+                    <div id="plantas"><EnterPlansSection
                         plans={enterprise.plans}
-                    /></div>}
-                    {isLargeScreen.isLargeScreen && <Row><LineDivider></LineDivider></Row>}
+                    /></div>
+                    <Row><LineDivider></LineDivider></Row>
                     <div id="localizacao"><EnterLocalSection
                         data={enterprise.localization}
                         district={enterprise.district}
                         city={enterprise.city}
                     /></div>
-                    {isLargeScreen.isLargeScreen && <Row><LineDivider></LineDivider></Row>}
-                    {isLargeScreen.isLargeScreen && <div id="obra"><EnterProgressSection
+                    <Row><LineDivider></LineDivider></Row>
+                    <div id="obra"><EnterProgressSection
                         data={enterprise.progress}
-                    /></div>}
+                    /></div>
                 </Container>
             </Section>
             </>
@@ -100,6 +100,8 @@ const LineDivider = styled.div`
     margin:40px 0;
 
     @media(max-width:768px){
-        margin:0;
+        margin:0 10px;
+        width:calc(100% - 30px);
+        margin:auto;
     }
 `;

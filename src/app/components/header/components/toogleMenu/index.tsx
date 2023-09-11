@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {useState, useEffect} from 'react';
 import useScreenSize from '@/hooks/useScreenSize';
+import { Col } from '@/app/components/grid';
 
 export interface MenuItem {
     text: string;
@@ -10,11 +11,13 @@ export interface MenuItem {
 export interface ItemProps {
     itens: MenuItem[];
     burgerItens: MenuItem[];
+    initial: MenuItem[];
+    itemSocialList?: MenuItem[];
   }
 
-export const ToogleMenu: React.FC<ItemProps> = ({itens, burgerItens}) => {
+export const ToogleMenu: React.FC<ItemProps> = ({itemSocialList, itens, burgerItens, initial}) => {
 
-  const {isLargeScreen} = useScreenSize(768)
+  const {isLargeScreen} = useScreenSize(992)
 
     const[open, setOpen] = useState(false)
 
@@ -36,12 +39,22 @@ export const ToogleMenu: React.FC<ItemProps> = ({itens, burgerItens}) => {
                 <span></span>
             </Button>
             <Menu className={open ? 'slideDown' : 'slideUp'}>
+                {initial.map((item, index) => (
+                    <li key={index}><a href={item.href} target="_parent">{item.text}</a></li>
+                ))}
                 {!isLargeScreen && itens.map((item, index) => (
                     <li key={index}><a href={item.href} target="_parent">{item.text}</a></li>
                 ))}
                 {burgerItens.map((item, index) => (
                     <li key={index}><a href={item.href} target="_parent">{item.text}</a></li>
                 ))}
+              {!isLargeScreen &&
+                  <SocialLinks>
+                      {itemSocialList && itemSocialList.map((item, index) => (
+                          <Link key={index}><a href={item.href} target="_blank">{item.text}</a></Link>
+                      ))}
+                  </SocialLinks>
+              }
             </Menu>
         </ToogleContainer>
       </>
@@ -53,8 +66,9 @@ type ButtonProps = {
   };
 
   const ToogleContainer = styled.div`
-    @media(min-width:768px){
+    @media(min-width:992px){
       position:relative;
+      margin-top:-3px;
     }
 `;
 
@@ -71,7 +85,7 @@ const BgAnimation = styled.div`
 
   const Button = styled.div<ButtonProps>`
   width: 2.3rem;
-  height: 2rem;
+  height: 2.3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -99,14 +113,18 @@ const BgAnimation = styled.div`
 
   span:last-child {
     transform: ${(props) => (props.open ? 'rotate(-45deg)' : 'rotate(0)')};
-    margin-bottom:${(props) => (props.open ? '15px' : '')};
+    margin-bottom:${(props) => (props.open ? '20px' : '')};
   }
 
-  @media(min-width:768px){
+  @media(min-width:992px){
     position: static;
-    margin:${(props) => (props.open ? '5px 10px 0' : '10px 10px 0')};
+    margin:${(props) => (props.open ? '10px 10px 0' : '10px 10px 0')};
     width: 2rem;
-    height: ${(props) => (props.open ? '2rem' : '1.5rem')};
+    height: ${(props) => (props.open ? '2rem' : '2rem')};
+
+    span:last-child {
+      margin-bottom:${(props) => (props.open ? '15px' : '')};
+    }
   }
 `;
 
@@ -137,14 +155,37 @@ const Menu = styled.div`
 
   li {
     list-style:none;
-    color:var(--text-white);
-    font-size:1.4rem;
-    font-weight:300;
-    cursor:pointer;
   }
 
-  @media(min-width:768px){
-    height: 200px;
+  li a{
+    color:var(--text-white);
+    font-size:var(--small-title-size);
+    font-weight:var(--buttons-weight);
+    cursor:pointer;
+    display:inline-flex;
+    text-transform:uppercase;
+    position:relative;
+  }
+
+  & li a::after {
+    content:'';
+    width:0%;
+    height:1px;
+    background-color:#fff;
+    position:absolute;
+    bottom:-5px;
+    right:0;
+    transition:0.3s;
+  }
+
+  & li a:hover{    
+    &::after {
+        width:100%;
+    }
+  }
+
+  @media(min-width:992px){
+    height: 240px;
     width:200px;
     position: fixed;
     top: 71px;
@@ -159,13 +200,65 @@ const Menu = styled.div`
 
     align-items:flex-end;
 
-    li {
+    li a{
       list-style:none;
       color:var(--text-white);
-      font-size:1rem;
-      font-weight:300;
+      font-size:var(--buttons-size);
+      font-weight:var(--buttons-weight);
       cursor:pointer;
-      padding:0 20px 0; 
+      margin:0 20px 0; 
     }
   }
+`;
+
+const SocialLinks = styled.div`
+    height:50px;
+    display:flex;
+    flex-direction:row;
+    align-items:flex-end;
+    justify-content:space-around;
+    gap:20px;
+    padding-bottom:50px;
+    position:fixed;
+    z-index:9999;
+    bottom:30px;
+    left:0;
+    right:0;
+
+    @media(max-width:768px){
+        padding:70px 0 0;
+    }
+`;
+
+const Link = styled.div`
+    color:var(--text-white);
+    text-transform:uppercase;
+    font-size:var(--buttons-size);
+    font-weight:var(--buttons-weight);
+    cursor:pointer;
+    
+    a {
+        position:relative;
+    }
+
+    & a::after {
+        content:'';
+        width:0%;
+        height:1px;
+        background-color:#fff;
+        position:absolute;
+        bottom:-5px;
+        left:0;
+        transition:0.3s;
+      }
+    
+      & a:hover{    
+        &::after {
+            width:100%;
+        }
+      }
+
+      @media(max-width:768px){
+        text-decoration:underline;
+    }
 `;

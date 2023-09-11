@@ -49,9 +49,9 @@ const Button = styled.a<{color: string; background: string}>`
     text-transform:uppercase;
     border-radius:5px;
     padding:8px 15px;
-    font-size:12px;
+    font-size:var(--buttons-size);
     cursor:pointer;
-    font-weight:500;
+    font-weight:var(--buttons-weight);
     transition: 0.3s ease-in-out;
 
     &:hover {
@@ -60,6 +60,6 @@ const Button = styled.a<{color: string; background: string}>`
     }
 
     @media(max-width:640px){
-        padding:12px 15px;
+        padding:9.5px 15px;
     }
 `;

@@ -17,5 +17,9 @@ const StyledVideoPlayer = styled.video`
   width: 100%;
   max-width: 100%;
   height: auto;
-  padding:0 20px;
+  padding:10px 20px 0;
+
+  @media(max-width:768px){
+      padding:10px 10px 30px;
+  }
 `;

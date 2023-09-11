@@ -65,13 +65,13 @@ const Cover = styled.div<{background : string}>`
 `;
 
 const Date = styled.div`
-    margin:30px auto;
+    margin:28px auto 48px;
     color:var(--text-secondary);
-    font-size:0.9rem;
+    font-size:var(--small-text-size);
 `;
 
 const Body = styled.div`
-
+    padding-left:10px;
 `;
 
 const Content = styled.div`
@@ -85,8 +85,14 @@ const Content = styled.div`
     p {
         color:var(--text-secondary);
         line-height:1.4;
-        font-size:14px;
+        font-size:var(desktop-text-size);
         margin:10px 0;
+    }
+
+    @media(max-width:768px){
+        p {
+            font-size:var(mobile-text-size);
+        }
     }
 `;
 
@@ -105,12 +111,16 @@ const ContainerNavigation = styled.div`
 `;
 
 const Next = styled.div`
-    display:flex;
-    align-items:center;
-    color:var(--text-primary);
-    gap:8px;
-    cursor:pointer;
-    transition:0.2s;
+    a {
+        display:flex;
+        align-items:center;
+        color:var(--text-primary);
+        gap:8px;
+        cursor:pointer;
+        transition:0.2s;
+        font-size:var(--buttons-size);
+        font-weight:var(--buttons-weight);
+    }
 
     &:hover {
         transform:scale(1.05);
@@ -118,12 +128,16 @@ const Next = styled.div`
 `;
 
 const Prev = styled.div`
-    display:flex;
-    align-items:center;
-    color:var(--text-primary);
-    gap:8px;
-    cursor:pointer;
-    transition:0.2s;
+    a {
+        display:flex;
+        align-items:center;
+        color:var(--text-primary);
+        gap:8px;
+        cursor:pointer;
+        transition:0.2s;
+        font-size:var(--buttons-size);
+        font-weight:var(--buttons-weight);
+    }
 
     &:hover {
         transform:scale(1.05);

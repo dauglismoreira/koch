@@ -97,10 +97,10 @@ const BannerLabel= styled.div`
 
     h6 {
         color:var(--text-white);
-        font-weight:300;
+        font-weight:var(--small-text-weigh);
         letter-spacing:4px;
         text-transform:uppercase;
-        font-size:9px;
+        font-size:var(--small-text-size);
     }
 `;
 
@@ -113,11 +113,12 @@ const Line= styled.div`
 const ImageLine= styled.div`
     width:100%;
     height:1px;
-    margin-top:30px;
+    margin-top:70px;
+    margin-bottom:-50px;
     background-color:rgba(255,255,255,0.3);
 
     @media(max-width:768px){
         width:calc(100% - 20px);
-        margin:30px auto 0;
+        margin:20px auto 0;
     }
 `;

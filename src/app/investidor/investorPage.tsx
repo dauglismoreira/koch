@@ -83,7 +83,7 @@ const Content = styled.div`
     justify-content:space-between;
 
     p {
-        font-size:14px;
+        font-size:var(--text-desktop-size);
     }
 
     @media(max-width: 768px){
@@ -92,6 +92,8 @@ const Content = styled.div`
 
         p {
             margin-top:0;
+            padding:0;
+            font-size:var(--text-mobile-size);
         }
     }
 `;
@@ -109,6 +111,8 @@ const ButtonContainer = styled.div`
         text-transform:uppercase;
         cursor:pointer;
         border-radius:5px;
+        font-size:var(--buttons-size);
+        font-weight:var(--buttons-weight);
 
         &:hover {
             background-color:var(--text-white);

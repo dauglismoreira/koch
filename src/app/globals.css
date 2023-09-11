@@ -19,3 +19,17 @@ a {
 html.no-scroll {
   overflow: hidden;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--background-secondary-variation);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--background-secondary);
+}

@@ -31,7 +31,7 @@ const CheckContainer = styled.div<{color: string}>`
     gap:8px;
 
     label {
-        font-size:11px;
+        font-size:var(--mini-text-size);
         color:${props => props.color};
     }
     input {

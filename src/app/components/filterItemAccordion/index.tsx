@@ -39,7 +39,7 @@ const Item = styled.div`
   color: var(--text-secondary);
   margin: 20px 0;
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: var(--labels-size);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -60,7 +60,7 @@ const Body = styled.div`
     color: var(--text-primary);
     text-transform: uppercase;
     padding: 7px 0;
-    font-size: 15px;
-    font-weight: 500;
+    font-size: var(--labels-size);
+    font-weight: var(--labels-weight);
   }
 `;

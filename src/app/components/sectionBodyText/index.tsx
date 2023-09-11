@@ -20,8 +20,7 @@ const TextContent = styled.div<{color: string}>`
 
     h3 {
         color:${props => props.color};
-        font-family: var(--font-primary);
-        font-size:58px;
+        font-size: var(--big-title-size);
         text-transform:uppercase;
         margin-bottom:20px;
     }
@@ -29,14 +28,41 @@ const TextContent = styled.div<{color: string}>`
     p {
         color:${props => props.color};
         line-height:1.4;
-        font-weight:300;
-        font-size:16px;
+        font-weight:var(--desktop-text-weight);
+        font-size: var(--desktop-text-size);
         margin-top:20px;
-        border:none!important;
-        height:auto!important;
 
         @media(max-width:768px){
             padding:0 10px 10px;
+            line-height:1.6;
+            font-weight:var(--mobile-text-weight);
+            font-size: var(--mobile-text-size);
+        }
+    }
+    
+    ul {
+        margin:20px 0;
+    }
+
+    li {
+        color:${props => props.color};
+        margin:10px 0;
+        list-style:none;
+        font-size: var(--desktop-text-size);
+        font-weight: var(--desktop-text-weight);
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        gap:8px;
+
+        @media(max-width:768px){
+            font-weight:var(--mobile-text-weight);
+            font-size: var(--mobile-text-size);
+        }
+
+        &::before{
+            content:'—';
+            display:block;
         }
     }
 `;

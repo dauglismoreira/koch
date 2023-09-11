@@ -42,7 +42,7 @@ export const Accordion: React.FC<AccordionProps> = ({ data }) => {
                     onClick={() => handleItemClick(index)}
                 >
                     <Title>
-                        {item.title}
+                        <span>{item.title}</span>
                         {activeIndex !== index ? <MdOutlineAdd /> : <MdOutlineRemove />}
                     </Title>
                     <Body
@@ -73,6 +73,7 @@ const Item = styled.div<{active: boolean; activeindex: number; height: any}>`
   flex-direction:column;
   justify-content:center;
   transition: 0.5s ease-in-out;
+  position:relative;
 
     &:first-child{
         border-top:solid 1px rgba(255,255,255,0.3);
@@ -86,7 +87,7 @@ const Item = styled.div<{active: boolean; activeindex: number; height: any}>`
 `;
 
 const Title = styled.div`
-  font-size:14px;
+  font-size:var(--labels-size);
   text-transform:uppercase;
   color:var(--text-white);
   padding:5px 0;
@@ -100,15 +101,37 @@ const Title = styled.div`
     padding-top:5px;
     transition:0.6s;
   }
+
+  span {
+    position:relative;
+  }
+
+  & span::after {
+    content:'';
+    width:0%;
+    height:1px;
+    background-color:var(--text-white);
+    position:absolute;
+    bottom:-5px;
+    left:0px;
+    transition:0.3s;
+  }
+
+  &:hover{
+    font-weight:var(--medium-title-weight);
+      & span::after {
+        width:100%;
+      }
+  }
 `;
 
 const Body = styled.div<{active: boolean; height: any}>`
   margin:0;
-  font-size:14px;
+  font-size:var(--desktop-size);
   line-height:1.8;
   color:var(--text-white);
   padding:0 90px;
-  font-weight:200;
+  font-weight:var(--desktop-weight);
   max-height:${props => props.height > 0 ? (props.active ? '500px' : '0px') : 'auto'};
   transition: ${props => props.active ? '0.9s' : '0.5s'} ease-in-out;
   overflow:${props => props.height > 0 ? 'hidden' : 'unset'};
@@ -116,6 +139,8 @@ const Body = styled.div<{active: boolean; height: any}>`
 
   @media(max-width:768px){
     padding:0px 20px;
+    font-size:var(--mobile-size);
+    font-weight:var(--mobile-weight);
     max-height:${props => props.height > 0 ? (props.active ? '600px' : '0px') : 'auto'};
   }
 `;

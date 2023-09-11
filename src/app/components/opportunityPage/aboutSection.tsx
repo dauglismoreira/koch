@@ -5,14 +5,14 @@ import { AboutCharacteristics, HighSkills } from '@/app/empreendimentos/[slug]/e
 import { SectionBodyText } from '../sectionBodyText';
 import { SectionSubTitle } from '../sectionSubTitle';
 
-interface EnterAboutSectionProps {
-    about_text: string;
+interface OpportunityAboutSectionProps {
+    about_skills: string[];
     about_characteristics: AboutCharacteristics;
     about_image: string;
 }
 
-export const EnterAboutSection: React.FC<EnterAboutSectionProps> = ({
-    about_text,
+export const OpportunityAboutSection: React.FC<OpportunityAboutSectionProps> = ({
+    about_skills,
     about_characteristics,
     about_image,
 }) => {
@@ -26,14 +26,17 @@ export const EnterAboutSection: React.FC<EnterAboutSectionProps> = ({
                 </Col>
                 <Col flex={5}>
                     <Content>
-                        <SectionBodyText text={about_text} color="var(--text-secondary)"/>
-                        <LineDivider></LineDivider>
                         <SkillsList>
                             {about_characteristics.map((item, index) => (
                                 <li key={index}>━ {item}</li>
                             ))}
                         </SkillsList>
-                        {isLargeScreen.isLargeScreen && <LineDivider></LineDivider>}
+                        <LineDivider></LineDivider>
+                        <SkillsGrid>
+                            {about_skills.map((item, index) => (
+                                <p key={index}>{item}</p>
+                            ))}
+                        </SkillsGrid>
                     </Content>
                 </Col>
                 <Col flex={5}>
@@ -107,6 +110,30 @@ const SkillsList = styled.div`
 
         @media(max-width:768px){
             font-size:var(--small-text-size);
+            margin:30px 0 10px;
         }
+    }
+`;
+
+const SkillsGrid = styled.div`
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:10px;
+    margin:30px 0 0;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+
+    &.hidden {
+        opacity: 0;
+    }
+
+    p {
+        color:var(--text-secondary);
+        font-size:var(--small-text-size);
+    }
+
+    @media(max-width:768px){
+        margin:10px 0;
+        gap:20px;
     }
 `;

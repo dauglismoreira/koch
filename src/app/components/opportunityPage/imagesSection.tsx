@@ -16,11 +16,11 @@ import 'swiper/css/navigation';
 
 import { Navigation, Mousewheel, Keyboard } from 'swiper/modules';
 
-interface EnterImagesSectionProps {
+interface OpportunityImagesSectionProps {
     data:EnterpriseGalleryItem[];
 }
 
-export const EnterImagesSection: React.FC<EnterImagesSectionProps> = ({
+export const OpportunityImagesSection: React.FC<OpportunityImagesSectionProps> = ({
     data
 }) => {
     const isLargeScreen = useScreenSize(768);

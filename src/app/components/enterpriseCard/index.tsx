@@ -1,3 +1,4 @@
+import { Baskerville } from '@/app/fonts';
 import styled from 'styled-components';
 
 export interface CardProps {
@@ -23,7 +24,7 @@ export const EnterpriseCard: React.FC<{ data: CardProps }> = ({ data }) => {
             ></Cover>
             <Content>
                 <High><h5>{high}</h5></High>
-                <Name><h3>{name}</h3></Name>
+                <Name className={`${Baskerville.className}`}><h3>{name}</h3></Name>
                 <Place><p>{district}, {city}</p></Place>
                 <Skills>
                     <span>{suites}</span>
@@ -72,31 +73,31 @@ const Content = styled.div`
 const High = styled.div`
     h5 {
         color:var(--text-secondary);
-        font-size:13px;
+        font-size:var(--small-text-size);
         text-transform:uppercase;
-        font-weight:300;
+        font-weight:var(--small-text-weight);
     }
 `;
 
 const Name = styled.div`
     h3 {
         color:var(--text-primary);
-        font-family: var(--font-primary);
-        font-size:1.4rem;
+        font-size:var(--medium-title-size);
         text-transform:uppercase;
         letter-spacing:0px;
-        font-weight:900;
+        font-weight:var(--medium-title-weight);
         padding-top:10px;
 
         @media(max-width:768px){
-            font-size:1.2rem;
+            font-size:var(--small-title-size);
+            text-align:center;
         }
     }
 `;
 
 const Place = styled.div`
     color:var(--text-secondary);
-    font-size:12px;
+    font-size:var(--small-text-size);
     padding-bottom:20px;
 `;
 
@@ -104,11 +105,12 @@ const Skills = styled.div`
     display:flex;
     width:100%;
     flex-direction:row;
-    justify-content:space-around;
+    justify-content:center;
+    gap:40px;
     color:var(--text-secondary);
-    font-weight:600;
+    font-weight:var(--medium-title-weight);
     padding-bottom:20px;
-    font-size:14px;
+    font-size:var(--small-text-size);
 
     @media(max-width:768px){
         padding:0 20px 20px;
@@ -117,9 +119,9 @@ const Skills = styled.div`
 
 const Link = styled.div`
      color:var(--text-primary);
-     font-size:12px;
+     font-size:var(--buttons-size);
      cursor:pointer;
-     font-weight:600;
+     font-weight:var(--buttons-weight);
      text-transform:uppercase;
      position:relative;
 

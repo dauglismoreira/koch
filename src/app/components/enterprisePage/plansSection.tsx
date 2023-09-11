@@ -29,7 +29,7 @@ export const EnterPlansSection: React.FC<EnterPlansSectionProps> = ({
             <Row breakpoint={!isLargeScreen.isLargeScreen}>
                 <Col flex={2}>
                     <SectionSubTitle text={`Plantas do\nempreendimento`} color="var(--text-secondary)"/>
-                    <ContainerButton>
+                    <ContainerButton width={isLargeScreen.width}>
                         {plans.map((plan, index) => (
                             <Button key={index}
                                 onClick={() => handlePlanClick(index)}
@@ -42,7 +42,7 @@ export const EnterPlansSection: React.FC<EnterPlansSectionProps> = ({
                     <PlanImage className={!effectControl ? 'hidden' : ''} image={plans[selectedPlan].image}></PlanImage>
                 </Col>
                 <Col flex={4}>
-                    <h3>Características do Ambiente</h3>
+                    {isLargeScreen.isLargeScreen && <h3>Características do Ambiente</h3>}
                     <SkillsGrid className={!effectControl ? 'hidden' : ''}>
                         {plans[selectedPlan].skill.map((item, index) => (
                             <p key={index}>{item}</p>
@@ -60,9 +60,13 @@ const PlansSection = styled.div`
 
     h3 {
         text-transform:uppercase;
-        font-size:13px;
+        font-size:var(--small-title-size);
         color:var(--text-secondary);
-        font-weight:400;
+        font-weight:var(--small-title-weight);
+    }
+
+    @media(max-width:768px){
+        padding:70px 10px;
     }
 `;
 
@@ -80,8 +84,8 @@ const PlanImage = styled.div<{image: string}>`
     }
 
     @media(max-width: 768px){
-        width:calc(100% - 20px);
-        height:455px;
+        width:100%;
+        height:278px;
     }
 `;
 
@@ -99,17 +103,35 @@ const SkillsGrid = styled.div`
 
     p {
         color:var(--text-secondary);
-        font-size:13px;
+        font-size:var(--small-text-size);
+    }
+
+    @media(max-width:768px){
+        margin:10px 0;
+        gap:20px;
     }
 `;
 
-const ContainerButton = styled.div`
-    display:flex;
+const ContainerButton = styled.div<{width: number}>`
+    display:inline-flex;
     flex-direction:column;
     gap:10px;
     border:none;
     margin:20px 0 0;
     background-color:var(--background-secondary);
+
+    @media(max-width:768px){
+        flex-direction:row;
+        overflow:auto;
+        padding:10px 0;
+        width: ${props => props.width - 40}px;
+    }
+
+    & ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+
 `;
 
 const Button = styled.button`
@@ -120,7 +142,8 @@ const Button = styled.button`
     cursor:pointer;
     padding: 0 15px;
     text-transform:uppercase;
-    font-weight:600;
+    font-weight:var(--buttons-weight);
+    font-size:var(--buttons-size);
     transition: 0.2s opacity;
 
     &:hover{
@@ -131,5 +154,11 @@ const Button = styled.button`
     &.selected {
         background-color: var(--background-primary);
         color: var(--text-white);
+    }
+
+    @media(max-width:768px){
+        white-space:nowrap;
+        width:auto;
+        height:40px;
     }
 `;

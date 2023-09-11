@@ -84,7 +84,7 @@ const Content = styled.div`
     justify-content:space-between;
 
     p {
-        font-size:14px;
+        font-size:var(--desktop-text-size);
     }
 
     @media(max-width: 768px){
@@ -93,6 +93,8 @@ const Content = styled.div`
 
         p {
             margin-top:0;
+            padding:0 0;
+            font-size:var(--mobile-text-size);
         }
     }
 `;
@@ -105,11 +107,12 @@ const ActionFormContainer = styled.div`
 
     input::placeholder {
         color: var(--text-primary);
+        text-transform:uppercase;
     }
 
     textarea::placeholder {
         color: var(--text-primary);
-        font-family: var(--font-secondary);
+        text-transform:uppercase;
     }
 
     @media(max-width:768px){
@@ -130,6 +133,8 @@ const ButtonContainer = styled.div`
         text-transform:uppercase;
         cursor:pointer;
         border-radius:5px;
+        font-size:var(--buttons-size);
+        font-weight:var(--buttons-weight);
 
         &:hover {
             background-color:var(--text-primary);

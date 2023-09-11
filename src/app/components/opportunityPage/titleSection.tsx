@@ -1,49 +1,48 @@
 import styled from 'styled-components';
-import { Col, Row } from "../../components/grid";
+import { Col, Row } from "../grid";
 import useScreenSize from '../../../hooks/useScreenSize';
 import { HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
 import { Baskerville } from '@/app/fonts';
 
-interface EnterTitleSectionProps {
+interface OpportunityTitleSectionProps {
     title:string;
-    title_high:string;
     district:string;
     city:string;
+    price:number;
     high_image:string;
-    enterprise_logo:string;
     high_skills:HighSkills[];
 }
 
-export const EnterTitleSection: React.FC<EnterTitleSectionProps> = ({
+export const OpportunityTitleSection: React.FC<OpportunityTitleSectionProps> = ({
     title,
-    title_high,
     district,
     city,
+    price,
     high_image,
-    enterprise_logo,
     high_skills
-}: EnterTitleSectionProps) => {
+}: OpportunityTitleSectionProps) => {
     const isLargeScreen = useScreenSize(768);
 
     return (
         <TitleSection>
             <Row>
-                <Col flex={4}>
-                    <h5>{title_high}</h5>
+                <Col flex={6}>
                     <h1 className={`${Baskerville.className}`}>{title}</h1>
                     <p>{district}, {city}</p>
                 </Col>
-                <Col flex={2}>
-                    <EnterpriseLogoContainer>
-                        <EnterpriseLogo logo={enterprise_logo}></EnterpriseLogo>
-                    </EnterpriseLogoContainer>
-                </Col>
                 <Col flex={6}>
-                    <HighSkillsContainer>
-                        {high_skills.map((skill, index) => (
-                            <HighSkillItem key={index}>{skill}</HighSkillItem>
-                        ))}
-                    </HighSkillsContainer>
+                    <ColContainer>
+                        <InfoContainer>
+                            <PriceContainer>
+                                <span className={Baskerville.className}>{price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</span>
+                            </PriceContainer>
+                            <HighSkillsContainer>
+                                {high_skills.map((skill, index) => (
+                                    <HighSkillItem key={index}>{skill}</HighSkillItem>
+                                ))}
+                            </HighSkillsContainer>
+                        </InfoContainer>
+                    </ColContainer>
                 </Col>
             </Row>
             <Cover style={{backgroundImage:`url('${high_image}')`}}></Cover>
@@ -112,12 +111,12 @@ const HighSkillsContainer = styled.div`
     flex-direction:row;
     justify-content:flex-end;
     align-items:flex-end;
-    height:100%;
     padding-bottom:50px;
 
     @media(max-width:768px){
         justify-content:space-between;
         padding-bottom:30px;
+        width:100%;
     }
 `;
 
@@ -130,24 +129,43 @@ const HighSkillItem = styled.li`
 
     @media(max-width:768px){
         padding: 0;
-        font-size: var(--desktop-text-size);
+        font-size: var(--mobile-text-size);
     }
 `;
 
-const EnterpriseLogo = styled.div<{logo: string}>`
-     background-image:url('${props => props.logo}');
-     width:140px;
-     height:140px;
-     background-size:contain;
-     background-position:center center;
-     background-repeat:no-repeat;
+const PriceContainer = styled.div`
+    display:flex;
+    align-items:flex-end;
+    padding:0 15px;
+    span {
+        font-size:var(--medium-title-size);
+        font-weight:var(--medium-title-weight);
+        color:var(--text-primary);
+    }
+
+    @media(max-width:768px){
+        padding: 0;
+    }
 `;
 
-const EnterpriseLogoContainer = styled.div`
-     height:100%;
-     display:flex;
-     align-items:center;
-     padding-bottom:30px;
+const InfoContainer = styled.div`
+    display:flex;
+    justify-content:flex-end;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+    height:100%;
+`;
+
+const ColContainer = styled.div`
+    width:100%;
+    display:flex;
+    height:100%;
+    justify-content:flex-end;
+
+    @media(max-width:768px){
+        display:block;
+    }
 `;
 
 const Cover = styled.div`

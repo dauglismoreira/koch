@@ -60,12 +60,16 @@ const Content = styled.div`
     justify-content:space-between;
 
     p {
-        font-size:14px;
+        font-size:var(--desktop-text-size);
     }
 
     @media(max-width: 768px){
         padding:0 10px;
         gap:40px;
+
+        p {
+            font-size:var(--mobile-text-size);
+        }
     }
 `;
 

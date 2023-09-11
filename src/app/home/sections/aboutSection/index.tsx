@@ -23,7 +23,7 @@ export const AboutSection: React.FC<AboutProps> = ({ accordionDate, info }) => {
     const isLargeScreen = useScreenSize(768);
 
     return (
-        <Section position="relative" padding={!isLargeScreen.isLargeScreen ? "40px 0" : "120px 0"} background="var(--background-primary)">
+        <Section position="relative" padding={!isLargeScreen.isLargeScreen ? "64px 0" : "120px 0"} background="var(--background-primary-variation)">
             <Container>
                 <Row breakpoint={!isLargeScreen.isLargeScreen}>
                     <Col flex={2}>
@@ -67,7 +67,7 @@ const Title = styled.div`
 const Link = styled.a`
     color:var(--text-white);
     text-transform:uppercase;
-    font-size:14px;
+    font-size:var(--buttons-size);
     position:relative;
     cursor:pointer;
     width:70px;
@@ -84,7 +84,7 @@ const Link = styled.a`
     }
   
     &:hover{
-      font-weight:500;
+      font-weight:600;
       
       &::after {
           width:100%;

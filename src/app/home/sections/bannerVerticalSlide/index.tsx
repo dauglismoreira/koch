@@ -118,7 +118,8 @@ const LeftCol = styled.div<{widthscreen : number}>`
         padding:8px 0;
         z-index:2;
         text-transform:uppercase;
-        font-size:12px;
+        font-size:var(--small-text-size);
+        font-weight:var(--small-text-weight);
         letter-spacing:3px;
     }
 
