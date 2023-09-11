@@ -38,7 +38,7 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
 
     return (
         <>
-        <Section padding={!isLargeScreen.isLargeScreen ? "120px 0 60px" : "120px 0"} background="var(--background-primary-variation)">
+        <Section padding={!isLargeScreen.isLargeScreen ? "120px 10px 60px" : "120px 0"} background="var(--background-primary-variation)">
             <Container>
                 <Row breakpoint={!isLargeScreen.isLargeScreen}>
                     <Col flex={2}>
@@ -126,7 +126,11 @@ const ContentContact = styled.div`
 `;
 
 const ContainerForm = styled.div`
-    margin:-30px 0 0;
+    margin:-40px 0 0;
+
+    @media(max-width:768px){
+        margin:-10px 0 0;
+    }
 `;
 
 const ContainerActionForm = styled.div`
