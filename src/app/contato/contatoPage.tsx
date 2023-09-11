@@ -126,7 +126,7 @@ const ContentContact = styled.div`
 `;
 
 const ContainerForm = styled.div`
-    margin:-30px 10px 0;
+    margin:-30px 0 0;
 `;
 
 const ContainerActionForm = styled.div`
