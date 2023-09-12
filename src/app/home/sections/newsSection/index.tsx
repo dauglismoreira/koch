@@ -65,7 +65,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ data, info }) => {
                     </SwiperContainer>
                 </Row>
                 <Row margin="30px 0 0">
-                    <Col className="no-mobile-available" flex={12}>
+                    <Col className="no-desktop-available" flex={12}>
                         <MoreButton cta={info && info.cta} link={info && info.link}/>
                     </Col>
                 </Row>
@@ -85,8 +85,8 @@ const NewsSectionContainer = styled.div`
         }
     }
 
-    .no-mobile-available {
-        @media(max-width:768px){
+    .no-desktop-available {
+        @media(min-width:768px){
             display:none;
         }
     }
