@@ -48,6 +48,7 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
                             <Content>
                                 <SectionBodyText text={aboutInfo && aboutInfo.content} color="var(--text-secondary)"/>
                                 <Row breakpoint={!isLargeScreen.isLargeScreen} reverse={false}>
+                                    <Col flex={12}>
                                     <InputGenerate
                                         leftInputs={formInputsLeft}
                                         rightInputs={formInputsRight}
@@ -55,6 +56,9 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
                                         setFormData={setFormData}
                                         color="var(--text-primary)"
                                     />
+                                    </Col>
+                                </Row>
+                                <Row breakpoint={!isLargeScreen.isLargeScreen}>
                                     <Col flex={6} padding="15px 10px">
                                         <ActionFormContainer>
                                             <Mandatory color="var(--text-secondary)"/>
@@ -67,7 +71,7 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
                                         </ActionFormContainer>
                                     </Col>
                                     <Col flex={6} padding="15px 10px"></Col>
-                                </Row>
+                                </Row>                                
                             </Content>
                         </Col>
                     </Row>
@@ -76,8 +80,6 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
             </>
     )
 }
-
-
 
 const Content = styled.div`
     height:100%;

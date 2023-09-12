@@ -60,7 +60,7 @@ const AboutSectionContainer = styled.div`
         }
     }
 
-    .break {s
+    .break {
         @media(max-width:768px){
             flex-direction:column;
         }

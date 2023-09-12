@@ -91,7 +91,7 @@ const Date = styled.div`
 `;
 
 const Body = styled.div`
-    padding-left:10px;
+    padding:0 10px;
 `;
 
 const Content = styled.div`

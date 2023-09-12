@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface InputProps {
@@ -23,17 +23,6 @@ export const TextInput: React.FC<InputProps> = ({ placeholder, clearFilter, icon
       setIsFocused(false);
     };
 
-    const handleInputChange = useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-          const newValue = event.target.value;
-          setInputValue(newValue);
-          if (onChange) {
-              onChange(newValue);
-          }
-      },
-      [onChange]
-  );
-
     useEffect(() => {
       setInputValue('')
     }, [clearFilter])
@@ -49,8 +38,17 @@ export const TextInput: React.FC<InputProps> = ({ placeholder, clearFilter, icon
       } as React.ChangeEvent<HTMLInputElement>;
 
       handleInputChange(fakeEvent)
-    }, [param, open, handleInputChange]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [param, open]);
 
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = event.target.value;
+        setInputValue(newValue);
+        if (onChange) {
+          onChange(newValue);
+        }
+      };
 
   return (
     <InputContainer>

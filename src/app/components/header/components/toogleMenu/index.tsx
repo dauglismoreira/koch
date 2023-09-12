@@ -220,7 +220,7 @@ const SocialLinks = styled.div`
     padding-bottom:50px;
     position:fixed;
     z-index:9999;
-    bottom:0px;
+    bottom:30px;
     left:0;
     right:0;
 

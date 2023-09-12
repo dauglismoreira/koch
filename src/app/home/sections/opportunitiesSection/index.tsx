@@ -54,7 +54,7 @@ const NewsSectionContainer = styled.div`
     }
 
     .no-desktop-available {
-        @media(max-width:768px){
+        @media(min-width:768px){
             display:none;
         }
     }
