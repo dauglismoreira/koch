@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
-import useScreenSize from '../../../hooks/useScreenSize';
 import { Localization } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionBodyText } from '../sectionBodyText';
 import { SectionSubTitle } from '../sectionSubTitle';
@@ -18,18 +17,17 @@ export const OpportunityLocalSection: React.FC<OpportunityLocalSectionProps> = (
     district,
     city
 }) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
         <LocalSection>
-            <Row breakpoint={!isLargeScreen.isLargeScreen}>
+            <Row className="break">
                 <Col flex={2}>
                     <SectionSubTitle text={`A localização`} color="var(--text-secondary)"/>
                 </Col>
                 <Col flex={4}>
                     <TitleContainer>
                         <Title className={`${Baskerville.className}`}>{district}</Title>
-                        {!isLargeScreen.isLargeScreen && <p>, </p>}
+                        <p className="no-desktop-available">, </p>
                         <Title className={`${Baskerville.className}`}>{city}</Title>
                     </TitleContainer>
                     <SectionBodyText text={data.local_description} color="var(--text-secondary)"/>
@@ -52,6 +50,18 @@ const LocalSection = styled.div`
 
     @media(max-width:768px){
         padding:60px 0;
+    }
+
+    .break{
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+
+    .no-desktop-available {
+        @media(min-width:768px){
+            display:none;
+        }
     }
 `;
 

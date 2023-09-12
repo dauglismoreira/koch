@@ -8,6 +8,7 @@ interface SectionProps {
   padding?: string;
   zindex?: string;
   position?: string;
+  className?: string;
 }
 
 const StyledSection = styled.div<SectionProps>`
@@ -21,8 +22,8 @@ const StyledSection = styled.div<SectionProps>`
   z-index: ${(props) => props.zindex || '99'};
 `;
 
-export const Section: React.FC<SectionProps> = ({ children, zindex, padding, background, fixHeight, position }) => {
-  return <StyledSection zindex={zindex} padding={padding} background={background} fixHeight={fixHeight} position={position}>{children}</StyledSection>;
+export const Section: React.FC<SectionProps> = ({ children, className, zindex, padding, background, fixHeight, position }) => {
+  return <StyledSection className={className} zindex={zindex} padding={padding} background={background} fixHeight={fixHeight} position={position}>{children}</StyledSection>;
 };
 
 interface ContainerProps {
@@ -46,6 +47,7 @@ interface RowProps {
   padding?: string;
   breakpoint?: boolean;
   reverse?: boolean;
+  className?: string;
   gap?: string;
 }
 
@@ -61,8 +63,8 @@ const StyledRow = styled.div<RowProps>`
   ${(props) => props.breakpoint && (props.reverse ? 'flex-direction: column-reverse;' : 'flex-direction: column;')}
 `;
 
-export const Row: React.FC<RowProps> = ({ children, gap, reverse, breakpoint, margin, padding }) => {
-  return <StyledRow gap={gap} reverse={reverse} breakpoint={breakpoint} margin={margin} padding={padding}>{children}</StyledRow>;
+export const Row: React.FC<RowProps> = ({ children, gap, className, reverse, breakpoint, margin, padding }) => {
+  return <StyledRow className={className} gap={gap} reverse={reverse} breakpoint={breakpoint} margin={margin} padding={padding}>{children}</StyledRow>;
 };
 
 interface ColProps {

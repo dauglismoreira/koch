@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 import { Col, Container, Row, Section } from "../components/grid";
 import { SectionSubTitle } from '../components/sectionSubTitle';
-import useScreenSize from '../../hooks/useScreenSize';
 import { ContainerButtons } from '../components/containerButtons';
 import { SectionBodyText } from '../components/sectionBodyText';
 import { SectionTitle } from '../components/sectionTitle';
@@ -42,7 +41,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         street,
         city
     }) => {
-    const isLargeScreen = useScreenSize(768);
+        
     const [formData, setFormData] = useState<LocalFormData>({});
     const [accept, setAccept] = useState(false);
 
@@ -51,10 +50,10 @@ export const ServicePage: React.FC<ServicePageProps> = ({
     };
 
     return (
-        <>
-        <Section padding={!isLargeScreen.isLargeScreen ? "120px 0" : "120px 0"} background="var(--background-secondary)">
+        <ContainerServicePage>
+        <Section className="section" background="var(--background-secondary)">
             <Container>
-                <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                <Row className="break-row">
                     <Col flex={2}>
                         <SectionSubTitle text={oportunitiesInfo.sectionTitle} color="var(--text-secondary)"/>
                     </Col>
@@ -69,7 +68,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                     </Col>
                 </Row>
                 <Row>
-                    {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
+                    <Col className="mobile-no-available" flex={2}></Col>
                     <Col flex={10}>
                         <BrokersListContainer>
                             {brokersList.map((broker, index) => (
@@ -81,7 +80,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 <Row>
                     <LineDivider></LineDivider>
                 </Row>
-                <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                <Row  className="break-row">
                     <Col flex={2}>
                         <SectionSubTitle text={contactInfo.sectionTitle} color="var(--text-secondary)"/>
                     </Col>
@@ -94,7 +93,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                         </Content>
                     </Col>
                 </Row>
-                <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                <Row  className="break-row">
                     <Col flex={2}></Col>
                     <Col flex={4}>
                         <ContactInfos
@@ -115,7 +114,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 <Row>
                     <LineDivider></LineDivider>
                 </Row>
-                <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                <Row  className="break-row">
                     <Col flex={2}>
                         <SectionSubTitle text={formInfo.sectionTitle} color="var(--text-secondary)"/>
                     </Col>
@@ -128,8 +127,8 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                         </Content>
                     </Col>
                 </Row>
-                <Row breakpoint={!isLargeScreen.isLargeScreen}>
-                {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
+                <Row  className="break-row">
+                <Col  className="mobile-no-available"flex={2}></Col>
                 <Col flex={10} padding="15px 10px">
                     <InputGenerate
                         leftInputs={formInputsLeft}
@@ -141,7 +140,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 </Col>
                 </Row>
                 <Row>
-                {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
+                <Col className="mobile-no-available" flex={2}></Col>
                     <Col flex={10}>
                         <ActionContainer>
                             <Mandatory color="var(--text-primary)"/>
@@ -156,9 +155,27 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 </Row>
             </Container>
         </Section>
-        </>
+        </ContainerServicePage>
     )
 }
+
+const ContainerServicePage = styled.div`
+    .section {
+        padding:120px 0;
+    }
+
+    .break-row{
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+
+    .mobile-no-available{
+        @media(max-width:768px){
+            display:none;
+        }
+    }
+`;
 
 const Content = styled.div`
     height:100%;

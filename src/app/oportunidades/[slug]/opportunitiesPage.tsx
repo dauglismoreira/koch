@@ -2,7 +2,6 @@
 
 import styled from 'styled-components';
 import { Container, Row, Section } from "../../components/grid";
-import useScreenSize from '../../../hooks/useScreenSize';
 import { OpportunityLocalSection } from '@/app/components/opportunityPage/localSection';
 import { OpportunityImagesSection } from '@/app/components/opportunityPage/imagesSection';
 import { OpportunityAboutSection } from '@/app/components/opportunityPage/aboutSection';
@@ -46,11 +45,10 @@ export type AboutCharacteristics = (string | JSX.Element)[];
   }
 
 export const EnterPage: React.FC<OpportunitiesProps> = ({opportunity}) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
-        <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "70px 0 0" : "70px 0"} background="var(--background-secondary)">
+        <EnterPageSectionContainer>
+            <Section className="section" background="var(--background-secondary)">
                 <OpportunityMenuSection/>
                 <Container>
                     <OpportunityTitleSection
@@ -78,9 +76,15 @@ export const EnterPage: React.FC<OpportunitiesProps> = ({opportunity}) => {
                     /></div>
                 </Container>
             </Section>
-            </>
+            </EnterPageSectionContainer>
     )
 }
+
+const EnterPageSectionContainer = styled.div`
+    .section{
+        padding:70px 0 0;
+    }
+`;
 
 const LineDivider = styled.div`
     width:100%;

@@ -5,7 +5,6 @@ import { Col, Container, Row, Section } from "../components/grid";
 import { SectionTitle } from '../components/sectionTitle';
 import { SectionBodyText } from '../components/sectionBodyText';
 import { SectionSubTitle } from '../components/sectionSubTitle';
-import useScreenSize from '../../hooks/useScreenSize';
 import { Accordion } from '../components/accordion';
 import {AboutImageBanner} from '../components/aboutImageBanner';
 import SvgComponent from '../components/SvgComponent';
@@ -17,13 +16,12 @@ interface AboutPageProps {
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ aboutItemsAccordion, aboutInfo, aboutSecondInfo }) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
-        <>
-            <Section position="relative" padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-primary-variation)">
+        <AboutSectionContainer>
+            <Section position="relative" className="section" background="var(--background-primary-variation)">
                 <Container>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row className="break">
                         <Col flex={2}>
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-white)"/>
                         </Col>
@@ -31,7 +29,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ aboutItemsAccordion, about
                             <SectionTitle text={aboutInfo && aboutInfo.title} color="var(--text-white)"/>
                         </Col>
                     </Row>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row className="break">
                         <Col flex={2}></Col>
                         <Col flex={5}>
                             <Content>
@@ -49,9 +47,25 @@ export const AboutPage: React.FC<AboutPageProps> = ({ aboutItemsAccordion, about
                     <SvgComponent className="sv1" color="#182842" border="#182842"/>
                 </SvgContainer>
             </Section>
-            </>
+            </AboutSectionContainer>
     )
 }
+
+const AboutSectionContainer = styled.div`
+    .section{
+        padding:120px 0;
+
+        @media(max-width:768px){
+            padding:140px 0 40px;
+        }
+    }
+
+    .break {s
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+`;
 
 const Content = styled.div`
     height:100%;

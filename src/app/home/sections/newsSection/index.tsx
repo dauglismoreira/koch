@@ -2,7 +2,6 @@
 
 import styled from 'styled-components';
 import { Col, Container, Row, Section } from '../../../components/grid';
-import useScreenSize from '../../../../hooks/useScreenSize';
 import { MoreButton } from '../../../components/moreButton';
 import { NewsTitleSection } from './components/title';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -24,10 +23,10 @@ interface NewsSectionProps {
 }
 
 export const NewsSection: React.FC<NewsSectionProps> = ({ data, info }) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
-        <Section padding={!isLargeScreen.isLargeScreen ? "48px 0" : "120px 0"} background="var(--background-secondary)">
+        <NewsSectionContainer>
+        <Section className="section" background="var(--background-secondary)">
             <Container>
                 <NewsTitleSection info={info}/>
                 <Row padding="50px 0 50px 10px">
@@ -66,16 +65,32 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ data, info }) => {
                     </SwiperContainer>
                 </Row>
                 <Row margin="30px 0 0">
-                    {!isLargeScreen.isLargeScreen &&
-                        <Col flex={12}>
-                            <MoreButton cta={info && info.cta} link={info && info.link}/>
-                        </Col>
-                    }
+                    <Col className="no-mobile-available" flex={12}>
+                        <MoreButton cta={info && info.cta} link={info && info.link}/>
+                    </Col>
                 </Row>
             </Container>
         </Section>
+        </NewsSectionContainer>
     );
 }
+
+const NewsSectionContainer = styled.div`
+
+    .section{
+        padding:120px 0;
+
+        @media(max-width:768px){
+            padding:48px 0;
+        }
+    }
+
+    .no-mobile-available {
+        @media(max-width:768px){
+            display:none;
+        }
+    }
+`;
 
 const SwiperContainer = styled.div`
     display:block;

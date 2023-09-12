@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
-import useScreenSize from '../../../hooks/useScreenSize';
 import { HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
 import { Baskerville } from '@/app/fonts';
 
@@ -21,7 +20,6 @@ export const OpportunityTitleSection: React.FC<OpportunityTitleSectionProps> = (
     high_image,
     high_skills
 }: OpportunityTitleSectionProps) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
         <TitleSection>

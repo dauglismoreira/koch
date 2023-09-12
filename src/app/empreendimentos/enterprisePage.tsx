@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 import { Col, Container, Row, Section } from "../components/grid";
 import { SectionSubTitle } from '../components/sectionSubTitle';
-import useScreenSize from '../../hooks/useScreenSize';
 import { CardProps, EnterpriseCard } from '../components/enterpriseCard';
 import { EnterpriseFilters } from '../components/catalogFilters';
 import { useEffect, useState } from 'react';
@@ -17,7 +16,6 @@ interface EnterprisePageProps {
 }
 
 export const EnterprisePage: React.FC<EnterprisePageProps> = ({ situationOptions, aboutInfo, citiesOptions, enterprises}) => {
-    const isLargeScreen = useScreenSize(768);
 
     const [textFilter, setTextFilter] = useState('')
     const [cityFilter, setCityFilter] = useState('')
@@ -46,10 +44,10 @@ export const EnterprisePage: React.FC<EnterprisePageProps> = ({ situationOptions
     }, [situationFilter])
     
     return (
-        <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "120px 0 40px" : "160px 0"} background="var(--background-secondary)">
+        <EnterpriseSectionContainer>
+            <Section className="section" background="var(--background-secondary)">
                 <Container>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row className="break">
                         <Col flex={2}>
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-secondary)"/>
                         </Col>
@@ -95,11 +93,25 @@ export const EnterprisePage: React.FC<EnterprisePageProps> = ({ situationOptions
                     </Row>
                 </Container>
             </Section>
-            </>
+            </EnterpriseSectionContainer>
     )
 }
 
+const EnterpriseSectionContainer = styled.div`
+    .section {
+        padding:160px 0;
 
+        @media(max-width:768px){
+            padding:120px 0 40px;
+        }
+    }
+
+    .break{
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+`;
 
 const EnterpriseListContainer = styled.div`
   width:100%;

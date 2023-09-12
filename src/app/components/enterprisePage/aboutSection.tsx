@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
-import useScreenSize from '../../../hooks/useScreenSize';
-import { AboutCharacteristics, HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
+import { AboutCharacteristics } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionBodyText } from '../sectionBodyText';
 import { SectionSubTitle } from '../sectionSubTitle';
 
@@ -16,11 +15,10 @@ export const EnterAboutSection: React.FC<EnterAboutSectionProps> = ({
     about_characteristics,
     about_image,
 }) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
         <AboutSection>
-            <Row breakpoint={!isLargeScreen.isLargeScreen}>
+            <Row className="break">
                 <Col flex={2}>
                     <SectionSubTitle text={`Sobre o\nempreendimento`} color="var(--text-secondary)"/>
                 </Col>
@@ -33,7 +31,7 @@ export const EnterAboutSection: React.FC<EnterAboutSectionProps> = ({
                                 <li key={index}>━ {item}</li>
                             ))}
                         </SkillsList>
-                        {isLargeScreen.isLargeScreen && <LineDivider></LineDivider>}
+                        <LineDivider className='no-mobile-available'></LineDivider>
                     </Content>
                 </Col>
                 <Col flex={5}>
@@ -50,6 +48,18 @@ const AboutSection = styled.div`
 
     @media(max-width:768px){
         padding:60px 0;
+    }
+
+    .break {
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+
+    .no-mobile-available {
+        @media(max-width:768px){
+            display:none;
+        }
     }
 `;
 

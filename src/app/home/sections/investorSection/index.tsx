@@ -2,7 +2,6 @@
 
 import styled from 'styled-components';
 import { Col, Container, Row, Section } from '../../../components/grid';
-import useScreenSize from '../../../../hooks/useScreenSize';
 import { SectionSubTitle } from '../../../components/sectionSubTitle';
 import { SectionTitle } from '../../../components/sectionTitle';
 import { SectionBodyText } from '../../../components/sectionBodyText';
@@ -19,14 +18,12 @@ interface InvestorSection {
 }
 
 export const InvestorSection: React.FC<InvestorSection> = ({ buttonsList, info }) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
-        <>
-        {isLargeScreen?.isLargeScreen &&
-            <Section position="relative" padding={!isLargeScreen.isLargeScreen ? "40px 0" : "120px 0"} background="var(--background-grey)">
+        <InvestorSectionContainer>
+            <Section position="relative" className="section" background="var(--background-grey)">
                 <Container>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row className="break">
                         <Col flex={2}>
                             <SectionSubTitle text={info && info.sectionTitle} color="var(--text-white)"/>
                         </Col>
@@ -45,10 +42,29 @@ export const InvestorSection: React.FC<InvestorSection> = ({ buttonsList, info }
                     <SvgComponent className="sv2" color="var(--background-grey)" border="white"/>
                 </SvgContainer>
             </Section>
-        }
-        </>
+        </InvestorSectionContainer>
     );
 }
+
+const InvestorSectionContainer = styled.div`
+    @media(min-width:768px){
+        display:none;
+    }
+
+    .section{
+        padding:120px 0;
+
+        @media(max-width:768px){
+            padding:40px 0;
+        }
+    }
+
+    .break {
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+`;
 
 const Content = styled.div`
     height:100%;

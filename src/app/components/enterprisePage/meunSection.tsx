@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Container } from "../grid";
-import useScreenSize from '../../../hooks/useScreenSize';
 
 const scrollToSection = (sectionId : string) => {
     const section = document.getElementById(sectionId);
@@ -14,7 +13,6 @@ const scrollToSection = (sectionId : string) => {
 };
 
 export const EnterMenuSection = () => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
         <TopMenu>

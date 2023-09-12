@@ -2,27 +2,38 @@
 
 import styled from 'styled-components';
 import { Section } from "./components/grid";
-import useScreenSize from '../hooks/useScreenSize';
 import { Baskerville } from './fonts';
 import SvgComponent from './components/SvgComponent';
 
 
 const NotFound = () => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
-        <Section position='relative' padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-primary-variation)">
-            <NotFoundContainer>
-                <h1 className={Baskerville.className}>404</h1>
-                <p>A página que você procurou não existe.</p>
-                <Button href="./../">Voltar para o início</Button>
-            </NotFoundContainer>
-            <SvgContainer>
-                <SvgComponent className="sv1" color="#182842" border="#182842"/>
-            </SvgContainer>
-        </Section>
+        <NotFoundSectionContainer>
+            <Section position='relative' className="section" background="var(--background-primary-variation)">
+                <NotFoundContainer>
+                    <h1 className={Baskerville.className}>404</h1>
+                    <p>A página que você procurou não existe.</p>
+                    <Button href="./../">Voltar para o início</Button>
+                </NotFoundContainer>
+                <SvgContainer>
+                    <SvgComponent className="sv1" color="#182842" border="#182842"/>
+                </SvgContainer>
+            </Section>
+        </NotFoundSectionContainer>
     )
 }
+
+const NotFoundSectionContainer = styled.div`
+    .section{
+        padding: 120px 0;
+
+        @media(max-width:768px){
+            padding: 140px 0 40px;
+        }
+    }
+`;
+
 
 const NotFoundContainer = styled.div`
     height:60vh;

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Col, Row } from "../grid";
 import { SectionTitle } from '../sectionTitle';
 import { SectionSubTitle } from '../sectionSubTitle';
-import useScreenSize from '../../../hooks/useScreenSize';
 
 interface AboutBannerProps {
     data: {
@@ -13,11 +12,10 @@ interface AboutBannerProps {
 }
 
 export const AboutImageBanner: React.FC<AboutBannerProps> = ({ data }) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
         <AboutImageBannerContainer>
-            <Row padding={!isLargeScreen.isLargeScreen ? "40px 0" : "120px 0"}>
+            <Row className="section">
                 <Col flex={2}></Col>
                 <Col flex={9}>
                     <Title>
@@ -28,19 +26,17 @@ export const AboutImageBanner: React.FC<AboutBannerProps> = ({ data }) => {
                 <Col flex={1}></Col>
             </Row>
             <Row>
-                {isLargeScreen.isLargeScreen &&
-                <Col flex={2}>
+                <Col className="no-mobile-available" flex={2}>
                     <BannerLabel>
                         <Line></Line>
                         <h6>Construtora<br></br>& Incorporadora</h6>
                     </BannerLabel>
                 </Col>
-                }
                 <Col flex={9}>
                     <ImageBanner data={data.image ? data.image : ''}></ImageBanner>
                     <ImageLine></ImageLine>
                 </Col>
-                {isLargeScreen.isLargeScreen && <Col flex={1}></Col>}
+                <Col className='no-mobile-available' flex={1}></Col>
             </Row>
         </AboutImageBannerContainer>
     )
@@ -53,6 +49,20 @@ const AboutImageBannerContainer = styled.div`
 
     & h1 {
         text-align:center;
+    }
+
+    .section {
+        padding:120px 0;
+
+        @media(max-width:768px){
+            padding:40px 0;
+        }
+    }
+
+    .no-mobile-available {
+        @media(max-width:768px){
+            display:none;
+        }
     }
 `;
 

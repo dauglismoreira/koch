@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
-import useScreenSize from '../../../hooks/useScreenSize';
 import { AboutCharacteristics, HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionSubTitle } from '../sectionSubTitle';
 
@@ -15,11 +14,10 @@ export const OpportunityAboutSection: React.FC<OpportunityAboutSectionProps> = (
     about_characteristics,
     about_image,
 }) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
         <AboutSection>
-            <Row breakpoint={!isLargeScreen.isLargeScreen}>
+            <Row className="section">
                 <Col flex={2}>
                     <SectionSubTitle text={`Sobre o\nempreendimento`} color="var(--text-secondary)"/>
                 </Col>
@@ -52,6 +50,12 @@ const AboutSection = styled.div`
 
     @media(max-width:768px){
         padding:60px 0;
+    }
+
+    .section {
+        @media(max-width:768px){
+            flex-direction:column;
+        }
     }
 `;
 

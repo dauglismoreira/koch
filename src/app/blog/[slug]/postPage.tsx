@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Col, Container, Row, Section } from "../../components/grid";
 import { SectionTitle } from '../../components/sectionTitle';
 import { SectionSubTitle } from '../../components/sectionSubTitle';
-import useScreenSize from '../../../hooks/useScreenSize';
 import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
 import { RecommendedPosts } from '@/app/components/recomendedPosts';
 
@@ -13,13 +12,12 @@ interface PostPageProps {
 }
 
 export const PostPage: React.FC<PostPageProps> = ({post}) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
-        <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-secondary)">
+        <PostPageContainer>
+            <Section className="section" background="var(--background-secondary)">
                 <Container>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row className="break">
                         <Col flex={2}>
                             <SectionSubTitle text="blog" color="var(--text-primary)"/>
                         </Col>
@@ -28,7 +26,7 @@ export const PostPage: React.FC<PostPageProps> = ({post}) => {
                         </Col>
                     </Row>
                     <Row>
-                        {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
+                        <Col className="no-mobile-available" flex={2}></Col>
                         <Col flex={8}>
                             <Body>
                                 <Date>{post.date}</Date>
@@ -41,15 +39,37 @@ export const PostPage: React.FC<PostPageProps> = ({post}) => {
                                 </ContainerNavigation>
                             </Body>
                         </Col>
-                        {isLargeScreen.isLargeScreen && <Col flex={2}>
+                        <Col className="no-mobile-available" flex={2}>
                             <RecommendedPosts data={post.related_posts}/>
-                        </Col>}
+                        </Col>
                     </Row>
                 </Container>
             </Section>
-            </>
+        </PostPageContainer>
     )
 }
+
+const PostPageContainer = styled.div`
+    .section {
+        padding:120px 0;
+
+        @media(max-width:768px){
+            padding: 140px 0 40px;
+        }
+    }
+
+    .break{
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+
+    .no-mobile-available{
+        @media(max-width:768px){
+            display:none;
+        }
+    }
+`;
 
 const Cover = styled.div<{background : string}>`
     background-image:url('${props => props.background}');

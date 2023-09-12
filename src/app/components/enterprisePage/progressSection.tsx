@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
-import useScreenSize from '../../../hooks/useScreenSize';
 import { Progress } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionSubTitle } from '../sectionSubTitle';
 import { ProgressBar } from '../progressBar';
@@ -14,7 +13,6 @@ interface EnterProgressSectionProps {
 export const EnterProgressSection: React.FC<EnterProgressSectionProps> = ({
     data
 }) => {
-    const isLargeScreen = useScreenSize(768);
 
     const buttons = [
         {
@@ -33,7 +31,7 @@ export const EnterProgressSection: React.FC<EnterProgressSectionProps> = ({
 
     return (
         <ProgressSection>
-            <Row breakpoint={!isLargeScreen.isLargeScreen}>
+            <Row className="section">
                 <Col flex={2}>
                     <SectionSubTitle text={`Acompanhamento\nde obra`} color="var(--text-secondary)"/>
                     <ContainerButton>
@@ -109,6 +107,12 @@ const ProgressSection = styled.div`
 
     @media(max-width:768px){
         padding:70px 0;
+    }
+
+    .section{
+        @media(max-width:768px){
+            flex-direction:column;
+        }
     }
 `;
 

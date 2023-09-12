@@ -42,7 +42,8 @@ export const Header = () => {
       ]
 
     return(
-        <Section background="var(--background-primary)" fixHeight={70} position="fixed" zindex='999'>
+        <HeaderContainer>
+        <Section className="section" background="var(--background-primary)" position="fixed" zindex='999'>
             <Container>
                 <Row>
                     <Col flex={2}>
@@ -71,6 +72,7 @@ export const Header = () => {
                 </Row>
             </Container>
         </Section>
+        </HeaderContainer>
     )
 }
 
@@ -79,4 +81,10 @@ const ContainerItemsMenu = styled.div`
     flex-direction:row;
     max-width:840px;
     margin-top:0px;
+`;
+
+const HeaderContainer = styled.div`
+    .section{
+        height:70px;
+    }
 `;

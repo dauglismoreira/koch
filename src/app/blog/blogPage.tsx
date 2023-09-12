@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 import { Col, Container, Row, Section } from "../components/grid";
 import { SectionSubTitle } from '../components/sectionSubTitle';
-import useScreenSize from '../../hooks/useScreenSize';
 import { BlogCard, BlogCardProps } from '../components/blogCard';
 
 interface BlogProps {
@@ -15,29 +14,40 @@ export const BlogPage: React.FC<BlogProps> = ({
         blogInfo,
         blog
     }) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
-        <>
-        <Section padding={!isLargeScreen.isLargeScreen ? "120px 0" : "120px 0"} background="var(--background-secondary)">
-            <Container>
-                <Row breakpoint={!isLargeScreen.isLargeScreen}>
-                    <Col flex={2}>
-                        <SectionSubTitle text={blogInfo.sectionTitle} color="var(--text-secondary)"/>
-                    </Col>
-                    <Col flex={10}>
-                        <BlogListContainer>
-                            {blog.map((post, index) => (
-                                <BlogCard key={index} data={post} />
-                            ))}
-                        </BlogListContainer>
-                    </Col>
-                </Row>
-            </Container>
-        </Section>
-        </>
+        <BlogPageContainer>
+            <Section className="section" background="var(--background-secondary)">
+                <Container>
+                    <Row className="break">
+                        <Col flex={2}>
+                            <SectionSubTitle text={blogInfo.sectionTitle} color="var(--text-secondary)"/>
+                        </Col>
+                        <Col flex={10}>
+                            <BlogListContainer>
+                                {blog.map((post, index) => (
+                                    <BlogCard key={index} data={post} />
+                                ))}
+                            </BlogListContainer>
+                        </Col>
+                    </Row>
+                </Container>
+            </Section>
+        </BlogPageContainer>
     )
 }
+
+const BlogPageContainer = styled.div`
+  .section {
+    padding:120px 0;
+  }
+
+  .break{
+    @media(max-width:768px){
+        flex-direction:column;
+    }
+  }
+`;
 
 const BlogListContainer = styled.div`
   width:100%;

@@ -6,7 +6,6 @@ import { FiFilter } from 'react-icons/fi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Col, Row } from '../grid';
 import FilterItem from '../filterItemAccordion';
-import useScreenSize from '@/hooks/useScreenSize';
 import { useState } from 'react';
 import { BsArrowLeft } from "react-icons/bs";
 
@@ -27,8 +26,6 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
   onSearchChange,
   clearFilter
 }) => {
-
-    const isLargeScreen = useScreenSize(768);
 
     const [showModal, setShowModal] = useState(false);
     const [isOptionsListVisible, setIsOptionsListVisible] = useState(true);
@@ -68,9 +65,8 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
     }
 
   return (
-    <>
-      {isLargeScreen.isLargeScreen ? (
-        <InputContainer>
+    <FiltersContainer>
+        <InputContainer className="no-mobile-available">
           <Row>
             <Col flex={2}>
               <Select
@@ -98,8 +94,7 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
             </Col>
           </Row>
         </InputContainer>
-      ) : (
-        <FilterMobileContainer>
+        <FilterMobileContainer className="no-desktop-available">
           <FilterButtonContainer open={showModal}>
             <FilterButton
               onClick={toggleOptionsList}
@@ -164,10 +159,23 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
             </TextInputContainer>
 
         </FilterMobileContainer>
-      )}
-    </>
+    </FiltersContainer>
   );
 };
+
+const FiltersContainer = styled.div`
+  .no-mobile-available{
+    @media(max-width:768px){
+      display:none;
+    }
+  }
+
+  .no-desktop-available{
+    @media(min-width:768px){
+      display:none;
+    }
+  }
+`;
 
 const InputContainer = styled.div`
     max-width:660px;

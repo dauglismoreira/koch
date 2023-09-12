@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Col, Row } from "../../components/grid";
-import useScreenSize from '../../../hooks/useScreenSize';
 import { HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
 import { Baskerville } from '@/app/fonts';
 
@@ -23,7 +22,6 @@ export const EnterTitleSection: React.FC<EnterTitleSectionProps> = ({
     enterprise_logo,
     high_skills
 }: EnterTitleSectionProps) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
         <TitleSection>

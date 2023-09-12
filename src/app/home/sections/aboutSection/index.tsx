@@ -2,7 +2,6 @@
 
 import styled from 'styled-components';
 import { Col, Container, Row, Section } from '../../../components/grid';
-import useScreenSize from '../../../../hooks/useScreenSize';
 import { Accordion, AccordionItemProps } from '../../../components/accordion';
 import { SectionSubTitle } from '../../../components/sectionSubTitle';
 import { SectionTitle } from '../../../components/sectionTitle';
@@ -20,38 +19,55 @@ interface AboutProps {
 }
 
 export const AboutSection: React.FC<AboutProps> = ({ accordionDate, info }) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
-        <Section position="relative" padding={!isLargeScreen.isLargeScreen ? "64px 0" : "120px 0"} background="var(--background-primary-variation)">
-            <Container>
-                <Row breakpoint={!isLargeScreen.isLargeScreen}>
-                    <Col flex={2}>
-                        <SectionSubTitle text={info && info.sectionTitle} color="var(--text-white)"/>
-                    </Col>
-                    <Col flex={4}>
-                        <Content>
-                            <Title>
-                                <SectionTitle text={info && info.title} color="var(--text-white)"/>
-                                <SectionBodyText text={info && info.content} color="var(--text-white)"/>
-                            </Title>
-                            <Link href={info && `./../${info.link}`} target="_parent">
-                                Leia mais
-                            </Link>
-                        </Content>
-                    </Col>
-                    <Col flex={1}></Col>
-                    <Col flex={5}>
-                        <Accordion data={accordionDate}/>
-                    </Col>
-                </Row>
-            </Container>
-            <SvgContainer>
-                <SvgComponent className="sv1" color="#182842" border="#182842"/>
-            </SvgContainer>
-        </Section>
+        <AboutSectionContainer>
+            <Section position="relative" className="section" background="var(--background-primary-variation)">
+                <Container>
+                    <Row className="break">
+                        <Col flex={2}>
+                            <SectionSubTitle text={info && info.sectionTitle} color="var(--text-white)"/>
+                        </Col>
+                        <Col flex={4}>
+                            <Content>
+                                <Title>
+                                    <SectionTitle text={info && info.title} color="var(--text-white)"/>
+                                    <SectionBodyText text={info && info.content} color="var(--text-white)"/>
+                                </Title>
+                                <Link href={info && `./../${info.link}`} target="_parent">
+                                    Leia mais
+                                </Link>
+                            </Content>
+                        </Col>
+                        <Col flex={1}></Col>
+                        <Col flex={5}>
+                            <Accordion data={accordionDate}/>
+                        </Col>
+                    </Row>
+                </Container>
+                <SvgContainer>
+                    <SvgComponent className="sv1" color="#182842" border="#182842"/>
+                </SvgContainer>
+            </Section>
+        </AboutSectionContainer>
     );
 }
+
+const AboutSectionContainer = styled.div`
+    .section {
+        padding:120px 0;
+
+        @media(max-width:768px){
+            padding:64px 0;
+        }
+    }
+
+    .break{
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+`;
 
 const Content = styled.div`
     height:100%;

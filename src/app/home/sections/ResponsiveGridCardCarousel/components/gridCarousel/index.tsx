@@ -54,6 +54,7 @@ export const GridCardCarousel: React.FC<GridProps> = ({ data }) => {
     );
 }
 
+
 const SwiperContainer = styled.div`
     display:block;
     width:100%;

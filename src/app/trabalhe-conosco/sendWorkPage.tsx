@@ -5,7 +5,6 @@ import { Col, Container, Row, Section } from "../components/grid";
 import { SectionTitle } from '../components/sectionTitle';
 import { SectionBodyText } from '../components/sectionBodyText';
 import { SectionSubTitle } from '../components/sectionSubTitle';
-import useScreenSize from '../../hooks/useScreenSize';
 import { useState } from 'react';
 import { InputGenerate, LocalFormData } from '../components/formGenerator';
 import { Mandatory } from '../components/formGenerator/components/notice';
@@ -21,7 +20,6 @@ export const SendWorkPage: React.FC<SendWorkProps> = ({
         aboutInfo,
         formInputs
     }) => {
-    const isLargeScreen = useScreenSize(768);
     const [formData, setFormData] = useState<LocalFormData>({});
     const [accept, setAccept] = useState(false);
 
@@ -31,10 +29,10 @@ export const SendWorkPage: React.FC<SendWorkProps> = ({
 
 
     return (
-        <>
-            <Section position="relative" padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-secondary)">
+        <SendWorkSectionContainer>
+            <Section position="relative" className="section" background="var(--background-secondary)">
                 <Container>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row  className="break">
                         <Col flex={2}>
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-primary)"/>
                         </Col>
@@ -42,7 +40,7 @@ export const SendWorkPage: React.FC<SendWorkProps> = ({
                             <SectionTitle text={aboutInfo && aboutInfo.title} color="var(--text-primary)"/>
                         </Col>
                     </Row>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row className="break">
                         <Col flex={2}></Col>
                         <Col flex={5}>
                             <Content>
@@ -73,9 +71,26 @@ export const SendWorkPage: React.FC<SendWorkProps> = ({
                     <SvgComponent className="sv3" color="var(--background-secondary)" border="var(--background-grey)"/>
                 </SvgContainer>
             </Section>
-            </>
+        </SendWorkSectionContainer>
     )
 }
+
+const SendWorkSectionContainer = styled.div`
+
+    .section{
+        padding:120px 0;
+
+        @media(max-width:768px){
+            padding:140px 0 40px;
+        }
+    }
+
+    .break {
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+`;
 
 const Content = styled.div`
     height:100%;

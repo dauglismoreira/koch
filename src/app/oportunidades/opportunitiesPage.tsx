@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 import { Col, Container, Row, Section } from "../components/grid";
 import { SectionSubTitle } from '../components/sectionSubTitle';
-import useScreenSize from '../../hooks/useScreenSize';
 import { OpportunityCard } from '../components/opportunityCard';
 import { EnterpriseFilters } from '../components/catalogFilters';
 import { CardProps } from '../components/enterpriseCard';
@@ -23,7 +22,6 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
         situationOptions,
         enterprises,
     }) => {
-        const isLargeScreen = useScreenSize(768);
 
         const [textFilter, setTextFilter] = useState('')
         const [cityFilter, setCityFilter] = useState('')
@@ -53,10 +51,10 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
         
 
     return (
-        <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "120px 0 40px" : "160px 0"} background="var(--background-secondary)">
+        <OpportunitiesSectionContainer>
+            <Section className="section" background="var(--background-secondary)">
                 <Container>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row className="break">
                         <Col flex={2}>
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-secondary)"/>
                         </Col>
@@ -100,9 +98,27 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
                     </Row>
                 </Container>
             </Section>
-            </>
+            </OpportunitiesSectionContainer>
     )
 }
+
+const OpportunitiesSectionContainer = styled.div`
+
+    .section{
+        padding:160px 0;
+
+        @media(max-width:768px){
+            padding:120px 0 40px;
+        }
+    }
+
+
+    .break {
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+`;
 
 
 const EnterpriseListContainer = styled.div`
