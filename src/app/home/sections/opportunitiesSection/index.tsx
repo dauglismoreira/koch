@@ -37,7 +37,7 @@ export const OpportunitiesSection: React.FC<OpportunitiesProps> = ({ buttonsList
                         </Col>
                     </Row>
                 </Container>
-                <LineDivider className="no-mobile-available"></LineDivider>
+                <LineDivider className="no-desktop-available"></LineDivider>
             </Section>
         </NewsSectionContainer>
     );
@@ -53,7 +53,7 @@ const NewsSectionContainer = styled.div`
         }
     }
 
-    .no-mobile-available {
+    .no-desktop-available {
         @media(max-width:768px){
             display:none;
         }

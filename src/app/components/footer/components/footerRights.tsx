@@ -8,7 +8,7 @@ export const FooterRights = ({}) => {
     return(
         <Row>
             <Col>
-                <CopyRight text="Política de Privacidade e Segurança, ©2023 - Todos os direitos reservados"/>
+                <a href="./../../termos"><CopyRight text="Política de Privacidade e Segurança, ©2023 - Todos os direitos reservados"/></a>
             </Col>
             <Col>
                 <ImpacteText text="Desenvolvido por ">
