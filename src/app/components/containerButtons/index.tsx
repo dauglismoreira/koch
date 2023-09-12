@@ -55,6 +55,7 @@ const Button = styled.a<{color: string; background: string}>`
     transition: 0.3s ease-in-out;
     height:40px;
     align-items:center;
+    justify-content:center;
     display:flex;
 
     &:hover {
