@@ -47,7 +47,7 @@ export const InvestorSection: React.FC<InvestorSection> = ({ buttonsList, info }
 }
 
 const InvestorSectionContainer = styled.div`
-    @media(min-width:768px){
+    @media(max-width:768px){
         display:none;
     }
 
