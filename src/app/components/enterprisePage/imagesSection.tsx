@@ -142,6 +142,11 @@ const ImagesGrid = styled.div`
     display:grid;
     gap:20px;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+
+    img {
+        width:100%;
+        object-fit:cover;
+    }
 `;
 
 const CustomNavButton = styled.div`

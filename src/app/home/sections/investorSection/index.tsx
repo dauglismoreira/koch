@@ -83,5 +83,5 @@ const SvgContainer = styled.div`
     bottom:0;
     right:0;
     z-index:-1;
-    width:700px;
+    width:800px;
 `;

@@ -81,6 +81,7 @@ const ContainerItemsMenu = styled.div`
     flex-direction:row;
     max-width:840px;
     margin-top:0px;
+    gap:16px;
 `;
 
 const HeaderContainer = styled.div`

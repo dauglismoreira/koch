@@ -48,11 +48,14 @@ const Button = styled.a<{color: string; background: string}>`
     border:solid 1px ${props => props.background};
     text-transform:uppercase;
     border-radius:5px;
-    padding:8px 15px;
+    padding:0 15px;
     font-size:var(--buttons-size);
     cursor:pointer;
     font-weight:var(--buttons-weight);
     transition: 0.3s ease-in-out;
+    height:40px;
+    align-items:center;
+    display:flex;
 
     &:hover {
         background-color:${props => props.background};
@@ -60,6 +63,7 @@ const Button = styled.a<{color: string; background: string}>`
     }
 
     @media(max-width:640px){
-        padding:9.5px 15px;
+        padding:0  15px;
+        height:40px;
     }
 `;

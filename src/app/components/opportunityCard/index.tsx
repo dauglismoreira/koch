@@ -157,6 +157,10 @@ const Card = styled.div`
         color:var(--text-white);
       }
 
+      ${Skills} {
+        color:var(--text-white);
+      }
+
       ${Place} {
         color:var(--text-white);
       }

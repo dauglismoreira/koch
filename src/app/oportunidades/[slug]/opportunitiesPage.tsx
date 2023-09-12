@@ -82,7 +82,7 @@ export const EnterPage: React.FC<OpportunitiesProps> = ({opportunity}) => {
 
 const EnterPageSectionContainer = styled.div`
     .section{
-        padding:70px 0 0;
+        padding:100px 0 0;
     }
 `;
 

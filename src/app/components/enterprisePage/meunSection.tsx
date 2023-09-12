@@ -6,8 +6,8 @@ const scrollToSection = (sectionId : string) => {
 
     if (section) {
         window.scrollTo({
-            top: section.offsetTop,
-            behavior: 'smooth', // Rola suavemente
+            top: section.offsetTop - 50,
+            behavior: 'smooth',
         });
     }
 };
@@ -32,6 +32,11 @@ export const EnterMenuSection = () => {
 
 const TopMenu = styled.div`
     border-bottom:solid 1px var(--border-grey);
+    position:fixed;
+    background-color:var(--background-secondary);
+    width:100%;
+    top:70px;
+    z-index:998;
 `;
 
 const TopMenuContainer = styled.div`

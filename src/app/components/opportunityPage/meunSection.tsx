@@ -1,20 +1,18 @@
 import styled from 'styled-components';
 import { Container } from "../grid";
-import useScreenSize from '../../../hooks/useScreenSize';
 
 const scrollToSection = (sectionId : string) => {
     const section = document.getElementById(sectionId);
 
     if (section) {
         window.scrollTo({
-            top: section.offsetTop,
-            behavior: 'smooth', // Rola suavemente
+            top: section.offsetTop - 50,
+            behavior: 'smooth',
         });
     }
 };
 
 export const OpportunityMenuSection = () => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
         <TopMenu>
@@ -32,6 +30,11 @@ export const OpportunityMenuSection = () => {
 
 const TopMenu = styled.div`
     border-bottom:solid 1px var(--border-grey);
+    position:fixed;
+    background-color:var(--background-secondary);
+    width:100%;
+    top:70px;
+    z-index:998;
 `;
 
 const TopMenuContainer = styled.div`

@@ -142,7 +142,7 @@ const Menu = styled.div`
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:20px;
+  gap:26px;
   z-index:-2;
 
   &.slideDown {

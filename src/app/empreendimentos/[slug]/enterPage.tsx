@@ -52,7 +52,7 @@ export const EnterPage: React.FC<EnterpriseProps> = ({enterprise}) => {
 
     return (
         <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "70px 0 0" : "70px 0"} background="var(--background-secondary)">
+            <Section padding={!isLargeScreen.isLargeScreen ? "100px 0 0" : "100px 0 70px"} background="var(--background-secondary)">
                 <EnterMenuSection/>
                 <Container>
                     <EnterTitleSection

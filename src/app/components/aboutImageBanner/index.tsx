@@ -15,7 +15,7 @@ export const AboutImageBanner: React.FC<AboutBannerProps> = ({ data }) => {
 
     return (
         <AboutImageBannerContainer>
-            <Row className="section">
+            <Row className="section-child">
                 <Col flex={2}></Col>
                 <Col flex={9}>
                     <Title>
@@ -51,7 +51,7 @@ const AboutImageBannerContainer = styled.div`
         text-align:center;
     }
 
-    .section {
+    .section-child {
         padding:120px 0;
 
         @media(max-width:768px){

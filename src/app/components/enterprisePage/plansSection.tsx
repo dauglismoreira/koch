@@ -159,6 +159,6 @@ const Button = styled.button`
     @media(max-width:768px){
         white-space:nowrap;
         width:auto;
-        height:40px;
+        height:30px;
     }
 `;

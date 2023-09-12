@@ -17,7 +17,7 @@ export const OpportunityAboutSection: React.FC<OpportunityAboutSectionProps> = (
 
     return (
         <AboutSection>
-            <Row className="section">
+            <Row className="break">
                 <Col flex={2}>
                     <SectionSubTitle text={`Sobre o\nempreendimento`} color="var(--text-secondary)"/>
                 </Col>
@@ -52,7 +52,7 @@ const AboutSection = styled.div`
         padding:60px 0;
     }
 
-    .section {
+    .break {
         @media(max-width:768px){
             flex-direction:column;
         }

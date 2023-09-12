@@ -118,7 +118,6 @@ const Title = styled.div`
   }
 
   &:hover{
-    font-weight:var(--medium-title-weight);
       & span::after {
         width:100%;
       }
