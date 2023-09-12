@@ -37,73 +37,80 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
     };
 
     return (
-        <>
-        <Section padding={!isLargeScreen.isLargeScreen ? "120px 10px 60px" : "120px 0"} background="var(--background-primary-variation)">
-            <Container>
-                <Row breakpoint={!isLargeScreen.isLargeScreen}>
-                    <Col flex={2}>
-                        <SectionSubTitle text={contactInfo.sectionTitle} color="var(--text-white)"/>
-                    </Col>
-                    <Col flex={6}>
-                        <ContentContact>
-                            <div>
-                                <SectionTitle text={contactInfo.title} color="var(--text-white)"/>
-                                {/* <SectionBodyText  text={contactInfo.content} color="var(--text-white)"/> */}
-                                <p>Preencha os campos abaixo para falar com a gente.</p>
-                            </div>
-                        </ContentContact>
-                    </Col>
-                    {isLargeScreen.isLargeScreen && <Col flex={4}>
-                        <SocialLinks>
-                            {itemSocialList.map((item, index) => (
-                                <Link key={index}><a href={item.href} target="_blank">{item.text}</a></Link>
-                            ))}
-                        </SocialLinks>
-                    </Col>}
-                </Row>
-                <Row breakpoint={!isLargeScreen.isLargeScreen} margin="20px 0 0">
-                {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
-                    <Col flex={5} >
-                        <ContainerForm>
-                            <InputGenerate
-                                leftInputs={formInputs}
-                                formData={formData}
-                                setFormData={setFormData}
-                                color="var(--text-white)"
-                                singleColumn={true}
+        <ContatoPageSectionContainer>
+            <Section padding={!isLargeScreen.isLargeScreen ? "120px 10px 60px" : "120px 0"} background="var(--background-primary-variation)">
+                <Container>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                        <Col flex={2}>
+                            <SectionSubTitle text={contactInfo.sectionTitle} color="var(--text-white)"/>
+                        </Col>
+                        <Col flex={7}>
+                            <ContentContact>
+                                <div>
+                                    <SectionTitle text={contactInfo.title} color="var(--text-white)"/>
+                                    {/* <SectionBodyText  text={contactInfo.content} color="var(--text-white)"/> */}
+                                    <p>Preencha os campos abaixo para falar com a gente.</p>
+                                </div>
+                            </ContentContact>
+                        </Col>
+                        {isLargeScreen.isLargeScreen && <Col className="align-end" flex={3}>
+                            <SocialLinks>
+                                {itemSocialList.map((item, index) => (
+                                    <Link key={index}><a href={item.href} target="_blank">{item.text}</a></Link>
+                                ))}
+                            </SocialLinks>
+                        </Col>}
+                    </Row>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen} margin="20px 0 0">
+                    {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
+                        <Col flex={5} >
+                            <ContainerForm>
+                                <InputGenerate
+                                    leftInputs={formInputs}
+                                    formData={formData}
+                                    setFormData={setFormData}
+                                    color="var(--text-white)"
+                                    singleColumn={true}
+                                />
+                            </ContainerForm>
+                            <ContainerActionForm>
+                                <Mandatory color="var(--text-white)"/>
+                                <CheckFormAccept color="var(--text-white)"  onAcceptChange={setAccept}/>
+                                    {accept ?
+                                        <ButtonContainer><button onClick={handleFormSubmit}>Enviar</button></ButtonContainer>
+                                        :
+                                        <ButtonContainer><button onClick={handleFormSubmit} disabled>Enviar</button></ButtonContainer>
+                                    }
+                            </ContainerActionForm>
+                        </Col>
+                        <Col flex={5}>
+                            <Maps
+                                latI={-27.120616076517972}
+                                lngI={-48.6081570743573}
+                                zoomLevel={16}
                             />
-                        </ContainerForm>
-                        <ContainerActionForm>
-                            <Mandatory color="var(--text-white)"/>
-                            <CheckFormAccept color="var(--text-white)"  onAcceptChange={setAccept}/>
-                                {accept ?
-                                    <ButtonContainer><button onClick={handleFormSubmit}>Enviar</button></ButtonContainer>
-                                    :
-                                    <ButtonContainer><button onClick={handleFormSubmit} disabled>Enviar</button></ButtonContainer>
-                                }
-                        </ContainerActionForm>
-                    </Col>
-                    <Col flex={5}>
-                        <Maps
-                            latI={-27.120616076517972}
-                            lngI={-48.6081570743573}
-                            zoomLevel={16}
-                        />
-                        <Local>R. 210 - Meia Praia, Itapema - Santa Catarina</Local>
-                    </Col>
-                    {!isLargeScreen.isLargeScreen && <Col flex={4}>
-                        <SocialLinks>
-                            {itemSocialList.map((item, index) => (
-                                <Link key={index}><a href={item.href} target="_blank">{item.text}</a></Link>
-                            ))}
-                        </SocialLinks>
-                    </Col>}
-                </Row>
-            </Container>
-        </Section>
-        </>
+                            <Local>R. 210 - Meia Praia, Itapema - Santa Catarina</Local>
+                        </Col>
+                        {!isLargeScreen.isLargeScreen && <Col flex={4}>
+                            <SocialLinks>
+                                {itemSocialList.map((item, index) => (
+                                    <Link key={index}><a href={item.href} target="_blank">{item.text}</a></Link>
+                                ))}
+                            </SocialLinks>
+                        </Col>}
+                    </Row>
+                </Container>
+            </Section>
+        </ContatoPageSectionContainer>
     )
 }
+
+const ContatoPageSectionContainer = styled.div`
+    .align-end{
+        justify-content:flex-end;
+        display:flex;
+    }
+`;
 
 const ContentContact = styled.div`
     height:100%;
@@ -185,12 +192,13 @@ const SocialLinks = styled.div`
     display:flex;
     flex-direction:row;
     align-items:flex-end;
-    justify-content:space-around;
-    gap:20px;
+    justify-content:space-between;
+    gap:40px;
     padding-bottom:50px;
 
     @media(max-width:768px){
         padding:70px 0 0;
+        justify-content:space-around;
     }
 `;
 
