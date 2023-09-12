@@ -27,11 +27,11 @@ export const FooterSocial: React.FC<FooterSocialProps> = ({activeBreak, items, c
     const [col3, setCol3] = useState(1)
 
     useEffect(() => {
-        if(width < 1500 && width > 1200){
+        if(width < 1500 && width > 1200 && width !== 0){
             setCol1(7)
             setCol2(4)
         }
-        if(width < 1200){
+        if(width < 1200 && width !== 0){
             setCol1(5)
             setCol2(6)
         }

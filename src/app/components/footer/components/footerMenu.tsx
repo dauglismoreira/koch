@@ -24,7 +24,7 @@ export const FooterMenu: React.FC<FooterMenuProps> = ({activeBreak, items, numbe
     const [col2, setCol2] = useState(6)
 
     useEffect(() => {
-        if(width < 1500){
+        if(width < 1500 && width !== 0){
             setCol1(3)
             setCol2(9)
         }
