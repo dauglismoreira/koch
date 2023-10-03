@@ -1,26 +1,29 @@
-import React, { ReactNode, CSSProperties } from 'react';
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
 
 interface SectionProps {
   children?: ReactNode;
   background?: string;
   fixHeight?: number;
   padding?: string;
-  position?: CSSProperties['position'];
+  zindex?: string;
+  position?: string;
+  className?: string;
 }
 
-export const Section: React.FC<SectionProps> = ({ children, padding, background, fixHeight, position }) => {
-  const containerStyle: CSSProperties = {
-    width: '100%',
-    margin: '0 auto',
-    padding: padding || '20px 0 15px',
-    overflow: 'hidden',
-    background: background || 'transparent',
-    position: position || 'static',
-    height: fixHeight || 'auto',
-    zIndex: 99,
-  };
+const StyledSection = styled.div<SectionProps>`
+  width: 100%;
+  margin: 0 auto;
+  padding: ${(props) => props.padding || '20px 0 15px'};
+  overflow: hidden;
+  background: ${(props) => props.background || 'transparent'};
+  position: ${(props) => props.position || 'static'};
+  height: ${(props) => props.fixHeight || 'auto'};
+  z-index: ${(props) => props.zindex || '99'};
+`;
 
-  return <div style={containerStyle}>{children}</div>;
+export const Section: React.FC<SectionProps> = ({ children, className, zindex, padding, background, fixHeight, position }) => {
+  return <StyledSection className={className} zindex={zindex} padding={padding} background={background} fixHeight={fixHeight} position={position}>{children}</StyledSection>;
 };
 
 interface ContainerProps {
@@ -28,14 +31,14 @@ interface ContainerProps {
   background?: string;
 }
 
-export const Container: React.FC<ContainerProps> = ({ children, background }) => {
-  const containerStyle: CSSProperties = {
-    maxWidth: '1560px',
-    margin: '0 auto',
-    background: background || 'transparent',
-  };
+const StyledContainer = styled.div<ContainerProps>`
+  max-width: 1560px;
+  margin: 0 auto;
+  background: ${(props) => props.background || 'transparent'};
+`;
 
-  return <div style={containerStyle}>{children}</div>;
+export const Container: React.FC<ContainerProps> = ({ children, background }) => {
+  return <StyledContainer background={background}>{children}</StyledContainer>;
 };
 
 interface RowProps {
@@ -43,51 +46,43 @@ interface RowProps {
   margin?: string;
   padding?: string;
   breakpoint?: boolean;
-  reverse?:boolean;
-  gap?:string;
+  reverse?: boolean;
+  className?: string;
+  gap?: string;
 }
 
-export const Row: React.FC<RowProps> = ({ children, gap, reverse, breakpoint, margin, padding }) => {
-  const rowStyle: CSSProperties = {
-    display: 'flex',
-    width: '100%',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    margin: margin || '-8px 0',
-    padding: padding || '0',
-    justifyContent: 'space-between',
-    gap: gap || '0',
-  };
+const StyledRow = styled.div<RowProps>`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: ${(props) => props.margin || '-8px 0'};
+  padding: ${(props) => props.padding || '0'};
+  justify-content: space-between;
+  gap: ${(props) => props.gap || '0'};
+  ${(props) => props.breakpoint && (props.reverse ? 'flex-direction: column-reverse;' : 'flex-direction: column;')}
+`;
 
-  if (breakpoint) {
-    if(reverse){
-      rowStyle.flexDirection = 'column-reverse';
-    }else{
-      rowStyle.flexDirection = 'column';
-    }
-  }
-
-  return <div style={rowStyle}>{children}</div>;
+export const Row: React.FC<RowProps> = ({ children, gap, className, reverse, breakpoint, margin, padding }) => {
+  return <StyledRow className={className} gap={gap} reverse={reverse} breakpoint={breakpoint} margin={margin} padding={padding}>{children}</StyledRow>;
 };
 
 interface ColProps {
   children?: ReactNode;
   flex?: number;
-  border?:string;
-  padding?:string;
-  align?:'left' | 'center' | 'right' | undefined;
+  border?: string;
+  padding?: string;
+  align?: 'left' | 'center' | 'right' | undefined;
   className?: string;
 }
 
+const StyledCol = styled.div<ColProps>`
+  flex: ${(props) => props.flex || 'auto'};
+  padding: ${(props) => props.padding || '8px'};
+  border: ${(props) => props.border || 'none'};
+  text-align: ${(props) => props.align || 'left'};
+`;
+
 export const Col: React.FC<ColProps> = ({ children, align, border, padding, flex, className }) => {
-  const colStyle: CSSProperties = {
-    flex: flex || 'auto',
-    padding: padding || '8px',
-    border: border || 'none',
-    textAlign: align || 'left',
-  };
-
-  const combinedClassName = `${className || ''} col`;
-
-  return <div className={combinedClassName} style={colStyle}>{children}</div>;
+  return <StyledCol flex={flex} padding={padding} border={border} align={align} className={className}>{children}</StyledCol>;
 };

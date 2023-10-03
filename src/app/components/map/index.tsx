@@ -40,11 +40,13 @@ interface MapsProps {
 export default Maps;
 
 const MapContainer = styled.div`
-  width: 100%;
+  width: calc(100% - 20px);
+  margin:auto;
   height:300px;
 
   @media screen and (min-width: 799px) {
     height: 480px;
+    width: 100%;
   }
 `;
 

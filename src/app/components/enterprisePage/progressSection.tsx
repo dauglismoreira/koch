@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
-import useScreenSize from '../../../hooks/useScreenSize';
-import { Progress } from '@/app/empreendimento/[slug]/enterPage';
+import { Progress } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionSubTitle } from '../sectionSubTitle';
 import { ProgressBar } from '../progressBar';
 import { useState } from 'react';
@@ -14,7 +13,6 @@ interface EnterProgressSectionProps {
 export const EnterProgressSection: React.FC<EnterProgressSectionProps> = ({
     data
 }) => {
-    const isLargeScreen = useScreenSize(768);
 
     const buttons = [
         {
@@ -33,7 +31,7 @@ export const EnterProgressSection: React.FC<EnterProgressSectionProps> = ({
 
     return (
         <ProgressSection>
-            <Row breakpoint={!isLargeScreen.isLargeScreen}>
+            <Row className="section">
                 <Col flex={2}>
                     <SectionSubTitle text={`Acompanhamento\nde obra`} color="var(--text-secondary)"/>
                     <ContainerButton>
@@ -69,6 +67,12 @@ const ContainerButton = styled.div`
     border:none;
     margin:20px 0 0;
     background-color:var(--background-secondary);
+
+    @media(max-width:768px){
+        flex-direction:row;
+        flex-wrap:wrap;
+        padding:0 10px;
+    }
 `;
 
 const Button = styled.button`
@@ -79,7 +83,8 @@ const Button = styled.button`
     cursor:pointer;
     padding: 0 15px;
     text-transform:uppercase;
-    font-weight:600;
+    font-weight:var(--buttons-weight);
+    font-size:var(--buttons-size);
     transition:0.2s;
 
     &:hover{
@@ -91,28 +96,49 @@ const Button = styled.button`
         background-color: var(--background-primary);
         color: var(--text-white);
     }
+
+    @media(max-width:768px){
+        flex:1;
+    }
 `;
 
 const ProgressSection = styled.div`
     padding:140px 0;
+
+    @media(max-width:768px){
+        padding:70px 0;
+    }
+
+    .section{
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
 `;
 
 const Start = styled.div`
     color:var(--text-secondary);
-    font-weight:600;
-    font-size:16px;
+    font-weight:var(--medium-title-weight);
+    font-size:var(--small-title-size);
 
     span{
-        font-weight:400;
+        font-weight:var(--small-title-weight);
+    }
+
+    @media(max-width:768px){
+        padding:0 10px;
     }
 `;
 
 const Forecast = styled.div`
     color:var(--text-secondary);
-    font-weight:600;
-    font-size:16px;
+    font-weight:var(--medium-title-weight);
+    font-size:var(--small-title-size);
 
     span{
-        font-weight:400;
+        font-weight:var(--small-title-weight);
+    }
+    @media(max-width:768px){
+        padding:0 10px;
     }
 `;

@@ -1,3 +1,4 @@
+import { Baskerville } from '@/app/fonts';
 import styled from 'styled-components';
 
 export interface CardProps {
@@ -8,8 +9,13 @@ export interface CardProps {
     phone?: any;
 }
 
-export const BrokerCard: React.FC<{ data: CardProps }> = ({ data }) => {
-    const { photo, name, creci, phone, email } = data;
+interface CardPropsData {
+    data:CardProps
+}
+
+export const BrokerCard: React.FC<CardPropsData> = ({ 
+    data
+ }) => {
 
     const formatPhoneNumber = (phoneNumber: string) => {
         const part1 = phoneNumber.substring(0, 2);
@@ -26,17 +32,17 @@ export const BrokerCard: React.FC<{ data: CardProps }> = ({ data }) => {
     return (
         <Card>
             <Cover
-                image={photo || ''}
+                image={data.photo || ''}
             ></Cover>
             <Content>
                 <Info>
-                    <Name><h3>{name}</h3></Name>
-                    <Creci>CRECI - {creci}</Creci>
-                    <Phone>{formatPhoneNumber(phone)}</Phone>
+                    <Name className={`${Baskerville.className}`}><h3>{data.name}</h3></Name>
+                    <Creci><p>CRECI - {data.creci}</p></Creci>
+                    <Phone>{formatPhoneNumber(data.phone)}</Phone>
                 </Info>
                 <ContainerButtons>
-                    <Button><a href={`mailto:` + email} target="_blank">Email</a></Button>
-                    <Button><a href={`https://wa.me/55` + phone} target="_blank">Whatsapp</a></Button>
+                    <Button><a href={`mailto:` + data.email} target="_blank">Email</a></Button>
+                    <Button><a href={`https://api.whatsapp.com/send?phone=55` + data.phone} target="_blank">Whatsapp</a></Button>
                     <Button>Ligue agora</Button>
                 </ContainerButtons>
             </Content>
@@ -87,34 +93,44 @@ const ContainerButtons = styled.div`
     flex-direction:column;
     align-items:center;
     gap:10px;
+
+    @media(max-width:640px){
+        width:100%;
+    }
 `;
 
 const Name = styled.div`
     h3 {
         color:var(--text-primary);
-        font-family: var(--font-primary);
-        font-size:1.2rem;
+        font-size:var(--desktop-text-size);
         text-transform:uppercase;
         letter-spacing:0px;
-        font-weight:900;
+        font-weight:var(--medium-title-weight);
         padding-top:10px;
+        max-width:90%;
+        margin:auto;
+        text-align:center;
 
         @media(max-width:768px){
-            font-size:1.2rem;
+            font-size:var(--mobile-text-size);
         }
     }
 `;
 
 const Creci = styled.div`
     color:var(--text-secondary);
-    font-size:12px;
+    font-size:var(--small-text-size);
     margin-top:8px;
 `;
 
 const Phone = styled.div`
     color:var(--text-secondary);
-    font-size:15px;
-    margin-top:15px;
+    font-size:var(--desktop-text-size);
+    margin-top:5px;
+
+    @media(max-width:768px){
+        font-size:var(--mobile-text-size);
+    }
 `;
 
 const Button = styled.a`
@@ -124,9 +140,9 @@ const Button = styled.a`
     text-transform:uppercase;
     border-radius:5px;
     padding:8px 15px;
-    font-size:12px;
+    font-size:var(--buttons-size);
     cursor:pointer;
-    font-weight:500;
+    font-weight:var(--buttons-weight);
     transition: 0.3s ease-in-out;
 
     &:hover {
@@ -136,6 +152,8 @@ const Button = styled.a`
 
     @media(max-width:640px){
         padding:12px 15px;
+        width:100%;
+        text-align:center;
     }
 `;
 

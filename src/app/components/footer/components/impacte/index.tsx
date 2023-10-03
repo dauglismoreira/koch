@@ -16,14 +16,13 @@ export const ImpacteText: React.FC<ItemProps> = ({text, children}) => {
 }
 
 const Impacte = styled.div`
-    font-size:0.8rem;
-    font-weight:300;
+    font-size:var(--small-text-size);
+    font-weight:var(--small-text-weight);
     color:var(--text-white);
     text-align:right;
 
     @media(max-width:768px){
         text-align:left;
-        font-size:0.9rem;
         margin-top:20px;
     }
 `;

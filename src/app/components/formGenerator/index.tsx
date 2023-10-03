@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { EmailInput } from "../emailInput";
 import { PhoneInput } from "../phoneInputMask";
 import { SelectInput } from "../selectInput";
-import useScreenSize from '../../../hooks/useScreenSize';
 import { Col, Row } from '../grid';
 import { IoDocumentAttachOutline } from "react-icons/io5";
+import { OpenSans } from '@/app/fonts';
 
 
 interface FormInput {
@@ -33,11 +33,9 @@ export const InputGenerate: React.FC<InputProps> = ({ leftInputs, singleColumn, 
         setFormData({ ...formData, [name]: value });
     };
 
-    const isLargeScreen = useScreenSize(768);
-
     return (
-        <>
-            <Row breakpoint={!isLargeScreen.isLargeScreen} gap="20px">
+        <InputGenerateContainer>
+            <Row className="break" gap="20px">
                 <Col flex={5} padding="15px 0px">
                     <Form color={color}>
                         {leftInputs.map((input, index) => (
@@ -60,9 +58,17 @@ export const InputGenerate: React.FC<InputProps> = ({ leftInputs, singleColumn, 
                     </Col>
                 }
             </Row>
-        </>
+        </InputGenerateContainer>
     );
 };
+
+const InputGenerateContainer = styled.div`
+    .break {
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+`;
 
 const Form = styled.div<{color: string}>`
     display:flex;
@@ -72,11 +78,12 @@ const Form = styled.div<{color: string}>`
 
     input::placeholder {
         color: ${props => props.color};
+        text-transform:uppercase;
     }
 
     textarea::placeholder {
         color:  ${props => props.color};
-        font-family: var(--font-secondary);
+        text-transform:uppercase;
     }
 
     @media(max-width:768px){
@@ -101,6 +108,7 @@ const renderInput = (input: FormInput, value: string, onChange: (e: React.Change
                 onChange={onChange}
                 rows={8}
                 color={color}
+                className={`${OpenSans.className}`}
             />
         );
     }
@@ -178,6 +186,8 @@ const InputElement = styled.input<{color: string}>`
     height:35px;
     color:${props => props.color};
     padding:0 10px;
+    font-size:var(--labels-size);
+    font-weight:var(--labels-weight);
 `;
 
 const Textarea = styled.textarea<{color: string}>`
@@ -186,6 +196,8 @@ const Textarea = styled.textarea<{color: string}>`
     width:100%;
     color:${props => props.color};
     padding:10px;
+    font-size:var(--labels-size);
+    font-weight:var(--labels-weight);
 `;
 
 const FileInputWrapper = styled.div<{color: string}>`
@@ -198,11 +210,13 @@ const FileInputWrapper = styled.div<{color: string}>`
         border: 1px solid ${props => props.color};
         display: flex;
         width:100%;
-        font-size:13px;
         color: ${props => props.color};
         align-items:center;
         flex-direction:row;
         justify-content:space-between;
+        font-size:var(--labels-size);
+        font-weight:var(--labels-weight);
+        text-transform:uppercase;
     }
 
     .file-input {

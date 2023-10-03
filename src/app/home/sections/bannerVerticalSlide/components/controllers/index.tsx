@@ -29,15 +29,17 @@ const ControllersWrapper = styled.div`
     gap: 10px;
 `;
 
+
 const Option = styled.div<{ isActive: boolean }>`
-    font-size: 14px;
+    font-size: var(--small-text-size);
+    font-weight: var(--small-text-weight);
     padding: 0 10px;
-    color: ${(props) => (props.isActive ? 'var(--text-primary)' : 'var(--border-grey)')};
-    font-weight: ${(props) => (props.isActive ? '600' : '300')};
+    color: ${(props) => (props.isActive ? 'var(--text-primary)' : 'var(--text-secondary)')};
+    font-weight: ${(props) => (props.isActive ? '700' : 'var(--small-text-weight)')};
     cursor: pointer;
     transition: color 0.5s ease-in-out;
 
     &:hover {
-        color: #333;
+        color: var(--text-primary);
     }
 `;

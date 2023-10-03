@@ -25,34 +25,21 @@ export const BlogCard: React.FC<{ data: BlogCardProps }> = ({ data }) => {
     
     return (
         <Card>
-            <Cover
+            <a href={`./../blog/${link}`}><Cover
                 image={cover || ''}
             ></Cover>
             <Content>
                 <Name><h3>{title}</h3></Name>
                 <Text><p>{truncatedContent}</p></Text>
-                <Link><a href={`./../post/${link}`}>Leia mais</a></Link>
-            </Content>
+                <Link>Leia mais</Link>
+            </Content></a>
         </Card>
     );
 }
 
-const Card = styled.div`
-    width:100%;
-    border:solid 1px var(--border-grey);
-    padding:40px;
-    height:515px;
-
-    @media(max-width:768px){
-        height:515px;
-        margin:auto;
-        width:85%;
-    }
-`;
-
 const Cover = styled.div<{image : string}>`
     position: relative;
-    height: 50%;
+    height: 40%;
     transition: 0.3s ease-in-out;
     background: transparent;
     overflow: hidden;
@@ -71,14 +58,10 @@ const Cover = styled.div<{image : string}>`
         z-index: 0;
         transition: inherit;
     }
-
-    &:hover::before {
-        transform: rotate(2deg) scale(1.04);
-    }
 `;
 
 const Content = styled.div`
-    height:50%;
+    height:60%;
     display:flex;
     flex-direction:column;
     justify-content:space-around;
@@ -89,37 +72,31 @@ const Content = styled.div`
 const Name = styled.div`
     h3 {
         color:var(--text-primary);
-        font-size:1rem;
-        text-transform:uppercase;
+        font-size:var(--small-title-size);
         letter-spacing:0px;
-        font-weight:700;
+        font-weight:var(--big-title-weight);
         padding-top:10px;
         padding-right:30px;
-
-        @media(max-width:768px){
-            font-size:0.9rem;
-        }
     }
 `;
 
 const Text = styled.div`
     color:var(--text-secondary);
-    font-size:18px;
+    font-size:var(--desktop-text-size);
     line-height:1.4;
     padding-bottom:20px;
     padding-right:20px;
 
     @media(max-width:768px){
-        font-size:0.9rem;
+        font-size:var(--desktop-text-size);
     }
 `;
 
 const Link = styled.div`
-    a {
      color:var(--text-primary);
-     font-size:12px;
+     font-size:var(--buttons-size);
      cursor:pointer;
-     font-weight:600;
+     font-weight:var(--buttons-weight);
      text-transform:uppercase;
      position:relative;
 
@@ -133,11 +110,35 @@ const Link = styled.div`
         left:0px;
         transition:0.3s;
       }
-    
-      &:hover{
-        &::after {
-            width:100%;
-        }
-      }
+
+`;
+
+const Card = styled.div`
+    width:100%;
+    border:solid 1px var(--border-grey);
+    padding:24px 24px 32px;
+    height:515px;
+
+    @media(max-width:768px){
+        height:515px;
+        margin:auto;
+        width:85%;
     }
+    &:hover {
+        ${Link}{
+            color:var(--text-primary);
+    
+            &::after {
+                width:100%;
+            }
+      }
+
+      ${Cover}{
+            &:hover::before {
+                transform: scale(1.04);
+            }
+        }
+    }
+
+
 `;

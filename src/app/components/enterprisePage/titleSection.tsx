@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Col, Row } from "../../components/grid";
-import useScreenSize from '../../../hooks/useScreenSize';
-import { HighSkills } from '@/app/empreendimento/[slug]/enterPage';
+import { HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
+import { Baskerville } from '@/app/fonts';
 
 interface EnterTitleSectionProps {
     title:string;
@@ -22,21 +22,20 @@ export const EnterTitleSection: React.FC<EnterTitleSectionProps> = ({
     enterprise_logo,
     high_skills
 }: EnterTitleSectionProps) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
         <TitleSection>
             <Row>
                 <Col flex={4}>
                     <h5>{title_high}</h5>
-                    <h1>{title}</h1>
+                    <h1 className={`${Baskerville.className}`}>{title}</h1>
                     <p>{district}, {city}</p>
                 </Col>
-                {isLargeScreen.isLargeScreen && <Col flex={2}>
+                <Col flex={2}>
                     <EnterpriseLogoContainer>
                         <EnterpriseLogo logo={enterprise_logo}></EnterpriseLogo>
                     </EnterpriseLogoContainer>
-                </Col>}
+                </Col>
                 <Col flex={6}>
                     <HighSkillsContainer>
                         {high_skills.map((skill, index) => (
@@ -60,24 +59,23 @@ const TitleSection = styled.div`
     flex-direction:column;
 
     h5 {
-        font-size:16px;
-        font-weight:300;
+        font-size:var(--small-title-size);
+        font-weight:var(--small-title-weight);
         color:var(--text-secondary);
     }
 
     h1 {
-        font-size:58px;
-        font-weight:800;
+        font-size:var(--big-title-size);
+        font-weight:var(--big-title-weight);
         color:var(--text-primary);
-        font-family:var(--font-primary);
         margin:30px 0 5px;
         line-height:1;
         text-transform:uppercase;
     }
 
     p {
-        font-size:16px;
-        font-weight:300;
+        font-size:var(--small-text-size);
+        font-weight:var(--small-text-weight);
         color:var(--text-secondary);
         margin-bottom:50px;
     }
@@ -85,17 +83,24 @@ const TitleSection = styled.div`
     @media(max-width:768px){
         padding:40px 10px 10px;
 
-        h5 {
-            display:none;
-        }
+        width:calc(100% - 20px);
+        margin:auto;
 
         h1 {
-            font-size:24px;
-            margin:10px 0 20px;
+            font-size:font-size:var(--medium-title-size);
+            margin:10px 0 15px;
+            line-height:1.4;
+        }
+
+        h5 {
+            font-size:var(--mini-text-size);
+            text-transform:uppercase;
+            margin-bottom:30px;
+            margin-top:15px;
         }
 
         p {
-            margin-bottom:30px;
+            margin-bottom:10px;
         }
     }
 `;
@@ -109,7 +114,8 @@ const HighSkillsContainer = styled.div`
     padding-bottom:50px;
 
     @media(max-width:768px){
-        justify-content:flex-start;
+        justify-content:space-between;
+        padding-bottom:30px;
     }
 `;
 
@@ -117,11 +123,12 @@ const HighSkillItem = styled.li`
     list-style: none;
     padding: 0 15px;
     color: var(--text-secondary);
-    font-size: 16px;
-    font-weight: 600;
+    font-size: var(--small-title-size);
+    font-weight: var(--medium-title-weight);
 
     @media(max-width:768px){
-        padding: 0 15px 0 0;
+        padding: 0;
+        font-size: var(--desktop-text-size);
     }
 `;
 

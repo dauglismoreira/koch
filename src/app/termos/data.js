@@ -1,0 +1,32 @@
+export const dataTerms = [
+    {
+        title:'Política de privacidade',
+        content:`
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus ante non sollicitudin. Quisque pulvinar nec elit quis iaculis. In non condimentum velit, ut bibendum nisi. Aenean venenatis enim nisl, a porttitor ex ullamcorper vel. Etiam a massa vel odio tempor rhoncus. Sed vehicula nisi nec tortor tempus, ac elementum felis viverra. Praesent efficitur rutrum laoreet. Proin lorem metus, convallis mollis condimentum sed, dictum ac mi. Morbi ante lacus, porta ac ligula vitae, fringilla elementum lacus. Sed suscipit quam at luctus tincidunt.</p>
+        <p>Maecenas tempor sem sit amet placerat commodo. Maecenas cursus consequat nulla sed varius. Phasellus sit amet justo erat. Integer ultrices enim mi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque vehicula maximus urna, ut scelerisque diam bibendum sed. Morbi a ultricies felis. Ut sed sapien efficitur, condimentum ipsum a, dapibus nulla. Aenean id finibus arcu, nec luctus justo. Aliquam erat volutpat. In hac habitasse platea dictumst. Ut ligula velit, blandit finibus massa vel, pulvinar imperdiet est. Quisque nisl sem, blandit in libero ut, euismod varius nisl. Curabitur ullamcorper metus vitae ipsum auctor ultricies.</p>
+        <ul>
+        <li>Apartamentos de até 2 suítes</li>
+        <li>Apartamentos de até 2 suítes</li>
+        <li>Apartamentos de até 2 suítes</li>
+        <li>Apartamentos de até 2 suítes</li>
+        </ul>
+        <p>Ut eu tellus a lectus tempor congue. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin id malesuada justo. Pellentesque non massa justo. Cras vel felis vestibulum, imperdiet dui vitae, pulvinar sem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In dignissim semper arcu in cursus. Nullam sodales elit enim, in tincidunt lectus pretium nec. Vivamus ac diam commodo, faucibus tortor non, posuere nulla. Donec in lorem efficitur, elementum neque quis, tincidunt velit. Proin tincidunt, magna id iaculis facilisis, mauris dolor laoreet risus, in dignissim massa ipsum ut risus. Proin et bibendum tellus, non elementum massa.</p>
+        <p>Etiam sed enim sed velit congue euismod. Aenean sodales a ligula sit amet scelerisque. Duis vitae volutpat lorem. Phasellus congue ligula ex, ut varius risus molestie vel. Sed et posuere sem, non tristique justo. Aenean convallis ante vitae enim efficitur egestas. Integer scelerisque urna a velit condimentum mattis. Cras vel turpis auctor, dapibus risus id, ornare erat. Sed porta felis nunc, a venenatis felis blandit eu. In imperdiet ex at eros finibus dignissim. Duis sit amet ex ut arcu sollicitudin interdum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec feugiat accumsan porttitor. Etiam molestie metus consectetur elementum laoreet. Ut tempor quam in turpis fringilla, eget pellentesque risus ullamcorper. Quisque ullamcorper urna nec eros dictum, nec hendrerit ex ullamcorper.</p>
+        `
+    },
+    {
+        title:'Termos de uso',
+        content:`
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus ante non sollicitudin. Quisque pulvinar nec elit quis iaculis. In non condimentum velit, ut bibendum nisi. Aenean venenatis enim nisl, a porttitor ex ullamcorper vel. Etiam a massa vel odio tempor rhoncus. Sed vehicula nisi nec tortor tempus, ac elementum felis viverra. Praesent efficitur rutrum laoreet. Proin lorem metus, convallis mollis condimentum sed, dictum ac mi. Morbi ante lacus, porta ac ligula vitae, fringilla elementum lacus. Sed suscipit quam at luctus tincidunt.</p>
+        <p>Maecenas tempor sem sit amet placerat commodo. Maecenas cursus consequat nulla sed varius. Phasellus sit amet justo erat. Integer ultrices enim mi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque vehicula maximus urna, ut scelerisque diam bibendum sed. Morbi a ultricies felis. Ut sed sapien efficitur, condimentum ipsum a, dapibus nulla. Aenean id finibus arcu, nec luctus justo. Aliquam erat volutpat. In hac habitasse platea dictumst. Ut ligula velit, blandit finibus massa vel, pulvinar imperdiet est. Quisque nisl sem, blandit in libero ut, euismod varius nisl. Curabitur ullamcorper metus vitae ipsum auctor ultricies.</p>
+        <ul>
+        <li>Apartamentos de até 2 suítes</li>
+        <li>Apartamentos de até 2 suítes</li>
+        <li>Apartamentos de até 2 suítes</li>
+        <li>Apartamentos de até 2 suítes</li>
+        </ul>
+        <p>Ut eu tellus a lectus tempor congue. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin id malesuada justo. Pellentesque non massa justo. Cras vel felis vestibulum, imperdiet dui vitae, pulvinar sem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In dignissim semper arcu in cursus. Nullam sodales elit enim, in tincidunt lectus pretium nec. Vivamus ac diam commodo, faucibus tortor non, posuere nulla. Donec in lorem efficitur, elementum neque quis, tincidunt velit. Proin tincidunt, magna id iaculis facilisis, mauris dolor laoreet risus, in dignissim massa ipsum ut risus. Proin et bibendum tellus, non elementum massa.</p>
+        <p>Etiam sed enim sed velit congue euismod. Aenean sodales a ligula sit amet scelerisque. Duis vitae volutpat lorem. Phasellus congue ligula ex, ut varius risus molestie vel. Sed et posuere sem, non tristique justo. Aenean convallis ante vitae enim efficitur egestas. Integer scelerisque urna a velit condimentum mattis. Cras vel turpis auctor, dapibus risus id, ornare erat. Sed porta felis nunc, a venenatis felis blandit eu. In imperdiet ex at eros finibus dignissim. Duis sit amet ex ut arcu sollicitudin interdum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec feugiat accumsan porttitor. Etiam molestie metus consectetur elementum laoreet. Ut tempor quam in turpis fringilla, eget pellentesque risus ullamcorper. Quisque ullamcorper urna nec eros dictum, nec hendrerit ex ullamcorper.</p>
+        `
+    },
+]

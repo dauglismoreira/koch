@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
 import useScreenSize from '../../../hooks/useScreenSize';
-import { EnterpriseGalleryItem } from '@/app/empreendimento/[slug]/enterPage';
+import { EnterpriseGalleryItem } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionSubTitle } from '../sectionSubTitle';
 import { Fancybox as NativeFancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
@@ -124,7 +124,7 @@ const ImagesSection = styled.div`
 
     small {
         color:var(--text-secondary);
-        font-size:12px;
+        font-size:var(--small-text-size);
         margin-top:15px;
         display:block;
     }
@@ -142,6 +142,11 @@ const ImagesGrid = styled.div`
     display:grid;
     gap:20px;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+
+    img {
+        width:100%;
+        object-fit:cover;
+    }
 `;
 
 const CustomNavButton = styled.div`
@@ -159,11 +164,11 @@ bottom: -30px;
 transform: translateY(-50%);
 
 &.custom-next-button{
-    right:15px;
+    right:10px;
 }
 
 &.custom-prev-button{
-    left:0px;
+    left:-10px;
 }
 
 @media(max-width:768px){
@@ -175,15 +180,17 @@ transform: translateY(-50%);
 
 const SwiperContainer = styled.div<{width: number}>`
     display:block;
-    width:${props => props.width}px;
+    width:${props => props.width - 10}px;
 
     & .swiper {
         padding-bottom:25px;
     }
 
     @media(max-width:768px){
+        margin-left:7px;
+
         & img{
-            width:calc(100% - 15px);
+            width:calc(100% - 20px);
             height:auto;
         }
     }

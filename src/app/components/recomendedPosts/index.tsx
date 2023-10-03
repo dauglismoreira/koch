@@ -40,7 +40,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-    font-size:14px;
+    font-size:var(--small-title-size);
     text-transform:uppercase;
     color:var(--text-secondary);
 `;
@@ -77,13 +77,31 @@ const Info = styled.div`
 `;
 
 const PostTitle = styled.div`
-    font-size:14px;
+    font-size:var(--small-text-size);
     color:var(--text-secondary);
     margin-bottom:10px;
 `;
 
 const Link = styled.a`
-    font-size:13px;
+    font-size:var(--mini-text-size);
     color:var(--text-primary);
-    font-weight:500;
+    font-weight:var(--small-text-weight);
+    position:relative;
+
+    &::after {
+        content:'';
+        width:0%;
+        height:1px;
+        background-color:var(--text-primary);
+        position:absolute;
+        bottom:-5px;
+        left:0;
+        transition:0.3s;
+      }
+    
+      &:hover{    
+        &::after {
+            width:100%;
+        }
+      }
 `;

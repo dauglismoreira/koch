@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Col, Container, Row, Section } from "../../components/grid";
 import { SectionTitle } from '../../components/sectionTitle';
 import { SectionSubTitle } from '../../components/sectionSubTitle';
-import useScreenSize from '../../../hooks/useScreenSize';
 import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
 import { RecommendedPosts } from '@/app/components/recomendedPosts';
 
@@ -13,13 +12,12 @@ interface PostPageProps {
 }
 
 export const PostPage: React.FC<PostPageProps> = ({post}) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
-        <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-secondary)">
+        <PostPageContainer>
+            <Section className="section" background="var(--background-secondary)">
                 <Container>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row className="break">
                         <Col flex={2}>
                             <SectionSubTitle text="blog" color="var(--text-primary)"/>
                         </Col>
@@ -28,7 +26,7 @@ export const PostPage: React.FC<PostPageProps> = ({post}) => {
                         </Col>
                     </Row>
                     <Row>
-                        {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
+                        <Col className="no-mobile-available" flex={2}></Col>
                         <Col flex={8}>
                             <Body>
                                 <Date>{post.date}</Date>
@@ -41,15 +39,37 @@ export const PostPage: React.FC<PostPageProps> = ({post}) => {
                                 </ContainerNavigation>
                             </Body>
                         </Col>
-                        {isLargeScreen.isLargeScreen && <Col flex={2}>
+                        <Col className="no-mobile-available" flex={2}>
                             <RecommendedPosts data={post.related_posts}/>
-                        </Col>}
+                        </Col>
                     </Row>
                 </Container>
             </Section>
-            </>
+        </PostPageContainer>
     )
 }
+
+const PostPageContainer = styled.div`
+    .section {
+        padding:120px 0;
+
+        @media(max-width:768px){
+            padding: 140px 0 40px;
+        }
+    }
+
+    .break{
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+
+    .no-mobile-available{
+        @media(max-width:768px){
+            display:none;
+        }
+    }
+`;
 
 const Cover = styled.div<{background : string}>`
     background-image:url('${props => props.background}');
@@ -65,13 +85,13 @@ const Cover = styled.div<{background : string}>`
 `;
 
 const Date = styled.div`
-    margin:30px auto;
+    margin:28px auto 48px;
     color:var(--text-secondary);
-    font-size:0.9rem;
+    font-size:var(--small-text-size);
 `;
 
 const Body = styled.div`
-
+    padding:0 10px;
 `;
 
 const Content = styled.div`
@@ -85,8 +105,14 @@ const Content = styled.div`
     p {
         color:var(--text-secondary);
         line-height:1.4;
-        font-size:14px;
+        font-size:var(desktop-text-size);
         margin:10px 0;
+    }
+
+    @media(max-width:768px){
+        p {
+            font-size:var(mobile-text-size);
+        }
     }
 `;
 
@@ -105,12 +131,16 @@ const ContainerNavigation = styled.div`
 `;
 
 const Next = styled.div`
-    display:flex;
-    align-items:center;
-    color:var(--text-primary);
-    gap:8px;
-    cursor:pointer;
-    transition:0.2s;
+    a {
+        display:flex;
+        align-items:center;
+        color:var(--text-primary);
+        gap:8px;
+        cursor:pointer;
+        transition:0.2s;
+        font-size:var(--buttons-size);
+        font-weight:var(--buttons-weight);
+    }
 
     &:hover {
         transform:scale(1.05);
@@ -118,12 +148,16 @@ const Next = styled.div`
 `;
 
 const Prev = styled.div`
-    display:flex;
-    align-items:center;
-    color:var(--text-primary);
-    gap:8px;
-    cursor:pointer;
-    transition:0.2s;
+    a {
+        display:flex;
+        align-items:center;
+        color:var(--text-primary);
+        gap:8px;
+        cursor:pointer;
+        transition:0.2s;
+        font-size:var(--buttons-size);
+        font-weight:var(--buttons-weight);
+    }
 
     &:hover {
         transform:scale(1.05);

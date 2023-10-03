@@ -5,11 +5,11 @@ import { Col, Container, Row, Section } from "../components/grid";
 import { SectionTitle } from '../components/sectionTitle';
 import { SectionBodyText } from '../components/sectionBodyText';
 import { SectionSubTitle } from '../components/sectionSubTitle';
-import useScreenSize from '../../hooks/useScreenSize';
 import { useState } from 'react';
 import { InputGenerate, LocalFormData } from '../components/formGenerator';
 import {CheckFormAccept} from '../components/formGenerator/components/check';
 import {Mandatory} from '../components/formGenerator/components/notice';
+import SvgComponent from '../components/SvgComponent';
 
 interface InvestorPageProps {
     aboutInfo:any;
@@ -17,7 +17,6 @@ interface InvestorPageProps {
 }
 
 export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInputs}) => {
-    const isLargeScreen = useScreenSize(768);
     const [formData, setFormData] = useState<LocalFormData>({});
     const [accept, setAccept] = useState(false);
 
@@ -26,10 +25,10 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
     };
 
     return (
-        <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0"} background="var(--background-secondary-variation)">
+        <InvestorPageSectionContainer>
+            <Section position='relative'className="section" background="var(--background-secondary-variation)">
                 <Container>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row  className="break">
                         <Col flex={2}>
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-white)"/>
                         </Col>
@@ -37,7 +36,7 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
                             <SectionTitle text={aboutInfo && aboutInfo.title} color="var(--text-white)"/>
                         </Col>
                     </Row>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row className="break">
                         <Col flex={2}></Col>
                         <Col flex={10}>
                             <Content>
@@ -51,8 +50,8 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
                             </Content>
                         </Col>
                     </Row>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
-                        {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
+                    <Row  className="break">
+                        <Col className="no-mobile-available" flex={2}></Col>
                         <Col flex={5}>
                             <ActionContainer>
                                 <Mandatory color="var(--text-white)"/>
@@ -64,13 +63,38 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
                                 }
                             </ActionContainer>
                         </Col>
-                        {isLargeScreen.isLargeScreen && <Col flex={5}></Col>}
+                        <Col className="no-mobile-available" flex={5}></Col>
                     </Row>
                 </Container>
+                <SvgContainer>
+                    <SvgComponent className="sv2" color="var(--background-grey)" border="white"/>
+                </SvgContainer>
             </Section>
-            </>
+        </InvestorPageSectionContainer>
     )
 }
+
+const InvestorPageSectionContainer = styled.div`
+    .section{
+        padding:120px 0;
+
+        @media(max-width:768px){
+            padding:140px 0 40px;
+        }
+    }
+
+    .no-mobile-available {
+        @media(max-width:768px){
+            display:none;
+        }
+    }
+
+    .break {
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+`;
 
 const Content = styled.div`
     height:100%;
@@ -79,7 +103,7 @@ const Content = styled.div`
     justify-content:space-between;
 
     p {
-        font-size:14px;
+        font-size:var(--text-desktop-size);
     }
 
     @media(max-width: 768px){
@@ -88,6 +112,8 @@ const Content = styled.div`
 
         p {
             margin-top:0;
+            padding:0;
+            font-size:var(--text-mobile-size);
         }
     }
 `;
@@ -105,6 +131,8 @@ const ButtonContainer = styled.div`
         text-transform:uppercase;
         cursor:pointer;
         border-radius:5px;
+        font-size:var(--buttons-size);
+        font-weight:var(--buttons-weight);
 
         &:hover {
             background-color:var(--text-white);
@@ -134,5 +162,18 @@ const ActionContainer = styled.div`
         margin-top:-40px;
         padding:0 10px;
         margin-bottom:30px;
+    }
+`;
+
+const SvgContainer = styled.div`
+    position:absolute;
+    top:-160px;
+    bottom:0;
+    left:65%;
+    z-index:-1;
+    width:1400px;
+
+    @media(max-width:768px){
+        display:none;
     }
 `;

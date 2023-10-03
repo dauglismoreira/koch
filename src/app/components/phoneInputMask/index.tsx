@@ -55,6 +55,8 @@ export const PhoneInput: React.FC<{
       height:35px;
       color:${props => props.color};
       padding:0 10px;
+      font-size:var(--labels-size);
+      font-weight:var(--labels-weight);
   
       ::placeholder,
       ::-webkit-input-placeholder {

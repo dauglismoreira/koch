@@ -16,6 +16,7 @@ export const enterprise = [
         district:'Morretes',
         city:'Itapema',
         high_image:'./../tmp/banner(1583x910).webp',
+        high_image_alt:'Imagem de destaque',
         enterprise_logo:'./../tmp/logo(140x140).webp',
         high_skills : [
             '1 ou 2 suítes',

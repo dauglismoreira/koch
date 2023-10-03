@@ -14,7 +14,7 @@ interface MenuItem {
 
 export const Header = () => {
 
-    const isLargeScreen = useScreenSize(768)
+    const isLargeScreen = useScreenSize(992)
 
     const itemMenuList: MenuItem[] = [
         {href:'./../sobre', text:'Sobre'},
@@ -31,8 +31,19 @@ export const Header = () => {
         {href:'./../blog', text:'Blog'},
     ]
 
+    const itemInitial: MenuItem[] = [
+        {href:'./../', text:'Início'},
+    ]
+
+    const itemSocialList: MenuItem[] = [
+        {href:'#', text:'Instagram'},
+        {href:'#', text:'Linkedin'},
+        {href:'#', text:'Youtube'}
+      ]
+
     return(
-        <Section background="var(--background-primary)" fixHeight={70} position="fixed">
+        <HeaderContainer>
+        <Section className="section" background="var(--background-primary)" position="fixed" zindex='999'>
             <Container>
                 <Row>
                     <Col flex={2}>
@@ -50,17 +61,18 @@ export const Header = () => {
                             <Col>
                                 <CallNumber number='47999999999'/>
                             </Col>
-                            <ToogleMenu itens={itemMenuList} burgerItens={itemMenuBurguerList}/>
+                            <ToogleMenu itemSocialList={itemSocialList} initial={itemInitial} itens={itemMenuList} burgerItens={itemMenuBurguerList}/>
                         </Row>
                     </Col>
                     :
                         <Col>
-                            <ToogleMenu itens={itemMenuList} burgerItens={itemMenuBurguerList}/>
+                            <ToogleMenu itemSocialList={itemSocialList} initial={itemInitial} itens={itemMenuList} burgerItens={itemMenuBurguerList}/>
                         </Col>
                     }
                 </Row>
             </Container>
         </Section>
+        </HeaderContainer>
     )
 }
 
@@ -68,4 +80,12 @@ const ContainerItemsMenu = styled.div`
     display:flex;
     flex-direction:row;
     max-width:840px;
+    margin-top:0px;
+    gap:16px;
+`;
+
+const HeaderContainer = styled.div`
+    .section{
+        height:70px;
+    }
 `;

@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface InputProps {
   placeholder: string;
   icon?: React.ReactNode;
   onChange?: (textValue: string) => void;
+  open:boolean;
+  param:string;
+  clearFilter:number;
 }
 
-export const TextInput: React.FC<InputProps> = ({ placeholder, icon, onChange }) => {
+export const TextInput: React.FC<InputProps> = ({ placeholder, clearFilter, icon, onChange, open, param }) => {
     const [isFocused, setIsFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    
 
     const handleInputFocus = () => {
       setIsFocused(true);
@@ -18,6 +22,24 @@ export const TextInput: React.FC<InputProps> = ({ placeholder, icon, onChange })
     const handleInputBlur = () => {
       setIsFocused(false);
     };
+
+    useEffect(() => {
+      setInputValue('')
+    }, [clearFilter])
+
+    useEffect(() => {
+      const queryParams = new URLSearchParams(window.location.search);
+      const valueFromParam = queryParams.get(param);
+
+      const fakeEvent = {
+        target: {
+          value: valueFromParam || '',
+        },
+      } as React.ChangeEvent<HTMLInputElement>;
+
+      handleInputChange(fakeEvent)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [param, open]);
 
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,6 +86,8 @@ const StyledInput = styled.input`
   padding: 0;
   height: 100%;
   width:100%;
+  font-size:var(--labels-size);
+  font-weight:var(--labels-weight);
 
   &:focus {
     outline: none;
@@ -74,5 +98,5 @@ const IconContainer = styled.div<{ isFocused: boolean }>`
     margin-right: 0px;
     transition: opacity 0.3s ease-in-out;
 
-    opacity: ${(props) => (props.isFocused ? '0' : '1')};
+    // opacity: ${(props) => (props.isFocused ? '0' : '1')};
 `;

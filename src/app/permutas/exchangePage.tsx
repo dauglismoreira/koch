@@ -48,6 +48,7 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
                             <Content>
                                 <SectionBodyText text={aboutInfo && aboutInfo.content} color="var(--text-secondary)"/>
                                 <Row breakpoint={!isLargeScreen.isLargeScreen} reverse={false}>
+                                    <Col flex={12}>
                                     <InputGenerate
                                         leftInputs={formInputsLeft}
                                         rightInputs={formInputsRight}
@@ -55,6 +56,9 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
                                         setFormData={setFormData}
                                         color="var(--text-primary)"
                                     />
+                                    </Col>
+                                </Row>
+                                <Row breakpoint={!isLargeScreen.isLargeScreen}>
                                     <Col flex={6} padding="15px 10px">
                                         <ActionFormContainer>
                                             <Mandatory color="var(--text-secondary)"/>
@@ -67,7 +71,7 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
                                         </ActionFormContainer>
                                     </Col>
                                     <Col flex={6} padding="15px 10px"></Col>
-                                </Row>
+                                </Row>                                
                             </Content>
                         </Col>
                     </Row>
@@ -84,7 +88,7 @@ const Content = styled.div`
     justify-content:space-between;
 
     p {
-        font-size:14px;
+        font-size:var(--desktop-text-size);
     }
 
     @media(max-width: 768px){
@@ -93,6 +97,8 @@ const Content = styled.div`
 
         p {
             margin-top:0;
+            padding:0 0;
+            font-size:var(--mobile-text-size);
         }
     }
 `;
@@ -105,11 +111,12 @@ const ActionFormContainer = styled.div`
 
     input::placeholder {
         color: var(--text-primary);
+        text-transform:uppercase;
     }
 
     textarea::placeholder {
         color: var(--text-primary);
-        font-family: var(--font-secondary);
+        text-transform:uppercase;
     }
 
     @media(max-width:768px){
@@ -130,6 +137,8 @@ const ButtonContainer = styled.div`
         text-transform:uppercase;
         cursor:pointer;
         border-radius:5px;
+        font-size:var(--buttons-size);
+        font-weight:var(--buttons-weight);
 
         &:hover {
             background-color:var(--text-primary);

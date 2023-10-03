@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
-import useScreenSize from '../../../hooks/useScreenSize';
-import { AboutCharacteristics, HighSkills } from '@/app/empreendimento/[slug]/enterPage';
+import { AboutCharacteristics } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionBodyText } from '../sectionBodyText';
 import { SectionSubTitle } from '../sectionSubTitle';
 
@@ -16,28 +15,27 @@ export const EnterAboutSection: React.FC<EnterAboutSectionProps> = ({
     about_characteristics,
     about_image,
 }) => {
-    const isLargeScreen = useScreenSize(768);
 
     return (
         <AboutSection>
-            <Row breakpoint={!isLargeScreen.isLargeScreen}>
+            <Row className="break">
                 <Col flex={2}>
                     <SectionSubTitle text={`Sobre o\nempreendimento`} color="var(--text-secondary)"/>
                 </Col>
                 <Col flex={5}>
                     <Content>
-                        {isLargeScreen.isLargeScreen && <SectionBodyText text={about_text} color="var(--text-secondary)"/>}
-                        {isLargeScreen.isLargeScreen && <LineDivider></LineDivider>}
+                        <SectionBodyText text={about_text} color="var(--text-secondary)"/>
+                        <LineDivider></LineDivider>
                         <SkillsList>
                             {about_characteristics.map((item, index) => (
                                 <li key={index}>━ {item}</li>
                             ))}
                         </SkillsList>
-                        {isLargeScreen.isLargeScreen && <LineDivider></LineDivider>}
+                        <LineDivider className='no-mobile-available'></LineDivider>
                     </Content>
                 </Col>
                 <Col flex={5}>
-                    <Image image={about_image}></Image>
+                    <CoverImage image={about_image}></CoverImage>
                 </Col>
             </Row>
         </AboutSection>
@@ -51,9 +49,21 @@ const AboutSection = styled.div`
     @media(max-width:768px){
         padding:60px 0;
     }
+
+    .break {
+        @media(max-width:768px){
+            flex-direction:column;
+        }
+    }
+
+    .no-mobile-available {
+        @media(max-width:768px){
+            display:none;
+        }
+    }
 `;
 
-const Image = styled.div<{image: string}>`
+const CoverImage = styled.div<{image: string}>`
     margin:auto;
     width:100%;
     height:940px;
@@ -72,6 +82,10 @@ const LineDivider = styled.div`
     height:1px;
     background-color:var(--border-grey);
     margin:40px 0;
+
+    @media(max-width:768px){
+        margin:0;
+    }
 `;
 
 const Content = styled.div`
@@ -80,25 +94,29 @@ const Content = styled.div`
     flex-direction:column;
 
     p {
-        font-size:15px;
+        font-size:var(--desktop-text-size);
     }
 
     @media(max-width: 768px){
         padding:0 10px;
         gap:40px;
+
+        p {
+            font-size:var(--mobile-text-size);
+        }
     }
 `;
 
 const SkillsList = styled.div`
     li {
         color:var(--text-primary);
-        font-size:16px;
-        font-weight:600;
+        font-size:var(--desktop-text-size);
+        font-weight:var(--medium-title-weight);
         margin:30px 0;
         list-style:none;
 
         @media(max-width:768px){
-            font-size:13px;
+            font-size:var(--small-text-size);
         }
     }
 `;

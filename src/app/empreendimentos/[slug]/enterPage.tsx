@@ -52,7 +52,7 @@ export const EnterPage: React.FC<EnterpriseProps> = ({enterprise}) => {
 
     return (
         <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "70px 0 0" : "70px 0"} background="var(--background-secondary)">
+            <Section padding={!isLargeScreen.isLargeScreen ? "100px 0 0" : "100px 0 70px"} background="var(--background-secondary)">
                 <EnterMenuSection/>
                 <Container>
                     <EnterTitleSection
@@ -64,29 +64,29 @@ export const EnterPage: React.FC<EnterpriseProps> = ({enterprise}) => {
                         enterprise_logo={enterprise.enterprise_logo}
                         high_skills={enterprise.high_skills}
                     />
-                    <EnterAboutSection
+                    <div id="sobre"><EnterAboutSection
                         about_text={enterprise.about_text}
                         about_characteristics={enterprise.about_characteristics}
                         about_image={enterprise.about_image}
-                    />
+                    /></div>
                     <Row><LineDivider></LineDivider></Row>
-                    <EnterImagesSection
+                    <div id="imagens"></div><EnterImagesSection
                         data={enterprise.enterprise_gallery}
                     />
                     <Row><LineDivider></LineDivider></Row>
-                    {isLargeScreen.isLargeScreen && <EnterPlansSection
+                    <div id="plantas"><EnterPlansSection
                         plans={enterprise.plans}
-                    />}
-                    {isLargeScreen.isLargeScreen && <Row><LineDivider></LineDivider></Row>}
-                    <EnterLocalSection
+                    /></div>
+                    <Row><LineDivider></LineDivider></Row>
+                    <div id="localizacao"><EnterLocalSection
                         data={enterprise.localization}
                         district={enterprise.district}
                         city={enterprise.city}
-                    />
-                    {isLargeScreen.isLargeScreen && <Row><LineDivider></LineDivider></Row>}
-                    {isLargeScreen.isLargeScreen && <EnterProgressSection
+                    /></div>
+                    <Row><LineDivider></LineDivider></Row>
+                    <div id="obra"><EnterProgressSection
                         data={enterprise.progress}
-                    />}
+                    /></div>
                 </Container>
             </Section>
             </>
@@ -100,6 +100,8 @@ const LineDivider = styled.div`
     margin:40px 0;
 
     @media(max-width:768px){
-        margin:0;
+        margin:0 10px;
+        width:calc(100% - 30px);
+        margin:auto;
     }
 `;

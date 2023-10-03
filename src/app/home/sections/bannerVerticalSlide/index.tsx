@@ -37,7 +37,7 @@ export const BannerVerticalSlide: React.FC<BannerProps> = ({ autoPlayTime, auto,
         return () => {
             clearInterval(intervalId);
         };
-    }, [autoPlay, images]);
+    }, [autoPlay, images, autoPlayInterval]);
 
     const handleBannerMouseEnter = () => {
         setAutoPlay(false);
@@ -118,7 +118,8 @@ const LeftCol = styled.div<{widthscreen : number}>`
         padding:8px 0;
         z-index:2;
         text-transform:uppercase;
-        font-size:12px;
+        font-size:var(--small-text-size);
+        font-weight:var(--small-text-weight);
         letter-spacing:3px;
     }
 
@@ -145,7 +146,7 @@ const RightCol = styled.div<{widthscreen : number}>`
     width:${(props) => (props.widthscreen - 100) - (props.widthscreen - 337)}px;
     display:flex;
     justify-content:flex-start;
-    align-items:flex-end;
+    align-items:center;
 
     @media(max-width:1360px) and (min-width:900px){
         width:${(props) => (props.widthscreen - 220) - (props.widthscreen - 337)}px;
