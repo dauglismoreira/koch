@@ -1,9 +1,5 @@
-import {
-  blogInfo,
-  blog,
-  meta
-} from './data';
-import { BlogPage } from './blogPage';
+import {meta} from './data';
+import List from "@/app/blog/List";
 
 export async function generateMetadata() {
   return {
@@ -17,10 +13,5 @@ export async function generateMetadata() {
 }
 
 export default function BlogPageWrapper() {
-  return (
-      <BlogPage
-        blogInfo={blogInfo}
-        blog={blog}
-      />
-  );
+  return <List />
 }

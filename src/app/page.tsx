@@ -19,8 +19,13 @@ import {
   blog,
   meta
 } from './home/data';
+import Dump from "@/impacte/Dump";
+import fetchData from "@/helpers/fetchData";
+import {getData} from "@/helpers/getData";
 
 export async function generateMetadata() {
+  const data = await fetchData('home')
+
   return {
     title:meta.title,
     description:meta.description,
@@ -31,9 +36,14 @@ export async function generateMetadata() {
   }
 }
 
-export default function Home() {
+export default async function Home() {
+  const data = await fetchData('home')
+
   return (
     <main className={styles.main}>
+
+      {/*<Dump obj={data} />*/}
+
       <div style={{paddingTop:'70px'}}>
         <BannerVerticalSlide
           text="Construtora & incorporadora"
