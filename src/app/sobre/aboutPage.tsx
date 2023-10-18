@@ -41,7 +41,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ aboutInfo, data }) => {
                             </Content>
                         </Col>
                         <Col flex={5}>
-                            <BannerImage image={data[0].mobile ? getStorageFile(data[0].mobile.path) : ''}></BannerImage>
+                            {data[0].mobile.path &&
+                                <BannerImage image={data[0].mobile ? getStorageFile(data[0].mobile.path) : ''}></BannerImage>
+                            }
                         </Col>
                     </Row>
                 </Container>
