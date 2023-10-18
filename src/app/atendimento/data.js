@@ -1,20 +1,18 @@
-export const meta = {
-    title:'Koch Empreendimentos',
-    description:'Venha fazer um bom negócio com a koch'
-  }
-
   export  const opportunitiesButtons = [
     {
       label: 'Email',
-      link: '#'
+      link: 'mailto:' + process.env.NEXT_PUBLIC_EMAIL,
+      extern: 1
     },
     {
       label: 'Whatsapp',
-      link: '#'
+      link: 'https://api.whatsapp.com/send?phone=55' + process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
+      extern: 1
     },
     {
       label: 'Corretor online',
-      link: '#'
+      link: 'https://api.whatsapp.com/send?phone=55' + process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
+      extern: 1
     },
   ];
 
@@ -35,37 +33,6 @@ export const meta = {
     title:`nos mande\numa mensagem`,
     content:'<p>Preencha os campos abaixo para falar com um de nossos consultores de vendas.</p>',
   };
-
-  export  const brokersList = [
-    {
-        name: 'João da Silva Romano',
-        creci: '000000',
-        phone:'47999999999',
-        email:'teste@teste.com',
-        photo:'./tmp/image(330x193).webp'
-    },
-    {
-        name: 'João da Silva Romano',
-        creci: '000000',
-        phone:'47999999999',
-        email:'teste@teste.com',
-        photo:'./tmp/image(330x193).webp'
-    },
-    {
-        name: 'João da Silva Romano',
-        creci: '000000',
-        phone:'47999999999',
-        email:'teste@teste.com',
-        photo:'./tmp/image(330x193).webp'
-    },
-    {
-        name: 'João da Silva Romano',
-        creci: '000000',
-        phone:'47999999999',
-        email:'teste@teste.com',
-        photo:'./tmp/image(330x193).webp'
-    },
-  ]
 
   export  const formInputsLeft = [
     {
@@ -92,8 +59,3 @@ export const meta = {
         type:'textarea'
     }
   ];
-
-  export  const phone = '(47) 3333-3333';
-  export  const email = 'koch@kockempreendimentos.com.br';
-  export  const street = 'R. 210 - Meia Praia, Itapema';
-  export  const city = 'Santa Catarina'; 

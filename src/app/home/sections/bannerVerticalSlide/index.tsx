@@ -7,8 +7,14 @@ import { Banner } from './components/banner';
 import { SlideControllers } from './components/controllers';
 import useScreenSize from '../../../../hooks/useScreenSize';
 
+
+export interface BannerImageProps {
+    path:string;
+    alt:string;
+}
+
 interface BannerProps {
-    images?: string[];
+    images?: BannerImageProps[];
     text?: string;
     autoPlayTime?: number;
     auto?: boolean;
@@ -48,6 +54,7 @@ export const BannerVerticalSlide: React.FC<BannerProps> = ({ autoPlayTime, auto,
     };
 
     return (
+        images.length > 0 &&
         <Section padding="0 0 15px" background="var(--background-secondary)">
             <Content>
                 <LeftCol

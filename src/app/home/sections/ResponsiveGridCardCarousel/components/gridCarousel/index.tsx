@@ -18,7 +18,7 @@ export const GridCardCarousel: React.FC<GridProps> = ({ data }) => {
     const isLargeScreen = useScreenSize(768);
 
     return (
-        <Row margin={!isLargeScreen.isLargeScreen ? "10px 0 60px" : "80px 0 120px"} padding="0 20px">
+        <Row margin={!isLargeScreen.isLargeScreen ? "10px 0 60px" : "80px 0 100px"} padding="0 20px">
             <SwiperContainer>
                 <Swiper
                     slidesPerView={3}

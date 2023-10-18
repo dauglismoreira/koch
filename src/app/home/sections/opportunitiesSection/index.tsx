@@ -11,14 +11,17 @@ interface OpportunitiesProps {
     buttonsList?:ButtonsProps[];
     info?: {
         sectionTitle: string;
-        title: string;
-        content: string;
+      };
+      data?:{
+        text:string;
+        title:string;
       };
 }
 
-export const OpportunitiesSection: React.FC<OpportunitiesProps> = ({ buttonsList, info }) => {
+export const OpportunitiesSection: React.FC<OpportunitiesProps> = ({ buttonsList, info, data }) => {
 
     return (
+        data && data.title &&
         <NewsSectionContainer>
             <Section className="section" background="var(--background-secondary)">
                 <Container>
@@ -29,8 +32,8 @@ export const OpportunitiesSection: React.FC<OpportunitiesProps> = ({ buttonsList
                         <Col flex={10}>
                             <Content>
                                 <Title>
-                                    <SectionTitle text={info && info.title} color="var(--text-primary)"/>
-                                    <SectionBodyText  text={info && info.content} color="var(--text-secondary)"/>
+                                    <SectionTitle text={data && data.title} color="var(--text-primary)"/>
+                                    <SectionBodyText  text={data && data.text} color="var(--text-secondary)"/>
                                 </Title>
                                 <ContainerButtons color="var(--text-white)" background="var(--text-primary)" buttonsList={buttonsList}/>
                             </Content>

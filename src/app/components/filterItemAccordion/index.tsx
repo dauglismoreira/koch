@@ -5,7 +5,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 interface FilterItemProps {
     label: string;
     param: string;
-    options: { label: string; value: string }[];
+    options: { name: string }[];
     onItemClick: (value: string) => void;
     open: boolean;
   }
@@ -33,16 +33,16 @@ interface FilterItemProps {
         <MdOutlineKeyboardArrowDown color="var(--text-primary)" size="1.5rem" />
       </Item>
       <Body className={isBodyVisible ? 'visible' : 'hidden'}>
-        {options.map((item, index) => (
+        {options && options.map((item, index) => (
           index === 0 ? null :
             <li
             key={index}
             onClick={() => {
-              onItemClick(item.value)
-              setParamValue(item.value)
+              onItemClick(item.name)
+              setParamValue(item.name)
             }}
-            className={item.value === paramValue ? 'highlighted' : ''}
-          >{item.label}</li>
+            className={item.name === paramValue ? 'highlighted' : ''}
+          >{item.name}</li>
         ))}
       </Body>
     </FilterItemContainer>

@@ -9,18 +9,21 @@ import { SectionBodyText } from '../../../components/sectionBodyText';
 import SvgComponent from './../../../components/SvgComponent';
 
 interface AboutProps {
-    accordionDate?:AccordionItemProps[];
     info?: {
         sectionTitle: string;
-        title: string;
-        content: string;
         link: string;
+      };
+    data: {
+        title: string;
+        long_text: string;
+        differentials:AccordionItemProps[];
       };
 }
 
-export const AboutSection: React.FC<AboutProps> = ({ accordionDate, info }) => {
+export const AboutSection: React.FC<AboutProps> = ({ info, data }) => {
 
     return (
+        data.title !== '' &&
         <AboutSectionContainer>
             <Section position="relative" className="section" background="var(--background-primary-variation)">
                 <Container>
@@ -31,8 +34,8 @@ export const AboutSection: React.FC<AboutProps> = ({ accordionDate, info }) => {
                         <Col flex={4}>
                             <Content>
                                 <Title>
-                                    <SectionTitle text={info && info.title} color="var(--text-white)"/>
-                                    <SectionBodyText text={info && info.content} color="var(--text-white)"/>
+                                    <SectionTitle text={data && data.title} color="var(--text-white)"/>
+                                    <SectionBodyText text={data && data.long_text} color="var(--text-white)"/>
                                 </Title>
                                 <Link href={info && `./../${info.link}`} target="_parent">
                                     Leia mais
@@ -41,7 +44,9 @@ export const AboutSection: React.FC<AboutProps> = ({ accordionDate, info }) => {
                         </Col>
                         <Col flex={1}></Col>
                         <Col flex={5}>
-                            <Accordion data={accordionDate}/>
+                            {data.differentials.length > 0 &&
+                                <Accordion data={data.differentials}/>
+                            }
                         </Col>
                     </Row>
                 </Container>

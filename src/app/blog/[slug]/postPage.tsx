@@ -6,12 +6,15 @@ import { SectionTitle } from '../../components/sectionTitle';
 import { SectionSubTitle } from '../../components/sectionSubTitle';
 import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
 import { RecommendedPosts } from '@/app/components/recomendedPosts';
+import getStorageFile from '@/helpers/getStorageFile';
 
 interface PostPageProps {
     post:any;
 }
 
 export const PostPage: React.FC<PostPageProps> = ({post}) => {
+
+    const moment = require('moment');
 
     return (
         <PostPageContainer>
@@ -22,25 +25,25 @@ export const PostPage: React.FC<PostPageProps> = ({post}) => {
                             <SectionSubTitle text="blog" color="var(--text-primary)"/>
                         </Col>
                         <Col flex={10}>
-                            <SectionTitle text={post && post.title} color="var(--text-primary)"/>
+                            <SectionTitle text={post && post.post.title} color="var(--text-primary)"/>
                         </Col>
                     </Row>
                     <Row>
                         <Col className="no-mobile-available" flex={2}></Col>
                         <Col flex={8}>
                             <Body>
-                                <Date>{post.date}</Date>
-                                <Cover background={post.image}></Cover>
-                                <Content>{post.content && <div dangerouslySetInnerHTML={{ __html: post.content }} />}</Content>
+                                <Date>{moment(post.post.updated_at).format('DD/MM/YYYY')}</Date>
+                                {post.post.file && <Cover background={getStorageFile(post.post.file.path)}></Cover>}
+                                <Content>{post.post.content && <div dangerouslySetInnerHTML={{ __html: post.post.content }} />}</Content>
                                 <LineDivider></LineDivider>
-                                <ContainerNavigation>
-                                    <Prev><a href={post.next_post} target="_parent"><BsArrowLeft/>Anterior</a></Prev>
-                                    <Next><a href={post.prev_post} target="_parent">Próximo<BsArrowRight/></a></Next>
+                                <ContainerNavigation single={!post.nextAndPrev.prev ? true : false}>
+                                    {post.nextAndPrev.prev && <Prev><a href={post.nextAndPrev.prev} target="_parent"><BsArrowLeft/>Anterior</a></Prev>}
+                                    {post.nextAndPrev.next && <Next><a href={post.nextAndPrev.next} target="_parent">Próximo<BsArrowRight/></a></Next>}
                                 </ContainerNavigation>
                             </Body>
                         </Col>
                         <Col className="no-mobile-available" flex={2}>
-                            <RecommendedPosts data={post.related_posts}/>
+                            {post.recommended.length > 0 && <RecommendedPosts data={post.recommended}/>}
                         </Col>
                     </Row>
                 </Container>
@@ -51,7 +54,7 @@ export const PostPage: React.FC<PostPageProps> = ({post}) => {
 
 const PostPageContainer = styled.div`
     .section {
-        padding:120px 0;
+        padding:120px 0 60px;
 
         @media(max-width:768px){
             padding: 140px 0 40px;
@@ -109,6 +112,10 @@ const Content = styled.div`
         margin:10px 0;
     }
 
+    h3, h2, h1, h4, h5{
+        color:var(--text-secondary);
+    }
+
     @media(max-width:768px){
         p {
             font-size:var(mobile-text-size);
@@ -123,11 +130,11 @@ const LineDivider = styled.div`
     margin:50px 0;
 `;
 
-const ContainerNavigation = styled.div`
+const ContainerNavigation = styled.div<{single: boolean}>`
     width:100%;
     display:flex;
     flex-direction:row;
-    justify-content:space-between;
+    justify-content: ${props => props.single ? 'flex-end' : 'space-between'};
 `;
 
 const Next = styled.div`

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { Col, Row } from "../grid";
-import { AboutCharacteristics, HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionSubTitle } from '../sectionSubTitle';
+import getStorageFile from '@/helpers/getStorageFile';
 
 interface OpportunityAboutSectionProps {
-    about_skills: string[];
-    about_characteristics: AboutCharacteristics;
+    about_skills: any;
+    about_characteristics: any;
     about_image: string;
 }
 
@@ -24,20 +24,27 @@ export const OpportunityAboutSection: React.FC<OpportunityAboutSectionProps> = (
                 <Col flex={5}>
                     <Content>
                         <SkillsList>
-                            {about_characteristics.map((item, index) => (
-                                <li key={index}>━ {item}</li>
+                            {about_characteristics.length > 0 &&
+                            about_characteristics.map((item: any, index: number) => (
+                                <li key={index}>━ {item.label}</li>
                             ))}
                         </SkillsList>
-                        <LineDivider></LineDivider>
-                        <SkillsGrid>
-                            {about_skills.map((item, index) => (
-                                <p key={index}>{item}</p>
-                            ))}
-                        </SkillsGrid>
+                        {about_skills.length > 0 &&
+                        <>
+                            <LineDivider></LineDivider>
+                            <SkillsGrid>
+                                {about_skills.map((item: any, index: number) => (
+                                    <p key={index}>{item.label}</p>
+                                ))}
+                            </SkillsGrid>
+                        </>
+                        }
                     </Content>
                 </Col>
                 <Col flex={5}>
-                    <BannerImage background={about_image}></BannerImage>
+                    {about_image &&
+                        <BannerImage background={getStorageFile(about_image)}></BannerImage>
+                    }
                 </Col>
             </Row>
         </AboutSection>
@@ -46,7 +53,7 @@ export const OpportunityAboutSection: React.FC<OpportunityAboutSectionProps> = (
 
 
 const AboutSection = styled.div`
-    padding:140px 0;
+    padding:100px 0;
 
     @media(max-width:768px){
         padding:60px 0;

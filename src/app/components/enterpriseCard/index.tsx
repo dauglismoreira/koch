@@ -1,35 +1,50 @@
 import { Baskerville } from '@/app/fonts';
+import getStorageFile from '@/helpers/getStorageFile';
 import styled from 'styled-components';
 
+export interface CardCoverProps {
+    path: string;
+    alt: string;
+    id: number;
+}
+
 export interface CardProps {
-    cover?: string;
-    high?: string;
-    name?: string;
-    city?: string;
-    district?: string;
-    suites?: string;
-    garage?: string;
+    title?: string;
+    slug?:string;
+    parking_spaces?: string;
     area?: string;
-    url?: string;
+    suites?: string;
+    status?:string;
+    vertical_image?: CardCoverProps;
+    location_type?: LocationProps;
+    city?: CityProps;
+    district?: string;
+}
+
+export interface CityProps {
+    name:string;
+}
+
+export interface LocationProps {
+    location_name:string;
 }
 
 export const EnterpriseCard: React.FC<{ data: CardProps }> = ({ data }) => {
-    const { cover, high, name, city, district, suites, garage, area, url } = data;
-    
+
     return (
         <Card>
-            <a href={`./../empreendimentos/${url}`}>
+            <a href={`./../empreendimentos/${data.slug}`}>
             <Cover
-                image={cover || ''}
+                image={data.vertical_image && getStorageFile(data.vertical_image.path) || ''}
             ></Cover>
             <Content>
-                <High><h5>{high}</h5></High>
-                <Name className={`${Baskerville.className}`}><h3>{name}</h3></Name>
-                <Place><p>{district}, {city}</p></Place>
+                <High><h5>{data.status}</h5></High>
+                <Name className={`${Baskerville.className}`}><h3>{data.title}</h3></Name>
+                <Place><p>{data.location_type?.location_name}, {data.city?.name}</p></Place>
                 <Skills>
-                    <span>{suites}</span>
-                    <span>{garage}</span>
-                    <span>{area}</span>
+                    <span>{data.suites}</span>
+                    <span>{data.parking_spaces}</span>
+                    <span>{data.area}</span>
                 </Skills>
                 <Link>Veja mais</Link>
             </Content>

@@ -25,6 +25,7 @@ interface NewsSectionProps {
 export const NewsSection: React.FC<NewsSectionProps> = ({ data, info }) => {
 
     return (
+        data && data.length > 0 &&
         <NewsSectionContainer>
         <Section className="section" background="var(--background-secondary)">
             <Container>
@@ -78,7 +79,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ data, info }) => {
 const NewsSectionContainer = styled.div`
 
     .section{
-        padding:120px 0;
+        padding:120px 0 20px;
 
         @media(max-width:768px){
             padding:48px 0;

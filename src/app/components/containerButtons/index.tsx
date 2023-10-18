@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export interface ButtonsProps {
     label?:string;
     link?:string;
+    extern?:number;
 }
 
 interface ContainerButtonsProps {
@@ -18,8 +19,8 @@ export const ContainerButtons: React.FC<ContainerButtonsProps> = ({ buttonsList,
             {buttonsList && buttonsList.map((button, index) => (
                 <Button
                     key={index}
-                    href={`./../${button.link}`}
-                    target='_parent'
+                    href={button.extern ? button.link : `./../${button.link}`}
+                    target={button.extern ? '_blank' : '_parent'}
                     color={color || "var(--text-primary)"}
                     background={background || "var(--text-white)"}
                 >

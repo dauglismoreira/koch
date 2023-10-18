@@ -2,14 +2,17 @@ import styled from 'styled-components';
 import { Col, Row } from "../grid";
 import { HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
 import { Baskerville } from '@/app/fonts';
+import getStorageFile from '@/helpers/getStorageFile';
 
 interface OpportunityTitleSectionProps {
-    title:string;
-    district:string;
-    city:string;
-    price:number;
-    high_image:string;
-    high_skills:HighSkills[];
+    title?:string;
+    district?:string;
+    city?:string;
+    price?:number;
+    high_image?:string;
+    suites?:any;
+    parking_spaces?:any;
+    area?:any;
 }
 
 export const OpportunityTitleSection: React.FC<OpportunityTitleSectionProps> = ({
@@ -18,7 +21,9 @@ export const OpportunityTitleSection: React.FC<OpportunityTitleSectionProps> = (
     city,
     price,
     high_image,
-    high_skills
+    suites,
+    parking_spaces,
+    area
 }: OpportunityTitleSectionProps) => {
 
     return (
@@ -26,24 +31,28 @@ export const OpportunityTitleSection: React.FC<OpportunityTitleSectionProps> = (
             <Row>
                 <Col flex={6}>
                     <h1 className={`${Baskerville.className}`}>{title}</h1>
-                    <p>{district}, {city}</p>
+                    {(district && city) && <p>{district}, {city}</p>}
                 </Col>
                 <Col flex={6}>
                     <ColContainer>
                         <InfoContainer>
                             <PriceContainer>
-                                <span className={Baskerville.className}>{price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</span>
+                                {price &&
+                                    <span className={Baskerville.className}>{(price / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</span>
+                                }
                             </PriceContainer>
                             <HighSkillsContainer>
-                                {high_skills.map((skill, index) => (
-                                    <HighSkillItem key={index}>{skill}</HighSkillItem>
-                                ))}
+                                <HighSkillItem>{suites}</HighSkillItem>
+                                <HighSkillItem>{parking_spaces}</HighSkillItem>
+                                <HighSkillItem>{area}</HighSkillItem>
                             </HighSkillsContainer>
                         </InfoContainer>
                     </ColContainer>
                 </Col>
             </Row>
-            <Cover style={{backgroundImage:`url('${high_image}')`}}></Cover>
+            {high_image &&
+                <Cover style={{backgroundImage:`url('${getStorageFile(high_image)}')`}}></Cover>
+            }
         </TitleSection>
     )
 }

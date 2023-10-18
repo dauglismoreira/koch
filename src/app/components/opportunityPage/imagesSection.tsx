@@ -15,6 +15,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import { Navigation, Mousewheel, Keyboard } from 'swiper/modules';
+import getStorageFile from '@/helpers/getStorageFile';
 
 interface OpportunityImagesSectionProps {
     data:EnterpriseGalleryItem[];
@@ -59,7 +60,7 @@ export const OpportunityImagesSection: React.FC<OpportunityImagesSectionProps> =
                             <Fancybox
                                 key={index}
                                 options={{ infinite: false }}
-                                href={image.url}
+                                href={getStorageFile(image.path)}
                                 delegate="[data-fancybox='gallery']"
                             >
                                 <Image
@@ -67,8 +68,8 @@ export const OpportunityImagesSection: React.FC<OpportunityImagesSectionProps> =
                                     height={200}
                                     loading="eager" 
                                     data-fancybox="gallery"
-                                    data-src={image.url}
-                                    src={image.thumb}
+                                    data-src={getStorageFile(image.path)}
+                                    src={getStorageFile(image.path)}
                                     alt={image.alt}
                                 />
                             </Fancybox>
@@ -100,8 +101,8 @@ export const OpportunityImagesSection: React.FC<OpportunityImagesSectionProps> =
                                             height={200}
                                             loading="eager" 
                                             data-fancybox="gallery"
-                                            data-src={image.url}
-                                            src={image.thumb}
+                                            data-src={getStorageFile(image.path)}
+                                            src={getStorageFile(image.path)}
                                             alt={image.alt}
                                         />
                                     </Fancybox>
@@ -120,7 +121,7 @@ export const OpportunityImagesSection: React.FC<OpportunityImagesSectionProps> =
 
 
 const ImagesSection = styled.div`
-    padding:140px 0;
+    padding:100px 0;
 
     small {
         color:var(--text-secondary);

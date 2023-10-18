@@ -7,15 +7,20 @@ import Maps from '@/app/components/map';
 import { Baskerville } from '@/app/fonts';
 
 interface EnterLocalSectionProps {
-    data:Localization;
-    district:string;
-    city:string;
+    // data:Localization;
+    district?:string;
+    nearby?:any[];
+    city?:string;
+    map?:string;
+    location_description?:string;
 }
 
 export const EnterLocalSection: React.FC<EnterLocalSectionProps> = ({
-    data,
+    nearby,
     district,
-    city
+    city,
+    map,
+    location_description
 }) => {
 
     return (
@@ -30,19 +35,18 @@ export const EnterLocalSection: React.FC<EnterLocalSectionProps> = ({
                         <p className="no-mobile-available">, </p>
                         <Title className={`${Baskerville.className}`}>{city}</Title>
                     </TitleContainer>
-                    <SectionBodyText text={data.local_description} color="var(--text-secondary)"/>
+                    <SectionBodyText text={location_description} color="var(--text-secondary)"/>
                     <LocalContainer>
-                        {data.nearby.map((nearby, index) => (
-                            <span key={index}>{nearby}</span>
+                        {nearby?.map((nearby, index) => (
+                            <span key={index}>{nearby.label}</span>
                         ))}
                     </LocalContainer>
                 </Col>
                 <Col flex={6}>
-                    <Maps
-                        latI={data.latitude}
-                        lngI={data.longitude}
-                        zoomLevel={16}
-                    />
+                    {map &&
+                    <Map>
+                        <div dangerouslySetInnerHTML={{ __html: map }} />
+                    </Map>}
                 </Col>
             </Row>
         </LocalSection>
@@ -51,7 +55,7 @@ export const EnterLocalSection: React.FC<EnterLocalSectionProps> = ({
 
 
 const LocalSection = styled.div`
-    padding:140px 0;
+    padding:100px 0;
 
     @media(max-width:768px){
         padding:60px 0;
@@ -118,3 +122,13 @@ const LocalContainer = styled.div`
     }
 `;
 
+const Map = styled.div`
+    iframe{
+        width:100%;
+        height: 480px;
+
+        @media screen and (max-width: 799px) {
+            height:300px;
+        }
+    }
+`;

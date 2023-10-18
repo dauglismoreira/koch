@@ -7,15 +7,17 @@ import Maps from '@/app/components/map';
 import { Baskerville } from '@/app/fonts';
 
 interface OpportunityLocalSectionProps {
-    data:Localization;
+    data:string;
     district:string;
     city:string;
+    map:any;
 }
 
 export const OpportunityLocalSection: React.FC<OpportunityLocalSectionProps> = ({
     data,
     district,
-    city
+    city,
+    map
 }) => {
 
     return (
@@ -30,14 +32,13 @@ export const OpportunityLocalSection: React.FC<OpportunityLocalSectionProps> = (
                         <p className="no-desktop-available">, </p>
                         <Title className={`${Baskerville.className}`}>{city}</Title>
                     </TitleContainer>
-                    <SectionBodyText text={data.local_description} color="var(--text-secondary)"/>
+                    <SectionBodyText text={data} color="var(--text-secondary)"/>
                 </Col>
                 <Col flex={6}>
-                    <Maps
-                        latI={data.latitude}
-                        lngI={data.longitude}
-                        zoomLevel={16}
-                    />
+                    {map &&
+                    <Map>
+                        <div dangerouslySetInnerHTML={{ __html: map }} />
+                    </Map>}
                 </Col>
             </Row>
         </LocalSection>
@@ -46,7 +47,7 @@ export const OpportunityLocalSection: React.FC<OpportunityLocalSectionProps> = (
 
 
 const LocalSection = styled.div`
-    padding:140px 0;
+    padding:100px 0;
 
     @media(max-width:768px){
         padding:60px 0;
@@ -85,5 +86,16 @@ const Title = styled.h4`
 
     @media(max-width:768px){
         text-align:center;
+    }
+`;
+
+const Map = styled.div`
+    iframe{
+        width:100%;
+        height: 480px;
+
+        @media screen and (max-width: 799px) {
+            height:300px;
+        }
     }
 `;

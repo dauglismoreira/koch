@@ -10,13 +10,13 @@ import { EnterPlansSection } from '@/app/components/enterprisePage/plansSection'
 import { EnterLocalSection } from '@/app/components/enterprisePage/localSection';
 import { EnterMenuSection } from '@/app/components/enterprisePage/meunSection';
 import { EnterProgressSection } from '@/app/components/enterprisePage/progressSection';
+import getStorageFile from '@/helpers/getStorageFile';
 
 export type HighSkills = (string | JSX.Element)[];
 export type AboutCharacteristics = (string | JSX.Element)[];
   
   export interface EnterpriseGalleryItem {
-    url: string;
-    thumb: string;
+    path: string;
     alt: string;
   }
   
@@ -52,40 +52,54 @@ export const EnterPage: React.FC<EnterpriseProps> = ({enterprise}) => {
 
     return (
         <>
-            <Section padding={!isLargeScreen.isLargeScreen ? "100px 0 0" : "100px 0 70px"} background="var(--background-secondary)">
+            <Section padding={!isLargeScreen.isLargeScreen ? "100px 0 0" : "100px 0 0px"} background="var(--background-secondary)">
                 <EnterMenuSection/>
                 <Container>
                     <EnterTitleSection
-                        title={enterprise.title}
-                        title_high={enterprise.title_high}
-                        district={enterprise.district}
-                        city={enterprise.city}
-                        high_image={enterprise.high_image}
-                        enterprise_logo={enterprise.enterprise_logo}
-                        high_skills={enterprise.high_skills}
+                        title={enterprise.enterprise.title}
+                        title_high={enterprise.enterprise.status}
+                        district={enterprise.enterprise.location_type.location_name}
+                        city={enterprise.enterprise.city.name}
+                        high_image={getStorageFile(enterprise.enterprise.horizontal_image.path)}
+                        enterprise_logo={getStorageFile(enterprise.enterprise.logo_image.path)}
+                        high_skills={enterprise.enterprise}
                     />
                     <div id="sobre"><EnterAboutSection
-                        about_text={enterprise.about_text}
-                        about_characteristics={enterprise.about_characteristics}
-                        about_image={enterprise.about_image}
+                        about_text={enterprise.enterprise.description}
+                        about_characteristics={enterprise.enterprise.differentials}
+                        about_image={getStorageFile(enterprise.enterprise.vertical_image.path)}
                     /></div>
                     <Row><LineDivider></LineDivider></Row>
-                    <div id="imagens"></div><EnterImagesSection
-                        data={enterprise.enterprise_gallery}
-                    />
-                    <Row><LineDivider></LineDivider></Row>
-                    <div id="plantas"><EnterPlansSection
-                        plans={enterprise.plans}
-                    /></div>
-                    <Row><LineDivider></LineDivider></Row>
+                    {enterprise.enterprise.galleries?.filter((gallery : any) => gallery.title === 'Galeria de imagens')[0].files.length > 0 &&
+                    <>
+                      <div id="imagens"></div><EnterImagesSection
+                          data={enterprise.enterprise.galleries?.filter((gallery : any) => gallery.title === 'Galeria de imagens')[0].files}
+                      />
+                      <Row><LineDivider></LineDivider></Row>
+                    </>
+                    }
+                    {enterprise.enterprise.types.length > 0 &&
+                    <>
+                      <div id="plantas"><EnterPlansSection
+                          plans={enterprise.enterprise.types}
+                      /></div>
+                      <Row><LineDivider></LineDivider></Row>
+                    </>
+                    }
                     <div id="localizacao"><EnterLocalSection
-                        data={enterprise.localization}
-                        district={enterprise.district}
-                        city={enterprise.city}
+                        nearby={enterprise.enterprise.nearby}
+                        district={enterprise.enterprise.location_type.location_name}
+                        city={enterprise.enterprise.city.name}
+                        map={enterprise.enterprise.map_iframe}
+                        location_description={enterprise.enterprise.location_description}
                     /></div>
                     <Row><LineDivider></LineDivider></Row>
                     <div id="obra"><EnterProgressSection
-                        data={enterprise.progress}
+                        prog={enterprise.enterprise.work_progress}
+                        videos={enterprise.enterprise.work_progress_videos}
+                        images={enterprise.enterprise.galleries?.filter((gallery : any) => gallery.title === 'Progresso da obra')[0].files}
+                        begin_date={enterprise.enterprise.begin_date}
+                        end_date={enterprise.enterprise.end_date}
                     /></div>
                 </Container>
             </Section>
@@ -97,7 +111,7 @@ const LineDivider = styled.div`
     width:100%;
     height:1px;
     background-color:var(--border-grey);
-    margin:40px 0;
+    margin:0px 0;
 
     @media(max-width:768px){
         margin:0 10px;

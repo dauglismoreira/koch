@@ -1,6 +1,6 @@
 'use client'
 
-import {blog, blogInfo} from "../data";
+import {blogInfo} from "../data";
 import {BlogPage} from "../blogPage";
 import {useEffect, useState} from "react";
 import useScrollPosition from "@/hooks/useScrollPosition";
@@ -17,7 +17,7 @@ export default function List(){
     const {query, handleTerm} = useFilter({
         search: '',
     })
-
+/* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         if (query) {
             fetchData(query)
@@ -25,6 +25,8 @@ export default function List(){
             fetchData(objectToURLParams(getURLParameters()))
         }
     }, [query])
+/* eslint-disable react-hooks/exhaustive-deps */
+    
 
     if (isScrolledToElement && getMoreItems && nextPage) {
         fetchMoreData(query)
@@ -37,11 +39,12 @@ export default function List(){
 
     return (
         <>
-            <Dump obj={feed}/>
+            {/* <Dump obj={feed}/> */}
 
             <BlogPage
                 blogInfo={blogInfo}
-                blog={blog}
+                data={feed}
+                loading={loading}
             />
         </>
     )

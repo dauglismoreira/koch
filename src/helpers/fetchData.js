@@ -10,7 +10,7 @@ export default async function fetchData(path) {
     })
 
     if (!res.ok) {
-        redirect('/404')
+        // redirect('/404')
     }
 
     return res.json()

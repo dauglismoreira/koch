@@ -2,6 +2,7 @@ import axios from "axios";
 import {redirect} from "next/navigation";
 
 export async function getData(path, fields = {}) {
+
     const api = axios.create({
         baseURL: process.env.NEXT_PUBLIC_API_ROUTE,
         headers: {
@@ -13,7 +14,13 @@ export async function getData(path, fields = {}) {
     try {
         let response = {}
 
-        if (Object.keys(fields).length !== 0) {
+        if(fields instanceof FormData){
+            response = await api.post(path, fields, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+        }else if (Object.keys(fields).length !== 0) {
             response = await api.post(path, fields)
         } else {
             response = await api.get(path)

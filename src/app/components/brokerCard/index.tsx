@@ -1,12 +1,14 @@
 import { Baskerville } from '@/app/fonts';
+import getStorageFile from '@/helpers/getStorageFile';
 import styled from 'styled-components';
 
 export interface CardProps {
-    photo?: string;
+    file?: any;
     name?: string;
     creci?: string;
     email?: string;
-    phone?: any;
+    telephone?: any;
+    whatsapp?: any;
 }
 
 interface CardPropsData {
@@ -17,33 +19,32 @@ export const BrokerCard: React.FC<CardPropsData> = ({
     data
  }) => {
 
-    const formatPhoneNumber = (phoneNumber: string) => {
-        const part1 = phoneNumber.substring(0, 2);
-        const part2 = phoneNumber.substring(2, 7);
-        const part3 = phoneNumber.substring(7, 11);
-        return (
-          <div>
-            <span>({part1}) </span>
-            {part2}-{part3}
-          </div>
-        );
-    };
+    // const formatPhoneNumber = (phoneNumber: string) => {
+    //     const part1 = phoneNumber.substring(0, 2);
+    //     const part2 = phoneNumber.substring(2, 7);
+    //     const part3 = phoneNumber.substring(7, 11);
+    //     return (
+    //       <div>
+    //         <span>({part1}) </span>
+    //         {part2}-{part3}
+    //       </div>
+    //     );
+    // };
     
     return (
         <Card>
             <Cover
-                image={data.photo || ''}
+                image={data && data.file?.path ? getStorageFile(data.file?.path) : './images/avatar.avif'}
             ></Cover>
             <Content>
                 <Info>
                     <Name className={`${Baskerville.className}`}><h3>{data.name}</h3></Name>
-                    <Creci><p>CRECI - {data.creci}</p></Creci>
-                    <Phone>{formatPhoneNumber(data.phone)}</Phone>
+                    <Phone>{data.telephone}</Phone>
                 </Info>
                 <ContainerButtons>
                     <Button><a href={`mailto:` + data.email} target="_blank">Email</a></Button>
-                    <Button><a href={`https://api.whatsapp.com/send?phone=55` + data.phone} target="_blank">Whatsapp</a></Button>
-                    <Button>Ligue agora</Button>
+                    <Button><a href={`https://api.whatsapp.com/send?phone=` + data.whatsapp.replace(/\D/g, '')} target="_blank">Whatsapp</a></Button>
+                    <Button><a  href={`tel:${data.telephone.replace(/\D/g, '')}`} target="_blank">Ligue agora</a></Button>
                 </ContainerButtons>
             </Content>
         </Card>
@@ -115,12 +116,6 @@ const Name = styled.div`
             font-size:var(--mobile-text-size);
         }
     }
-`;
-
-const Creci = styled.div`
-    color:var(--text-secondary);
-    font-size:var(--small-text-size);
-    margin-top:8px;
 `;
 
 const Phone = styled.div`

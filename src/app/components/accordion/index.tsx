@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { MdOutlineAdd, MdOutlineRemove } from "react-icons/md";
 
 export interface AccordionItemProps {
-    title?:string;
+    label?:string;
     description?:string;
 }
 
@@ -31,6 +31,7 @@ export const Accordion: React.FC<AccordionProps> = ({ data }) => {
       }
     };
 
+
     return (
         <AccordionContainer>
             {data && data.map((item, index) => (
@@ -42,7 +43,7 @@ export const Accordion: React.FC<AccordionProps> = ({ data }) => {
                     onClick={() => handleItemClick(index)}
                 >
                     <Title>
-                        <span>{item.title}</span>
+                        <span>{item.label}</span>
                         {activeIndex !== index ? <MdOutlineAdd /> : <MdOutlineRemove />}
                     </Title>
                     <Body

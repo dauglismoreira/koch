@@ -1,8 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { BannerImageProps } from '../..';
+import getStorageFile from '@/helpers/getStorageFile'
 
 interface BannerProps {
-    images: string[];
+    images: BannerImageProps[];
     activeIndex: number;
     handleBannerMouseEnter: () => void;
     handleBannerMouseLeave: () => void;
@@ -29,7 +31,7 @@ export const Banner: React.FC<BannerProps> = ({
                 {images.map((image, index) => (
                     <BannerImage
                         key={index}
-                        background={image}
+                        background={getStorageFile(image.path)}
                         width={width}
                     />
                 ))}

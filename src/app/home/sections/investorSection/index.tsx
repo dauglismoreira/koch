@@ -15,11 +15,16 @@ interface InvestorSection {
         title: string;
         content: string;
       };
+    data?:{
+        title?:string;
+        text?:string;
+    }
 }
 
-export const InvestorSection: React.FC<InvestorSection> = ({ buttonsList, info }) => {
+export const InvestorSection: React.FC<InvestorSection> = ({ buttonsList, info, data }) => {
 
     return (
+        data && data.title !== '' &&
         <InvestorSectionContainer>
             <Section position="relative" className="section" background="var(--background-grey)">
                 <Container>
@@ -30,8 +35,8 @@ export const InvestorSection: React.FC<InvestorSection> = ({ buttonsList, info }
                         <Col flex={10}>
                             <Content>
                                 <Title>
-                                    <SectionTitle text={info && info.title} color="var(--text-white)"/>
-                                    <SectionBodyText  text={info && info.content} color="var(--text-white)"/>
+                                    <SectionTitle text={data && data.title} color="var(--text-white)"/>
+                                    <SectionBodyText  text={data && data.text} color="var(--text-white)"/>
                                 </Title>
                                 <ContainerButtons background="var(--text-white)" color="var(--background-grey)" buttonsList={buttonsList}/>
                             </Content>

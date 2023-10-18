@@ -21,7 +21,8 @@ export const ResponsiveGridCardCarousel: React.FC<BannerProps> = ({ data, info }
     const isLargeScreen = useScreenSize(768);
 
     return (
-        <Section padding={!isLargeScreen.isLargeScreen ? "48px 0" : "80px 0"} background="var(--background-secondary)">
+        data && data.length > 0 &&
+        <Section padding={!isLargeScreen.isLargeScreen ? "48px 0" : "80px 0 0px"} background="var(--background-secondary)">
             <Container>
                 <GridCarouselTitle info={info}/>
                 <GridCardCarousel data={data}/>

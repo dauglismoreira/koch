@@ -1,6 +1,6 @@
 'use client'
 
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Col, Container, Row, Section } from "../components/grid";
 import { SectionSubTitle } from '../components/sectionSubTitle';
 import { OpportunityCard } from '../components/opportunityCard';
@@ -8,18 +8,24 @@ import { EnterpriseFilters } from '../components/catalogFilters';
 import { CardProps } from '../components/enterpriseCard';
 import {useState, useEffect} from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import { OpportunitiesSection } from '../home/sections/opportunitiesSection';
+import { oportunitiesInfo, oppotunitiesButtons } from '../home/data';
 
 interface OpportunitiesPageProps {
     aboutInfo:any;
-    citiesOptions:any;
-    situationOptions:any;
+    cities?:any;
+    status?:any;
+    loading:boolean;
     enterprises:CardProps[];
+    onURLParametersChange:any;
 }
 
 export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
         aboutInfo,
-        citiesOptions,
-        situationOptions,
+        onURLParametersChange,
+        cities,
+        status,
+        loading,
         enterprises,
     }) => {
 
@@ -27,31 +33,72 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
         const [cityFilter, setCityFilter] = useState('')
         const [situationFilter, setSituationFilter] = useState('')
         const [clearFilter, setClearFilter] = useState(0)
-    
+        const [count, setCount] = useState(0)
+/* eslint-disable react-hooks/exhaustive-deps */
         useEffect(() => {
             const urlSearchParams = new URLSearchParams(window.location.search);
-            urlSearchParams.set('textFilter', textFilter);
+            if(count > 0){
+            urlSearchParams.set('search', textFilter);
             const newUrl = `${window.location.pathname}?${urlSearchParams.toString()}`;
             window.history.pushState({ path: newUrl }, '', newUrl);
+    
+            if (onURLParametersChange) {
+                onURLParametersChange({
+                  textFilter,
+                });
+              }
+            }else{
+                setTextFilter(urlSearchParams.get('search') ?? '')
+                setCount(count => count + 1)
+            }
         }, [textFilter])
-    
+        /* eslint-disable react-hooks/exhaustive-deps */
+    /* eslint-disable react-hooks/exhaustive-deps */
         useEffect(() => {
             const urlSearchParams = new URLSearchParams(window.location.search);
-            urlSearchParams.set('cityFilter', cityFilter);
+            if(count > 0){
+            urlSearchParams.set('city', cityFilter);
             const newUrl = `${window.location.pathname}?${urlSearchParams.toString()}`;
             window.history.pushState({ path: newUrl }, '', newUrl);
+    
+            if (onURLParametersChange) {
+                onURLParametersChange({
+                    cityFilter,
+                });
+              }
+            }else{
+                setCityFilter(urlSearchParams.get('city') ?? '')
+                setCount(count => count + 1)
+            }
         }, [cityFilter])
-    
+        /* eslint-disable react-hooks/exhaustive-deps */
+    /* eslint-disable react-hooks/exhaustive-deps */
         useEffect(() => {
             const urlSearchParams = new URLSearchParams(window.location.search);
-            urlSearchParams.set('situationFilter', situationFilter);
+            if(count > 0){
+            urlSearchParams.set('status', situationFilter);
             const newUrl = `${window.location.pathname}?${urlSearchParams.toString()}`;
             window.history.pushState({ path: newUrl }, '', newUrl);
+    
+            if (onURLParametersChange) {
+                onURLParametersChange({
+                    situationFilter,
+                });
+              }
+            }else{
+                setSituationFilter(urlSearchParams.get('status') ?? '')
+                setCount(count => count + 1)
+            }
         }, [situationFilter])
-        
+        /* eslint-disable react-hooks/exhaustive-deps */
 
     return (
         <OpportunitiesSectionContainer>
+            {loading &&
+              <SpinnerContainer>
+                <Spinner></Spinner>
+              </SpinnerContainer>
+            }
             <Section className="section" background="var(--background-secondary)">
                 <Container>
                     <Row className="break">
@@ -60,8 +107,8 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
                         </Col>
                         <Col flex={10}>
                             <EnterpriseFilters
-                                citiesOptions={citiesOptions}
-                                situationOptions={situationOptions}
+                                citiesOptions={cities}
+                                situationOptions={status}
                                 onCityChange={(selectedValue) => {
                                     setCityFilter(selectedValue);
                                 }}
@@ -81,7 +128,7 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
                                 {cityFilter !== '' && <Filter onClick={() => {
                                     setCityFilter('')
                                     setClearFilter(clearFilter => clearFilter + 1)
-                                }}>{cityFilter}<AiOutlineClose/></Filter>}
+                                }}>{cities.filter((city : any) => city.id == cityFilter)[0].name}<AiOutlineClose/></Filter>}
                                 {situationFilter !== '' && <Filter onClick={() => {
                                     setSituationFilter('')
                                     setClearFilter(clearFilter => clearFilter + 1)
@@ -91,8 +138,15 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
                     </Row>
                     <Row>
                         <EnterpriseListContainer>
-                            {enterprises.map((enterprise, index) => (
-                                <OpportunityCard key={index} data={enterprise} />
+                            {enterprises.map((page: any, i : number) => (
+                                <div key={i}>
+                                {page?.data.length > 0 ?
+                                page?.data.map((enterprise:any, index:number) => (
+                                    <OpportunityCard key={index} data={enterprise} />
+                                ))
+                                :
+                                <p>Sem resultados encontrados.</p>}
+                                </div>
                             ))}
                         </EnterpriseListContainer>
                     </Row>
@@ -102,10 +156,39 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
     )
 }
 
+const SpinnerContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:fixed;
+    height:100vh;
+    width:100%;
+    backdrop-filter: blur(2px);
+    z-index:9;
+`;
+
+const spin = keyframes`
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+`;
+
+const Spinner = styled.div`
+    border: 4px solid var(--background-grey);
+    border-top: 4px solid var(--background-primary);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: ${spin} 1s linear infinite;
+`;
+
+SpinnerContainer.displayName = 'SpinnerContainer';
+Spinner.displayName = 'Spinner';
+
+
 const OpportunitiesSectionContainer = styled.div`
 
     .section{
-        padding:160px 0;
+        padding:160px 0 40px;
 
         @media(max-width:768px){
             padding:120px 0 40px;
@@ -137,6 +220,7 @@ const EnterpriseListContainer = styled.div`
     padding:0 20px;
     margin:30px 0;
   }
+
 `;
 
 const ListFilters = styled.div`

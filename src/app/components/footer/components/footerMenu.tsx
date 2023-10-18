@@ -34,8 +34,8 @@ export const FooterMenu: React.FC<FooterMenuProps> = ({activeBreak, items, numbe
         <Row>
         <Col flex={col1}>
             <CallNumber
-                number={number}
-                email={email}
+                number={process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}
+                email={process.env.NEXT_PUBLIC_EMAIL}
             />
         </Col>
         {activeBreak && <VerticalDivider/>}

@@ -1,39 +1,51 @@
-// import { GetServerSidePropsContext } from 'next';
-import { meta, posts } from './data';
+import fetchData from '@/helpers/fetchData';
 import { PostPage } from './postPage';
-// import { findPostBySlug } from './data';
+import getStorageFile from '@/helpers/getStorageFile';
+import { GetServerSidePropsContext } from 'next';
+import Dump from '@/impacte/Dump';
 
- export async function generateMetadata() {
-   return {
-     title: meta.title,
-     description: meta.description,
-     openGraph: {
-       title: meta.title,
-       description: meta.description,
-     },
-   };
- }
 
-// export async function getServerSideProps(context: GetServerSidePropsContext) {
-//   const slug = context.query.slug || null;
-//   const post = findPostBySlug(slug);
+export async function generateMetadata(slug: any) {
 
-//   if (!post) {
-//     return {
-//       notFound: true,
-//     };
-//   }
+  const data = await  fetchData(`blog/${slug?.params?.slug}`)
 
-//   return {
-//     props: {
-//       post,
-//     },
-//   };
-// }
+    return {
+      title:data?.post?.title,
+      description:data?.post?.resume,
+        openGraph: {
+          title:data?.post?.title,
+          description:data?.post?.resume,
+          images: [{
+            url: getStorageFile(data?.post?.file?.path),
+            width: data?.post?.file?.width,
+            height: data?.post?.file?.height,
+          },]
+        },
+    }
+  }
 
-export default function PostPageWrapper(props: any) {
+  export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const { slug } = context.query;
+    const meta = await generateMetadata(slug);
+    const page = await PostPageWrapper(slug);
+
   
-  const { post } = props;
+    return {
+      props: {
+        meta,
+        page,
+      },
+    };
+  }
 
-  return <PostPage post={posts[0]} />;
+export default async function PostPageWrapper(slug: any) {
+
+  const data = await fetchData(`blog/${slug?.params?.slug}`)
+
+  return (
+    <>
+      {/* <Dump obj={data} /> */}
+      <PostPage post={data} />
+    </>
+    )
 }

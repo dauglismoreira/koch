@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface SelectProps {
-  options: { label: string; value: string }[];
+  options: any;
   onChange: (selectedValue: string) => void;
   clearFilter:number;
+  label:string;
 }
 
-export const Select: React.FC<SelectProps> = ({ options, clearFilter, onChange }) => {
-  const [selectedValue, setSelectedValue] = useState(options[0].value);
+export const Select: React.FC<SelectProps> = ({ label, options, clearFilter, onChange }) => {
+  const [selectedValue, setSelectedValue] = useState('');
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newValue = event.target.value;
@@ -17,14 +18,15 @@ export const Select: React.FC<SelectProps> = ({ options, clearFilter, onChange }
   };
 
   useEffect(() => {
-    setSelectedValue(options[0].value)
+    setSelectedValue('')
   }, [clearFilter, options])
 
   return (
     <ContainerSelect><StyledSelect value={selectedValue} onChange={handleSelectChange}>
-      {options.map((option, index) => (
-        <option key={index} value={option.value} disabled={index === 0}>
-          {option.label}
+      <option value='' disabled>{label}</option>
+      {options && options.map((option : any, index : number) => (
+        <option key={index} value={option.id}>
+          {option.name}
         </option>
       ))}
     </StyledSelect></ContainerSelect>

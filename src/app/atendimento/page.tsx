@@ -1,44 +1,52 @@
+import getStorageFile from '@/helpers/getStorageFile';
 import {
     oportunitiesInfo,
     contactInfo,
     formInfo,
-    brokersList,
     formInputsLeft,
     formInputsRight,
-    phone,
-    email,
-    street,
-    city,
     opportunitiesButtons,
-    meta
   } from './data';
 import { ServicePage } from './servicePage';
+import fetchData from '@/helpers/fetchData';
+import Dump from '@/impacte/Dump';
 
 export async function generateMetadata() {
+  const data = await  fetchData('nosso-time')
+
     return {
-      title:meta.title,
-      description:meta.description,
+      title:data.page.title,
+      description:data.page.description,
         openGraph: {
-          title:meta.title,
-          description:meta.description,
+          title:data.page.title,
+          description:data.page.description,
+          images: [{
+            url: getStorageFile(data.page.file?.path),
+            width: data.page.file?.width,
+            height: data.page.file?.height,
+          },]
         },
     }
   }
 
-  export default function ServicePageWrapper() {
+  export default async function ServicePageWrapper() {
+    const data = await  fetchData('nosso-time')
+
     return (
+      <>
+        {/* <Dump obj={data} /> */}
         <ServicePage
-            opportunitiesButtons={opportunitiesButtons}
-            oportunitiesInfo={oportunitiesInfo}
-            contactInfo={contactInfo}
-            formInfo={formInfo}
-            brokersList={brokersList}
-            formInputsLeft={formInputsLeft}
-            formInputsRight={formInputsRight}
-            phone={phone}
-            email={email}
-            street={street}
-            city={city}
-        />
+              data={data.page.components}
+              collaborators={data.collaborators}
+              opportunitiesButtons={opportunitiesButtons}
+              oportunitiesInfo={oportunitiesInfo}
+              contactInfo={contactInfo}
+              formInfo={formInfo}
+              formInputsLeft={formInputsLeft}
+              formInputsRight={formInputsRight}
+              email_origin={data.contact.email}
+          />
+      </>
+
     );
 }

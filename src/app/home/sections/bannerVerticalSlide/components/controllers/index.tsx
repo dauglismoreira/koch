@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BannerImageProps } from '../..';
 
 interface ControllersProps {
-    images: string[];
+    images: BannerImageProps[];
     activeIndex: number;
     handleOptionClick: (index: number) => void;
 }

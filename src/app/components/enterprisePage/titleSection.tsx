@@ -4,13 +4,17 @@ import { HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
 import { Baskerville } from '@/app/fonts';
 
 interface EnterTitleSectionProps {
-    title:string;
-    title_high:string;
-    district:string;
-    city:string;
-    high_image:string;
-    enterprise_logo:string;
-    high_skills:HighSkills[];
+    title?:string;
+    title_high?:string;
+    district?:string;
+    city?:string;
+    high_image?:string;
+    enterprise_logo?:string;
+    high_skills?:{
+        parking_spaces?:string;
+        area?:string;
+        suites?:string;
+    };
 }
 
 export const EnterTitleSection: React.FC<EnterTitleSectionProps> = ({
@@ -29,22 +33,26 @@ export const EnterTitleSection: React.FC<EnterTitleSectionProps> = ({
                 <Col flex={4}>
                     <h5>{title_high}</h5>
                     <h1 className={`${Baskerville.className}`}>{title}</h1>
-                    <p>{district}, {city}</p>
+                    {(district && city) && <p>{district}, {city}</p>}
                 </Col>
                 <Col flex={2}>
+                    {enterprise_logo &&
                     <EnterpriseLogoContainer>
                         <EnterpriseLogo logo={enterprise_logo}></EnterpriseLogo>
                     </EnterpriseLogoContainer>
+                    }
                 </Col>
                 <Col flex={6}>
                     <HighSkillsContainer>
-                        {high_skills.map((skill, index) => (
-                            <HighSkillItem key={index}>{skill}</HighSkillItem>
-                        ))}
+                        <HighSkillItem>{high_skills && high_skills.suites}</HighSkillItem>
+                        <HighSkillItem>{high_skills && high_skills.parking_spaces}</HighSkillItem>
+                        <HighSkillItem>{high_skills && high_skills.area}</HighSkillItem>
                     </HighSkillsContainer>
                 </Col>
             </Row>
-            <Cover style={{backgroundImage:`url('${high_image}')`}}></Cover>
+            {high_image &&
+                <Cover style={{backgroundImage:`url('${high_image}')`}}></Cover>
+            }
         </TitleSection>
     )
 }

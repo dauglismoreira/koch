@@ -9,7 +9,7 @@ export default function useScrollPosition(elementId = '') {
 
     const handleScroll = () => {
         setScrollPosition(window.scrollY);
-
+        
         const elementToCheck = document.getElementById(elementId);
         if (elementToCheck) {
             const elementRect = elementToCheck.getBoundingClientRect();
@@ -22,7 +22,7 @@ export default function useScrollPosition(elementId = '') {
             }
         }
     };
-
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         setIsTopPage(window.scrollY > 0)
 
@@ -32,6 +32,7 @@ export default function useScrollPosition(elementId = '') {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+    /* eslint-disable react-hooks/exhaustive-deps */
 
     return {scrollPosition, isScrolledToElement, isTopPage};
 }

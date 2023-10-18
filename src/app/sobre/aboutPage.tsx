@@ -8,41 +8,47 @@ import { SectionSubTitle } from '../components/sectionSubTitle';
 import { Accordion } from '../components/accordion';
 import {AboutImageBanner} from '../components/aboutImageBanner';
 import SvgComponent from '../components/SvgComponent';
+import getStorageFile from '@/helpers/getStorageFile';
 
 interface AboutPageProps {
-    aboutItemsAccordion: any;
     aboutInfo: any;
-    aboutSecondInfo: any;
+    data: any;
 }
 
-export const AboutPage: React.FC<AboutPageProps> = ({ aboutItemsAccordion, aboutInfo, aboutSecondInfo }) => {
+export const AboutPage: React.FC<AboutPageProps> = ({ aboutInfo, data }) => {
 
     return (
         <AboutSectionContainer>
             <Section position="relative" className="section" background="var(--background-primary-variation)">
+                {data[0].title &&
                 <Container>
                     <Row className="break">
                         <Col flex={2}>
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-white)"/>
                         </Col>
                         <Col flex={10}>
-                            <SectionTitle text={aboutInfo && aboutInfo.title} color="var(--text-white)"/>
+                            <SectionTitle text={data && data[0].title} color="var(--text-white)"/>
                         </Col>
                     </Row>
                     <Row className="break">
                         <Col flex={2}></Col>
                         <Col flex={5}>
                             <Content>
-                                <SectionBodyText text={aboutInfo && aboutInfo.content} color="var(--text-white)"/>
-                                <Accordion data={aboutItemsAccordion}/>
+                                <SectionBodyText text={data && data[0].long_text} color="var(--text-white)"/>
+                               {data && data[0].differentials &&
+                                <Accordion data={data && data[0].differentials}/>
+                               }
                             </Content>
                         </Col>
                         <Col flex={5}>
-                            <BannerImage></BannerImage>
+                            <BannerImage image={data[0].mobile ? getStorageFile(data[0].mobile.path) : ''}></BannerImage>
                         </Col>
                     </Row>
                 </Container>
-                <AboutImageBanner data={aboutSecondInfo}/>
+                }
+                {data[1].desk &&
+                    <AboutImageBanner data={data && data[1]}/>
+                }
                 <SvgContainer>
                     <SvgComponent className="sv1" color="#182842" border="#182842"/>
                 </SvgContainer>
@@ -87,11 +93,11 @@ const Content = styled.div`
     }
 `;
 
-const BannerImage = styled.div`
+const BannerImage = styled.div<{image: string}>`
     margin:auto;
     width:80%;
     height:657px;
-    background-image:url('./images/about.png');
+    background-image:url('${props => props.image}');
     background-position: center center;
     background-size:cover;
 

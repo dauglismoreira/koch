@@ -4,9 +4,10 @@ import styled from 'styled-components';
 interface CheckContainerProps {
     onAcceptChange: (newAcceptValue: boolean) => void;
     color?: string;
+    data?:any;
 }
 
-export const CheckFormAccept: React.FC<CheckContainerProps> = ({ onAcceptChange, color }) =>{
+export const CheckFormAccept: React.FC<CheckContainerProps> = ({ data, onAcceptChange, color }) =>{
     const [accept, setAccept] = useState(false);
 
     const handleAcceptChange = () => {
@@ -20,7 +21,9 @@ export const CheckFormAccept: React.FC<CheckContainerProps> = ({ onAcceptChange,
                 checked={accept}
                 onChange={handleAcceptChange}
             ></input>
-            <label htmlFor="accept">A Koch Construtora respeita sua privacidade e utiliza seus dados pessoais para contatá-lo por e-mail ou telefone aqui registrados. Para saber mais, acesse nossa <a href="./../../termos">Política de Privacidade.</a><br></br>Ao clicar em &quot;Enviar&quot;, você concorda em permitir que a Koch Construtora armazene e processe dos dados pessoais fornecidos por você para a finalidade informada.</label>
+            <label htmlFor="accept">
+                <div dangerouslySetInnerHTML={{ __html: data && data.long_text }} />
+            </label>
         </CheckContainer>
     )
 }
@@ -38,5 +41,9 @@ const CheckContainer = styled.div<{color: string}>`
         width:20px;
         height:20px;
         margin-top:0;
+    }
+
+    p{
+        font-size:var(--mini-text-size)!important;
     }
 `;

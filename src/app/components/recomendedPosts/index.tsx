@@ -1,10 +1,11 @@
+import getStorageFile from '@/helpers/getStorageFile';
 import styled from 'styled-components';
 
 
 export interface PostRecommendedProps {
-    image:string,
+    file:any,
     title:string,
-    url:string,
+    slug:string,
 }
 
 interface PostPageProps {
@@ -20,10 +21,10 @@ export const RecommendedPosts: React.FC<PostPageProps> = ({data}) => {
             {data && data.map((post, index) => (
                 <PostContainer key={index}>
                     <Post>
-                        <Cover background={post.image}></Cover>
+                        <Cover background={getStorageFile(post.file.path)}></Cover>
                         <Info>
                             <PostTitle>{post.title}</PostTitle>
-                            <Link href={post.url} target="_parent">LEIA MAIS</Link>
+                            <Link href={post.slug} target="_parent">LEIA MAIS</Link>
                         </Info>
                     </Post>
                     <LineDivider></LineDivider>

@@ -7,6 +7,8 @@ import { OpportunityImagesSection } from '@/app/components/opportunityPage/image
 import { OpportunityAboutSection } from '@/app/components/opportunityPage/aboutSection';
 import { OpportunityTitleSection } from '@/app/components/opportunityPage/titleSection';
 import { OpportunityMenuSection } from '@/app/components/opportunityPage/meunSection';
+import { OpportunitiesSection } from '@/app/home/sections/opportunitiesSection';
+import { oportunitiesInfo, oppotunitiesButtons } from '@/app/home/data';
 
 export type HighSkills = (string | JSX.Element)[];
 export type AboutCharacteristics = (string | JSX.Element)[];
@@ -42,9 +44,10 @@ export type AboutCharacteristics = (string | JSX.Element)[];
 
   interface OpportunitiesProps {
     opportunity:any;
+    home?:any;
   }
 
-export const EnterPage: React.FC<OpportunitiesProps> = ({opportunity}) => {
+export const EnterPage: React.FC<OpportunitiesProps> = ({opportunity, home}) => {
 
     return (
         <EnterPageSectionContainer>
@@ -53,26 +56,50 @@ export const EnterPage: React.FC<OpportunitiesProps> = ({opportunity}) => {
                 <Container>
                     <OpportunityTitleSection
                         title={opportunity.title}
-                        district={opportunity.district}
-                        city={opportunity.city}
+                        district={opportunity.location_type.location_name}
+                        city={opportunity.city.name}
                         price={opportunity.price}
-                        high_image={opportunity.high_image}
-                        high_skills={opportunity.high_skills}
+                        high_image={opportunity.horizontal_image.path}
+                        suites={opportunity.suites}
+                        parking_spaces={opportunity.parking_spaces}
+                        area={opportunity.area}
                     />
-                    <div id="sobre"><OpportunityAboutSection
-                        about_skills={opportunity.about_skills}
-                        about_characteristics={opportunity.about_characteristics}
-                        about_image={opportunity.about_image}
-                    /></div>
+                    {(opportunity.vertical_image.path
+                    || opportunity.featured_features.length > 0
+                    || opportunity.differentials.length > 0) &&
+                      <>
+                        <div id="sobre"><OpportunityAboutSection
+                          about_skills={opportunity.differentials}
+                          about_characteristics={opportunity.featured_features}
+                          about_image={opportunity.vertical_image.path}
+                        /></div>
+                        <Row><LineDivider></LineDivider></Row>
+                      </>
+                    }
+                    {opportunity.galleries?.filter((gallery : any) => gallery.title === 'Progresso da obra')[0].files.length > 0 &&
+                    <>
+                      <div id="imagens"></div><OpportunityImagesSection
+                          data={opportunity.galleries?.filter((gallery : any) => gallery.title === 'Progresso da obra')[0].files}
+                      />
+                      <Row><LineDivider></LineDivider></Row>
+                    </>
+                    }
+                    {(opportunity.location_description
+                    || opportunity.location_type.location_name
+                    || opportunity.city.name
+                    || opportunity.map_iframe ) &&
+                      <div id="localizacao"><OpportunityLocalSection
+                          data={opportunity.location_description}
+                          district={opportunity.location_type.location_name}
+                          city={opportunity.city.name}
+                          map={opportunity.map_iframe}
+                      /></div>
+                    }
                     <Row><LineDivider></LineDivider></Row>
-                    <div id="imagens"></div><OpportunityImagesSection
-                        data={opportunity.enterprise_gallery}
-                    />
-                    <Row><LineDivider></LineDivider></Row>
-                    <div id="localizacao"><OpportunityLocalSection
-                        data={opportunity.localization}
-                        district={opportunity.district}
-                        city={opportunity.city}
+                    <div id="oportunidades"><OpportunitiesSection
+                      buttonsList={oppotunitiesButtons}
+                      info={oportunitiesInfo}
+                      data={home}
                     /></div>
                 </Container>
             </Section>
@@ -84,13 +111,24 @@ const EnterPageSectionContainer = styled.div`
     .section{
         padding:100px 0 0;
     }
+
+    #oportunidades{
+      padding-bottom:100px;
+    }
+
+    @media(max-width:768px){
+      #oportunidades{
+        padding-bottom:60px;
+        margin-top:-40px;
+      }
+    }
 `;
 
 const LineDivider = styled.div`
     width:100%;
     height:1px;
     background-color:var(--border-grey);
-    margin:40px 0;
+    margin:20px 0;
 
     @media(max-width:768px){
         margin:0 10px;

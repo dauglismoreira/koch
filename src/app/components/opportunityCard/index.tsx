@@ -1,31 +1,35 @@
 import { Baskerville } from '@/app/fonts';
 import styled from 'styled-components';
+import { CardCoverProps, CityProps, LocationProps } from '../enterpriseCard';
+import getStorageFile from '@/helpers/getStorageFile';
 
 export interface CardProps {
-    cover?: string;
-    name?: string;
-    city?: string;
-    district?: string;
-    suites?: string;
-    garage?: string;
+    title?: string;
+    slug?:string;
+    parking_spaces?: string;
     area?: string;
-    url?: string;
+    suites?: string;
+    status?:string;
+    vertical_image?: CardCoverProps;
+    location_type?: LocationProps;
+    city?: CityProps;
+    district?: string;
 }
 
 export const OpportunityCard: React.FC<{ data: CardProps }> = ({ data }) => {
-    const { cover, name, city, district, suites, garage, area, url } = data;
+    const { title, slug, city, district, suites, vertical_image, area, location_type, status, parking_spaces } = data;
     
     return (
         <Card>
-            <a href={`./../oportunidades/${url}`}><Cover
-                image={cover || ''}
+            <a href={`./../oportunidades/${slug}`}><Cover
+                image={vertical_image && getStorageFile(vertical_image.path) || ''}
             ></Cover>
             <Content>
-                <Name className={`${Baskerville.className}`}><h3>{name}</h3></Name>
-                <Place><p>{district}, {city}</p></Place>
+                <Name className={`${Baskerville.className}`}><h3>{title}</h3></Name>
+                <Place><p>{location_type?.location_name}, {city?.name}</p></Place>
                 <Skills>
                     <span>{suites}</span>
-                    <span>{garage}</span>
+                    <span>{parking_spaces}</span>
                     <span>{area}</span>
                 </Skills>
                 <Link>Veja mais</Link>

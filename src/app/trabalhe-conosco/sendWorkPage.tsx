@@ -5,28 +5,103 @@ import { Col, Container, Row, Section } from "../components/grid";
 import { SectionTitle } from '../components/sectionTitle';
 import { SectionBodyText } from '../components/sectionBodyText';
 import { SectionSubTitle } from '../components/sectionSubTitle';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InputGenerate, LocalFormData } from '../components/formGenerator';
 import { Mandatory } from '../components/formGenerator/components/notice';
 import { CheckFormAccept } from '../components/formGenerator/components/check';
 import SvgComponent from '../components/SvgComponent';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { getData } from '@/helpers/getData';
 
 interface SendWorkProps {
     aboutInfo:any;
     formInputs:any;
+    data:any;
+    dataForm:any;
+    dataValidate:any;
+}
+
+interface FormInput {
+    id:number;
+    name:string;
+    type:string;
+    differentials:any;
 }
 
 export const SendWorkPage: React.FC<SendWorkProps> = ({
         aboutInfo,
-        formInputs
+        formInputs,
+        dataValidate,
+        dataForm,
+        data
     }) => {
     const [formData, setFormData] = useState<LocalFormData>({});
     const [accept, setAccept] = useState(false);
+    const [inputs, setInputs] = useState([])
 
-      const handleFormSubmit = () => {
-        console.log(formData);
+    const handleFormSubmit = () => {
+        const combinedData = new FormData;
+
+        combinedData.append('origin', 'trabalhe_conosco')
+        // combinedData.append('department', dataForm?.email)
+        combinedData.append('department', 'dauglisc@gmail.com')
+
+        for (const key in formData) {
+            if (formData.hasOwnProperty(key)) {
+                const value = formData[key];
+                if (value instanceof File) {
+                    combinedData.append(key, value);
+                } else {
+                    combinedData.append(key, String(value));
+                }
+            }
+        }
+
+        getData('contact-send', combinedData)
+        .then(response => handleShowMessage(response))
     };
 
+    const MessageForm = withReactContent(Swal)
+
+    const handleShowMessage = (response:any) => {
+        if(response.success){
+            MessageForm.fire({
+                icon: 'success',
+                title: 'Mensagem enviada',
+                text: 'Em breve entraremos em contato',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }else{
+            MessageForm.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tivemos um problema, tente novamente mais tarde',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }
+/* eslint-disable react-hooks/exhaustive-deps */
+    useEffect(() => {
+        const novoObjeto = dataForm?.intentions.map((select: FormInput) => {
+            return {
+                placeholder: select.name,
+                name: 'choose_area',
+                type: "select",
+                options: select.differentials.map((option: { label: string }) => {
+                    return{
+                        label: option.label,
+                        value: option.label,
+                    }
+                }),
+            };
+        });
+    
+        setInputs(novoObjeto.concat(formInputs))
+    }, []);
+    /* eslint-disable react-hooks/exhaustive-deps */
 
     return (
         <SendWorkSectionContainer>
@@ -37,16 +112,16 @@ export const SendWorkPage: React.FC<SendWorkProps> = ({
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-primary)"/>
                         </Col>
                         <Col flex={10}>
-                            <SectionTitle text={aboutInfo && aboutInfo.title} color="var(--text-primary)"/>
+                            <SectionTitle text={data && data.text} color="var(--text-primary)"/>
                         </Col>
                     </Row>
                     <Row className="break">
                         <Col flex={2}></Col>
                         <Col flex={5}>
                             <Content>
-                                <SectionBodyText text={aboutInfo && aboutInfo.content} color="var(--text-secondary)"/>
+                                <SectionBodyText text={data && data.long_text} color="var(--text-secondary)"/>
                                 <InputGenerate
-                                    leftInputs={formInputs}
+                                    leftInputs={inputs}
                                     formData={formData}
                                     setFormData={setFormData}
                                     color="var(--text-primary)"
@@ -54,7 +129,7 @@ export const SendWorkPage: React.FC<SendWorkProps> = ({
                                 />
                                 <ActionContainer>
                                     <Mandatory color="var(--text-secondary)"/>
-                                    <CheckFormAccept color="var(--text-primary)"  onAcceptChange={setAccept}/>
+                                    <CheckFormAccept data={dataValidate} color="var(--text-primary)"  onAcceptChange={setAccept}/>
                                     {accept ?
                                         <ButtonContainer><button onClick={handleFormSubmit}>Enviar</button></ButtonContainer>
                                         :
@@ -78,7 +153,7 @@ export const SendWorkPage: React.FC<SendWorkProps> = ({
 const SendWorkSectionContainer = styled.div`
 
     .section{
-        padding:120px 0;
+        padding:120px 0 60px;
 
         @media(max-width:768px){
             padding:140px 0 40px;

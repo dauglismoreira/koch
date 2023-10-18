@@ -10,8 +10,8 @@ import { useState } from 'react';
 import { BsArrowLeft } from "react-icons/bs";
 
 interface EnterpriseFiltersProps {
-  citiesOptions: { label: string; value: string }[];
-  situationOptions: { label: string; value: string }[];
+  citiesOptions: any;
+  situationOptions: any;
   onCityChange: (selectedValue: string) => void;
   onSituationChange: (selectedValue: string) => void;
   onSearchChange: (textValue: string) => void;
@@ -26,6 +26,8 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
   onSearchChange,
   clearFilter
 }) => {
+
+  console.log()
 
     const [showModal, setShowModal] = useState(false);
     const [isOptionsListVisible, setIsOptionsListVisible] = useState(true);
@@ -70,6 +72,7 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
           <Row>
             <Col flex={2}>
               <Select
+                label={'Cidade'}
                 options={citiesOptions}
                 onChange={onCityChange}
                 clearFilter={clearFilter}
@@ -77,6 +80,7 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
             </Col>
             <Col flex={2}>
               <Select
+                label={'Situação'}
                 options={situationOptions}
                 onChange={onSituationChange}
                 clearFilter={clearFilter}
@@ -87,7 +91,7 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
                 placeholder="PESQUISAR"
                 icon={<FaSearch />}
                 onChange={onSearchChange}
-                param='textFilter'
+                param='search'
                 open={showModal}
                 clearFilter={clearFilter}
               />
@@ -127,17 +131,17 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
             >
               <SelectsList className={isOptionsListVisible ? 'slideRight' : 'slideLeft'}>
                 <FilterItem
-                  label={citiesOptions[0].label}
+                  label={ 'Cidade'}
                   options={citiesOptions}
                   onItemClick={CityHandleItemClick} 
-                  param='cityFilter'
+                  param='city'
                   open={showModal}
                 />
                 <FilterItem
-                  label={situationOptions[0].label}
+                  label={ 'Situação'}
                   options={situationOptions}
                   onItemClick={SituationHandleItemClick} 
-                  param='situationFilter'
+                  param='status'
                   open={showModal}
                 />
                 <FilterItemSearch className="search"></FilterItemSearch>

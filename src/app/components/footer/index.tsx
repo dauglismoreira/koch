@@ -14,24 +14,24 @@ export const Footer = () => {
 
     const isLargeScreen = useScreenSize(768)
 
-    const phone = '47999999999';
-    const email = 'koch@kockempreendimentos.com.br';
+    const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+    const email = process.env.NEXT_PUBLIC_EMAIL;
     const street = 'R. 210 - Meia Praia, Itapema';
     const city = 'Santa Catarina'; 
   
     const itemMenuList = [
-      {href:'./../sobre', text:'Sobre'},
+      {href:'./../sobre', text:'A Koch'},
       {href:'./../empreendimentos', text:'Empreendimentos'},
-      {href:'./../atendimento', text:'Central de vendas'},
+      {href:'./../atendimento', text:'Nosso time'},
       {href:'./../trabalhe-conosco', text:'Trabalhe conosco'},
       {href:'./../contato', text:'Contato'},
       {href:'./../blog', text:'Blog'}
     ]
   
     const itemSocialList = [
-      {href:'#', text:'Instagram'},
-      {href:'#', text:'Linkedin'},
-      {href:'#', text:'Youtube'}
+      {href:process.env.NEXT_PUBLIC_INSTAGRAM, text:'Instagram'},
+      {href:process.env.NEXT_PUBLIC_LINKEDIN, text:'Linkedin'},
+      {href:process.env.NEXT_PUBLIC_YOUTUBE, text:'Youtube'}
     ]
 
     return(

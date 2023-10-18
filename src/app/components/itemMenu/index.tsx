@@ -6,9 +6,10 @@ import styled from 'styled-components';
 interface ItemProps {
     href?: string;
     text?: string;
+    target?: string;
 }
 
-export const ItemMenu: React.FC<ItemProps> = ({href, text}) => {
+export const ItemMenu: React.FC<ItemProps> = ({href, text, target}) => {
 
     const [active, setActive] = useState(false)
 
@@ -19,7 +20,7 @@ export const ItemMenu: React.FC<ItemProps> = ({href, text}) => {
     }, [href])
 
     return(
-        <Link href={href} className={active ? 'active' : ''}>{text}</Link>
+        <Link href={href} target={target ? '_blank' : '_parent'} className={active ? 'active' : ''}>{text}</Link>
     )
 }
 

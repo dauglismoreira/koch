@@ -2,12 +2,19 @@ import styled from 'styled-components';
 import { Col, Row } from "../grid";
 import { SectionTitle } from '../sectionTitle';
 import { SectionSubTitle } from '../sectionSubTitle';
+import getStorageFile from '@/helpers/getStorageFile';
+
+interface AboutBannerImageProps {
+    path: string;
+    id: number;
+    alt: string;
+}
 
 interface AboutBannerProps {
     data: {
-        sectionTitle?: string;
+        text?: string;
         title?: string;
-        image?: string;
+        desk?: AboutBannerImageProps;
     };
 }
 
@@ -19,12 +26,13 @@ export const AboutImageBanner: React.FC<AboutBannerProps> = ({ data }) => {
                 <Col flex={2}></Col>
                 <Col flex={9}>
                     <Title>
-                        <SectionSubTitle text={data.sectionTitle}/>
-                        <SectionTitle size="24px"  text={data.title}/>
+                        <SectionSubTitle text={data.title}/>
+                        <SectionTitle size="24px"  text={data.text}/>
                     </Title>
                 </Col>
                 <Col flex={1}></Col>
             </Row>
+            {data && data.desk &&
             <Row>
                 <Col className="no-mobile-available" flex={2}>
                     <BannerLabel>
@@ -33,11 +41,12 @@ export const AboutImageBanner: React.FC<AboutBannerProps> = ({ data }) => {
                     </BannerLabel>
                 </Col>
                 <Col flex={9}>
-                    <ImageBanner data={data.image ? data.image : ''}></ImageBanner>
+                    <ImageBanner data={data.desk ? getStorageFile(data.desk.path) : ''}></ImageBanner>
                     <ImageLine></ImageLine>
                 </Col>
                 <Col className='no-mobile-available' flex={1}></Col>
             </Row>
+            }
         </AboutImageBannerContainer>
     )
 }

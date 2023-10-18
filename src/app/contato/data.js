@@ -34,7 +34,7 @@ export const meta = {
   };
 
   export  const itemSocialList = [
-    {href:'#', text:'Instagram'},
-    {href:'#', text:'Linkedin'},
-    {href:'#', text:'Youtube'}
+    {href:process.env.NEXT_PUBLIC_INSTAGRAM, text:'Instagram'},
+    {href:process.env.NEXT_PUBLIC_LINKEDIN, text:'Linkedin'},
+    {href:process.env.NEXT_PUBLIC_YOUTUBE, text:'Youtube'}
   ]

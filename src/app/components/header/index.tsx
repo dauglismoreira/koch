@@ -17,15 +17,15 @@ export const Header = () => {
     const isLargeScreen = useScreenSize(992)
 
     const itemMenuList: MenuItem[] = [
-        {href:'./../sobre', text:'Sobre'},
+        {href:'./../sobre', text:'A Koch'},
         {href:'./../empreendimentos', text:'Empreendimentos'},
         {href:'./../investidor', text:'Seja um investidor'},
-        {href:'./../atendimento', text:'Central de vendas'},
+        {href:'./../oportunidades', text:'Oportunidades'},
         {href:'./../contato', text:'Contato'}
     ]
 
     const itemMenuBurguerList: MenuItem[] = [
-        {href:'./../oportunidades', text:'Oportunidades'},
+        {href:'./../atendimento', text:'Nosso time'},
         {href:'./../permutas', text:'Permutas'},
         {href:'./../trabalhe-conosco', text:'Trabalhe conosco'},
         {href:'./../blog', text:'Blog'},
@@ -36,9 +36,9 @@ export const Header = () => {
     ]
 
     const itemSocialList: MenuItem[] = [
-        {href:'#', text:'Instagram'},
-        {href:'#', text:'Linkedin'},
-        {href:'#', text:'Youtube'}
+        {href:process.env.NEXT_PUBLIC_INSTAGRAM, text:'Instagram'},
+        {href:process.env.NEXT_PUBLIC_LINKEDIN, text:'Linkedin'},
+        {href:process.env.NEXT_PUBLIC_YOUTUBE, text:'Youtube'}
       ]
 
     return(
@@ -59,7 +59,7 @@ export const Header = () => {
 
                             </ContainerItemsMenu>
                             <Col>
-                                <CallNumber number='47999999999'/>
+                                <CallNumber number={process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}/>
                             </Col>
                             <ToogleMenu itemSocialList={itemSocialList} initial={itemInitial} itens={itemMenuList} burgerItens={itemMenuBurguerList}/>
                         </Row>

@@ -1,8 +1,3 @@
-export const meta = {
-    title:'Koch Empreendimentos',
-    description:'Venha fazer um bom negócio com a koch'
-  }
-
   export const aboutInfo = {
     sectionTitle:'oportunidades',
   };
@@ -16,11 +11,10 @@ export const meta = {
   ]
 
   export const situationOptions =[
-    { label: 'Tipo', value: '' },
-    { label: 'Opção 1', value: 'option1' },
-    { label: 'Opção 2', value: 'option2' },
-    { label: 'Opção 3', value: 'option3' },
-    { label: 'Opção 4', value: 'option4' },
+    { name: 'Na planta', value: 'Na planta' },
+    { name: 'Lançamento', value: 'Lançamento' },
+    { name: 'Em construção', value: 'Em construção' },
+    { name: 'Pronto para morar', value: 'Pronto para morar' },
   ]
 
   export const enterprises = [

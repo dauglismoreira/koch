@@ -1,30 +1,40 @@
 import {
-    aboutItemsAccordion,
     aboutInfo,
-    aboutSecondInfo,
-    meta
   } from './data';
 import { AboutPage } from './aboutPage';
+import fetchData from '@/helpers/fetchData';
+import Dump from '@/impacte/Dump';
+import getStorageFile from '@/helpers/getStorageFile';
 
 
 export async function generateMetadata() {
+  const data = await  fetchData('sobre')
+
     return {
-      title:meta.title,
-      description:meta.description,
+      title:data.page.title,
+      description:data.page.description,
         openGraph: {
-          title:meta.title,
-          description:meta.description,
+          title:data.page.title,
+          description:data.page.description,
+          images: [{
+            url: getStorageFile(data.page.file?.path),
+            width: data.page.file?.width,
+            height: data.page.file?.height,
+          },]
         },
     }
   }
-  
 
-  export default function AboutPageWrapper() {
+  export default async function AboutPageWrapper() {
+    const data = await  fetchData('sobre')
+
     return (
+      <>
+        {/* <Dump obj={data} /> */}
         <AboutPage
-            aboutItemsAccordion={aboutItemsAccordion}
             aboutInfo={aboutInfo}
-            aboutSecondInfo={aboutSecondInfo}
+            data={data.page.components}
         />
+      </>
     );
 }

@@ -15,15 +15,15 @@ export const FooterSocialMenu: React.FC<ItemProps> = ({items, activeBreak}) => {
         <SocialContainer>
             <Row>
                 <Col className="left">
-                    <ItemMenu href={items && items[0]?.href} text={items && items[0]?.text}/>
+                    <ItemMenu href={items && items[0]?.href} target="_blank" text={items && items[0]?.text}/>
                 </Col>
                 {!activeBreak && <Col><VerticalDivider margin="-25px 5px" height='72px'/></Col>}
                 <Col>
-                    <ItemMenu href={items && items[1]?.href} text={items && items[1]?.text}/>
+                    <ItemMenu href={items && items[1]?.href} target="_blank" text={items && items[1]?.text}/>
                 </Col>
                 {!activeBreak && <Col><VerticalDivider margin="-25px 5px" height='72px'/></Col>}
                 <Col className="right">
-                    <ItemMenu href={items && items[2]?.href} text={items && items[2]?.text}/>
+                    <ItemMenu href={items && items[2]?.href} target="_blank" text={items && items[2]?.text}/>
                 </Col>
             </Row>
         </SocialContainer>

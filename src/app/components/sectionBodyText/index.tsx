@@ -25,7 +25,7 @@ const TextContent = styled.div<{color: string}>`
         margin-bottom:20px;
     }
 
-    p {
+    p, div {
         color:${props => props.color};
         line-height:1.4;
         font-weight:var(--desktop-text-weight);

@@ -1,22 +1,29 @@
 'use client'
 
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Col, Container, Row, Section } from "../components/grid";
 import { SectionSubTitle } from '../components/sectionSubTitle';
 import { BlogCard, BlogCardProps } from '../components/blogCard';
 
 interface BlogProps {
     blogInfo:any;
-    blog:BlogCardProps[];
+    data:any;
+    loading:boolean;
 }
 
 export const BlogPage: React.FC<BlogProps> = ({
         blogInfo,
-        blog
+        data,
+        loading
     }) => {
 
     return (
-        <BlogPageContainer>
+        <BlogPageContainer id="get-more-items">
+            {loading &&
+              <SpinnerContainer>
+                <Spinner></Spinner>
+              </SpinnerContainer>
+            }
             <Section className="section" background="var(--background-secondary)">
                 <Container>
                     <Row className="break">
@@ -25,9 +32,11 @@ export const BlogPage: React.FC<BlogProps> = ({
                         </Col>
                         <Col flex={10}>
                             <BlogListContainer>
-                                {blog.map((post, index) => (
+                                {data.map((page: any) =>
+                                  page?.data.map((post:any, index:number) => (
                                     <BlogCard key={index} data={post} />
-                                ))}
+                                  ))
+                                )}
                             </BlogListContainer>
                         </Col>
                     </Row>
@@ -36,6 +45,34 @@ export const BlogPage: React.FC<BlogProps> = ({
         </BlogPageContainer>
     )
 }
+
+const SpinnerContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:fixed;
+    height:100vh;
+    width:100%;
+    backdrop-filter: blur(2px);
+    z-index:9;
+`;
+
+const spin = keyframes`
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+`;
+
+const Spinner = styled.div`
+    border: 4px solid var(--background-grey);
+    border-top: 4px solid var(--background-primary);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: ${spin} 1s linear infinite;
+`;
+
+SpinnerContainer.displayName = 'SpinnerContainer';
+Spinner.displayName = 'Spinner';
 
 const BlogPageContainer = styled.div`
   .section {

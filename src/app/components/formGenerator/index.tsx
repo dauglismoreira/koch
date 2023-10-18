@@ -15,22 +15,33 @@ interface FormInput {
 }
 
 export interface LocalFormData {
-    [key: string]: string;
+    [key: string]: string | File | null;
 }
 
 interface InputProps {
     leftInputs: FormInput[];
     rightInputs?: FormInput[];
-    formData: LocalFormData;
+    formData: any;
     color: string;
     singleColumn?: boolean;
-    setFormData: (data: LocalFormData) => void;
+    setFormData: (data: any) => void;
+    dataForm?:any;
 }
 
-export const InputGenerate: React.FC<InputProps> = ({ leftInputs, singleColumn, rightInputs, formData, color, setFormData }) => {
+export const InputGenerate: React.FC<InputProps> = ({ dataForm, leftInputs, singleColumn, rightInputs, formData, color, setFormData }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const { name, value, type } = e.target;
+
+        if (type === 'file') {
+            const fileInput = e.target as HTMLInputElement;
+            const file = fileInput.files && fileInput.files[0];
+
+            if (file) {
+                setFormData({ ...formData, [name]: file });
+            }
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     return (

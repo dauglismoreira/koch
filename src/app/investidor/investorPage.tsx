@@ -5,25 +5,90 @@ import { Col, Container, Row, Section } from "../components/grid";
 import { SectionTitle } from '../components/sectionTitle';
 import { SectionBodyText } from '../components/sectionBodyText';
 import { SectionSubTitle } from '../components/sectionSubTitle';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InputGenerate, LocalFormData } from '../components/formGenerator';
 import {CheckFormAccept} from '../components/formGenerator/components/check';
 import {Mandatory} from '../components/formGenerator/components/notice';
 import SvgComponent from '../components/SvgComponent';
+import { getData } from '@/helpers/getData';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 interface InvestorPageProps {
     aboutInfo:any;
     formInputs:any;
+    data:any;
+    dataForm:any;
+    dataValidate:any;
 }
 
-export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInputs}) => {
+interface FormInput {
+    id:number;
+    name:string;
+    type:string;
+    differentials:any;
+}
+
+export const InvestorPage: React.FC<InvestorPageProps> = ({ data, dataForm, dataValidate, aboutInfo, formInputs}) => {
     const [formData, setFormData] = useState<LocalFormData>({});
     const [accept, setAccept] = useState(false);
+    const [inputs, setInputs] = useState([])
 
     const handleFormSubmit = () => {
-        console.log(formData);
+        const origin = {
+            origin:'pagina_seja_um_investidor',
+            department: dataForm?.email,
+        }
+
+        const combinedData = {
+            ...formData,
+            ...origin,
+          };
+        
+          getData('contact-send', combinedData)
+          .then(response => handleShowMessage(response))
     };
 
+    const MessageForm = withReactContent(Swal)
+
+    const handleShowMessage = (response:any) => {
+        if(response.success){
+            MessageForm.fire({
+                icon: 'success',
+                title: 'Mensagem enviada',
+                text: 'Em breve entraremos em contato',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }else{
+            MessageForm.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tivemos um problema, tente novamente mais tarde',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }
+/* eslint-disable react-hooks/exhaustive-deps */
+    useEffect(() => {
+        const novoObjeto = dataForm?.intentions.map((select: FormInput) => {
+            return {
+                placeholder: select.name,
+                name: select.id === 1 ? 'profile_investor' : 'investment_type',
+                type: "select",
+                options: select.differentials.map((option: { label: string }) => {
+                    return{
+                        label: option.label,
+                        value: option.label,
+                    }
+                }),
+            };
+        });
+    
+        setInputs(novoObjeto.concat(formInputs))
+    }, []);
+/* eslint-disable react-hooks/exhaustive-deps */
     return (
         <InvestorPageSectionContainer>
             <Section position='relative'className="section" background="var(--background-secondary-variation)">
@@ -33,16 +98,17 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-white)"/>
                         </Col>
                         <Col flex={10}>
-                            <SectionTitle text={aboutInfo && aboutInfo.title} color="var(--text-white)"/>
+                            <SectionTitle text={data && data.text} color="var(--text-white)"/>
                         </Col>
                     </Row>
                     <Row className="break">
                         <Col flex={2}></Col>
                         <Col flex={10}>
                             <Content>
-                                <SectionBodyText text={aboutInfo && aboutInfo.content} color="var(--text-white)"/>
+                                <SectionBodyText text={data && data.long_text} color="var(--text-white)"/>
                                 <InputGenerate
-                                    leftInputs={formInputs}
+                                    dataForm={dataForm}
+                                    leftInputs={inputs}
                                     formData={formData}
                                     setFormData={setFormData}
                                     color="var(--text-white)"
@@ -55,7 +121,7 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
                         <Col flex={5}>
                             <ActionContainer>
                                 <Mandatory color="var(--text-white)"/>
-                                <CheckFormAccept color="var(--text-white)"  onAcceptChange={setAccept}/>
+                                <CheckFormAccept data={dataValidate} color="var(--text-white)"  onAcceptChange={setAccept}/>
                                 {accept ?
                                     <ButtonContainer><button onClick={handleFormSubmit}>Enviar</button></ButtonContainer>
                                     :
@@ -76,7 +142,7 @@ export const InvestorPage: React.FC<InvestorPageProps> = ({ aboutInfo, formInput
 
 const InvestorPageSectionContainer = styled.div`
     .section{
-        padding:120px 0;
+        padding:120px 0 80px;
 
         @media(max-width:768px){
             padding:140px 0 40px;

@@ -1,48 +1,47 @@
+import React from 'react';
 import styled from 'styled-components';
 
 interface ContactInfosProps {
-    phone?:string;
-    street?:string;
-    city?:string;
-    email?:string;
+    local?:any;
+    phone?:any;
+    hour?:any;
+    email?:any;
 }
 
-export const ContactInfos: React.FC<ContactInfosProps> = ({ phone, street, city, email }) => {
+export const ContactInfos: React.FC<ContactInfosProps> = ({ local, phone, hour, email }) => {
 
     return (
        <>
         <InfoContactContainer>
             <InfoTitle>
-                <h5>Endereço</h5>
+                <h5>{local.title}</h5>
             </InfoTitle>
             <InfoContent>
-                <p>{street}</p>
-                <p>{city}</p>
+                <p>{local.text}</p>
             </InfoContent>
         </InfoContactContainer>
         <InfoContactContainer>
             <InfoTitle>
-                <h5>Horário de atendimento</h5>
+                <h5>{hour.title}</h5>
             </InfoTitle>
             <InfoContent>
-                <p>Segunda a sábado das 9h às 19h</p>
-                <p>Domingos e feriados das 10h às 18h</p>
+                <p>{hour.text}</p>
             </InfoContent>
         </InfoContactContainer>
         <InfoContactContainer>
             <InfoTitle>
-                <h5>Telefone</h5>
+                <h5>{phone.title}</h5>
             </InfoTitle>
             <InfoContent>
-                <p>{phone}</p>
+                <p>{phone.text}</p>
             </InfoContent>
         </InfoContactContainer>
         <InfoContactContainer>
             <InfoTitle>
-                <h5>Email</h5>
+                <h5>{email.title}</h5>
             </InfoTitle>
             <InfoContent>
-                <p>{email}</p>
+                <p>{email.text}</p>
             </InfoContent>
         </InfoContactContainer>
        </>
@@ -77,6 +76,7 @@ const InfoContent = styled.div`
         color:var(--text-secondary);
         font-size:var(--desktop-text-size);
         font-weight:var(--desktop-text-size);
+        white-space: pre-line;
     }
 
     @media(max-width:768px){

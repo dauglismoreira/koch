@@ -3,7 +3,7 @@ import {getData} from "@/helpers/getData";
 
 export default function useFeedList(path) {
     const [feed, setFeed] = useState([])
-    const [nextPage, setNextPage] = useState(null)
+    const [nextPage, setNextPage] = useState([])
     const [loading, setLoading] = useState(true)
     const [getResponse, setResponse] = useState([])
 

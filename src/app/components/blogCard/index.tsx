@@ -1,16 +1,25 @@
+import getStorageFile from '@/helpers/getStorageFile';
 import styled from 'styled-components';
 
+interface BlogCardImageProps {
+    id?: number;
+    path?: string;
+    alt?: string;
+}
+
 export interface BlogCardProps {
-    cover?: string;
+    id?: number;
     title?: string;
+    slug?: string;
+    resume?: string;
     content?: string;
-    link?: string;
+    file?: BlogCardImageProps;
 }
 
 const MAX_TEXT_LENGTH = 60;
 
 export const BlogCard: React.FC<{ data: BlogCardProps }> = ({ data }) => {
-    const { cover, title, content, link } = data;
+    const { title, slug, resume, file } = data;
 
     const truncateText = (text: string | undefined, maxLength: number) => {
         if (!text) return '';
@@ -21,12 +30,12 @@ export const BlogCard: React.FC<{ data: BlogCardProps }> = ({ data }) => {
         }
     };
 
-    const truncatedContent = truncateText(content, MAX_TEXT_LENGTH);
+    const truncatedContent = truncateText(resume, MAX_TEXT_LENGTH);
     
     return (
         <Card>
-            <a href={`./../blog/${link}`}><Cover
-                image={cover || ''}
+            <a href={`./../blog/${slug}`}><Cover
+                image={file ? getStorageFile(file.path) : ''}
             ></Cover>
             <Content>
                 <Name><h3>{title}</h3></Name>

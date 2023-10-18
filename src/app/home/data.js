@@ -1,49 +1,3 @@
-export const meta = {
-  title:'Koch Empreendimentos',
-  description:'Venha fazer um bom negócio com a koch'
-}
-
-export const bannerImages = [
-    './tmp/banner(1583x910).webp',
-    './tmp/banner(1583x910).webp',
-    './tmp/banner(1583x910).webp'
-  ];
-
-  export const enterprises = [
-    {
-        cover:'./tmp/image(462x524).webp',
-        high:'Lançamento',
-        name:'Residencial constantino',
-        city:'Itapema',
-        district:'Morretes',
-        suites:'1 ou 2 suítes',
-        garage:'1 vaga',
-        area: 'até 69,69 m²',
-        url: 'teste'
-    },
-    {
-      cover:'./tmp/image(462x524).webp',
-      high:'Lançamento',
-      name:'Residencial constantino',
-      city:'Itapema',
-      district:'Morretes',
-      suites:'1 ou 2 suítes',
-      garage:'1 vaga',
-      area: 'até 69,69 m²',
-      url: 'teste'
-    },
-    {
-      cover:'./tmp/image(462x524).webp',
-      high:'Lançamento',
-      name:'Residencial constantino',
-      city:'Itapema',
-      district:'Morretes',
-      suites:'1 ou 2 suítes',
-      garage:'1 vaga',
-      area: 'até 69,69 m²',
-      url: 'teste'
-    }
-  ];
 
   export const enterpriseInfo = {
     title:`Moldando\no horizonte`,
@@ -52,23 +6,6 @@ export const bannerImages = [
     link:'empreendimentos'
   };
 
-  export const aboutItemsAccordion = [
-    {
-      title: 'Missão',
-      description:
-        'Entregar empreendimentos que transcendem o conceito de alto padrão, estabelecendo conexões com nossos clientes e permitindo que criem memórias que, assim como seus investimentos, perpetuam por toda a eternidade.',
-    },
-    {
-    title: 'Visão',
-    description:
-        'Entregar empreendimentos que transcendem o conceito de alto padrão, estabelecendo conexões com nossos clientes e permitindo que criem memórias que, assim como seus investimentos, perpetuam por toda a eternidade.',
-    },
-    {
-    title: 'Valores',
-    description:
-        'Entregar empreendimentos que transcendem o conceito de alto padrão, estabelecendo conexões com nossos clientes e permitindo que criem memórias que, assim como seus investimentos, perpetuam por toda a eternidade.',
-    },
-  ];
 
   export const aboutInfo = {
     sectionTitle:'Conheça a Koch',
@@ -80,20 +17,14 @@ export const bannerImages = [
   export const oppotunitiesButtons = [
     {
       label: 'Email',
-      link: '#'
+      link: 'mailto:' + process.env.NEXT_PUBLIC_EMAIL,
+      extern: 1
     },
     {
       label: 'Whatsapp',
-      link: '#'
-    },
-    {
-      label: 'Falar com um corretor',
-      link: 'atendimento'
-    },
-    {
-      label: 'Central de vendas',
-      link: 'atendimento'
-    },
+      link: 'https://api.whatsapp.com/send?phone=55' + process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
+      extern: 1
+    }
   ];
 
   export const oportunitiesInfo = {
@@ -121,24 +52,3 @@ export const bannerImages = [
     cta:'Mais notícias',
     link:'blog'
   };
-
-  export const blog = [
-    {
-        cover:'./tmp/image(330x193).webp',
-        title:'Conheça a história da Koch Construtora e Incorporadora.',
-        content:'Moldando horizontes, essa é a essência da Kock, que deixa um kajdlaskdhak adkljaskldja aksldjajlkd klasjdlkjasd',
-        link:'teste'
-    },
-    {
-      cover:'./tmp/image(330x193).webp',
-      title:'Residencial Constantino, a imponência do neoclássico chega ao Morretes',
-      content:'Nosso primeiro empreendimento. Foi escolhido para ser nosso primogê kajdlaskdhak adkljaskldja aksldjajlkd klasjdlkjasd',
-      link:'teste'
-    },
-    {
-      cover:'./tmp/image(330x193).webp',
-      title:'Conheça as oportunidades e viva tudo que Itapema tem para te oferecer.',
-      content:'Itapema é uma das cidades com maior destaque no cenário nacional kajdlaskdhak adkljaskldja aksldjajlkd klasjdlkjasd',
-      link:'teste'
-    },
-  ];

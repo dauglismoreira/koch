@@ -1,31 +1,35 @@
-import { EnterprisePage } from './enterprisePage';
-import {
-    situationOptions,
-    aboutInfo,
-    citiesOptions,
-    enterprises,
-    meta
-  } from './data';
+import fetchData from '@/helpers/fetchData';
+import getStorageFile from '@/helpers/getStorageFile';
+import Dump from '@/impacte/Dump';
+import List from './List';
+import { situationOptions } from './data';
 
-export async function generateMetadata() {
-    return {
-      title:meta.title,
-      description:meta.description,
-        openGraph: {
-          title:meta.title,
-          description:meta.description,
-        },
+  export async function generateMetadata() {
+    const data = await  fetchData('empreendimentos')
+  
+      return {
+        title:data.page.title,
+        description:data.page.description,
+          openGraph: {
+            title:data.page.title,
+            description:data.page.description,
+            images: [{
+              url: getStorageFile(data.page.file?.path),
+              width: data.page.file?.width,
+              height: data.page.file?.height,
+            },]
+          },
+      }
     }
-  }
   
 
-  export default function EnterprisesPageWrapper() {
+  export default async function EnterprisesPageWrapper() {
+    const data = await  fetchData('empreendimentos-feed')
+
     return (
-        <EnterprisePage
-            situationOptions={situationOptions}
-            aboutInfo={aboutInfo}
-            citiesOptions={citiesOptions}
-            enterprises={enterprises}
-        />
+      <>
+        {/* <Dump obj={data} /> */}
+        <List cities={data.cities} status={situationOptions}/>
+      </>  
     );
 }

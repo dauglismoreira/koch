@@ -6,7 +6,9 @@ import { SectionSubTitle } from '../sectionSubTitle';
 
 interface EnterAboutSectionProps {
     about_text: string;
-    about_characteristics: AboutCharacteristics;
+    about_characteristics: {
+        label: string;
+    }[];
     about_image: string;
 }
 
@@ -27,8 +29,8 @@ export const EnterAboutSection: React.FC<EnterAboutSectionProps> = ({
                         <SectionBodyText text={about_text} color="var(--text-secondary)"/>
                         <LineDivider></LineDivider>
                         <SkillsList>
-                            {about_characteristics.map((item, index) => (
-                                <li key={index}>━ {item}</li>
+                            {about_characteristics?.map((item, index) => (
+                                <li key={index}>━ {item.label}</li>
                             ))}
                         </SkillsList>
                         <LineDivider className='no-mobile-available'></LineDivider>
@@ -44,7 +46,7 @@ export const EnterAboutSection: React.FC<EnterAboutSectionProps> = ({
 
 
 const AboutSection = styled.div`
-    padding:140px 0;
+    padding:100px 0;
 
     @media(max-width:768px){
         padding:60px 0;

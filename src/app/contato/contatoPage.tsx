@@ -4,13 +4,14 @@ import styled from 'styled-components';
 import { Col, Container, Row, Section } from "../components/grid";
 import { SectionSubTitle } from '../components/sectionSubTitle';
 import useScreenSize from '../../hooks/useScreenSize';
-import { SectionBodyText } from '../components/sectionBodyText';
 import { SectionTitle } from '../components/sectionTitle';
 import { useState } from 'react';
-import Maps from '../components/map';
 import { InputGenerate, LocalFormData } from '../components/formGenerator';
 import { Mandatory } from '../components/formGenerator/components/notice';
 import { CheckFormAccept } from '../components/formGenerator/components/check';
+import { getData } from '@/helpers/getData';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 interface SocialLinksProps {
     text:string;
@@ -20,12 +21,20 @@ interface SocialLinksProps {
 interface ContatoPageProps {
     formInputs:any;
     contactInfo:any;
+    data:any;
+    dataForm:any;
+    dataValidate:any;
+    dataLocal:any;
     itemSocialList:SocialLinksProps[];
 }
 
 export const ContatoPage: React.FC<ContatoPageProps> = ({
+        data,
+        dataForm,
+        dataValidate,
         formInputs,
         contactInfo,
+        dataLocal,
         itemSocialList,
     }) => {
     const isLargeScreen = useScreenSize(768);
@@ -33,12 +42,45 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
     const [accept, setAccept] = useState(false);
 
       const handleFormSubmit = () => {
-        console.log(formData);
+        const origin = {
+            origin:'pagina_contato',
+            department: dataForm?.email,
+        }
+
+        const combinedData = {
+            ...formData,
+            ...origin,
+          };
+        
+          getData('contact-send', combinedData)
+          .then(response => handleShowMessage(response))
     };
+    
+    const MessageForm = withReactContent(Swal)
+
+    const handleShowMessage = (response:any) => {
+        if(response.success){
+            MessageForm.fire({
+                icon: 'success',
+                title: 'Mensagem enviada',
+                text: 'Em breve entraremos em contato',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }else{
+            MessageForm.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tivemos um problema, tente novamente mais tarde',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }
 
     return (
         <ContatoPageSectionContainer>
-            <Section padding={!isLargeScreen.isLargeScreen ? "120px 10px 60px" : "120px 0"} background="var(--background-primary-variation)">
+            <Section padding={!isLargeScreen.isLargeScreen ? "120px 10px 60px" : "120px 0 60px"} background="var(--background-primary-variation)">
                 <Container>
                     <Row breakpoint={!isLargeScreen.isLargeScreen}>
                         <Col flex={2}>
@@ -47,9 +89,9 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                         <Col flex={7}>
                             <ContentContact>
                                 <div>
-                                    <SectionTitle text={contactInfo.title} color="var(--text-white)"/>
+                                    <SectionTitle text={data.text} color="var(--text-white)"/>
                                     {/* <SectionBodyText  text={contactInfo.content} color="var(--text-white)"/> */}
-                                    <p>Preencha os campos abaixo para falar com a gente.</p>
+                                    <div dangerouslySetInnerHTML={{ __html: data && data.long_text }} />
                                 </div>
                             </ContentContact>
                         </Col>
@@ -75,7 +117,7 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                             </ContainerForm>
                             <ContainerActionForm>
                                 <Mandatory color="var(--text-white)"/>
-                                <CheckFormAccept color="var(--text-white)"  onAcceptChange={setAccept}/>
+                                <CheckFormAccept data={dataValidate} color="var(--text-white)"  onAcceptChange={setAccept}/>
                                     {accept ?
                                         <ButtonContainer><button onClick={handleFormSubmit}>Enviar</button></ButtonContainer>
                                         :
@@ -84,12 +126,14 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                             </ContainerActionForm>
                         </Col>
                         <Col flex={5}>
-                            <Maps
-                                latI={-27.120616076517972}
-                                lngI={-48.6081570743573}
-                                zoomLevel={16}
-                            />
-                            <Local>R. 210 - Meia Praia, Itapema - Santa Catarina</Local>
+                            {dataLocal.iframe &&
+                                <Map>
+                                    <div dangerouslySetInnerHTML={{ __html: dataLocal && dataLocal.iframe }} />
+                                </Map>
+                            }
+                            {dataLocal.text &&
+                                <Local>{dataLocal && dataLocal.text}</Local>
+                            }
                         </Col>
                         {!isLargeScreen.isLargeScreen && <Col flex={4}>
                             <SocialLinks>
@@ -246,5 +290,16 @@ const Local = styled.div`
     @media(max-width:768px){
         margin:30px 10px 0;
         width:calc(100% - 20px);
+    }
+`;
+
+const Map = styled.div`
+    iframe{
+        width:100%;
+        height: 480px;
+
+        @media screen and (max-width: 799px) {
+            height:300px;
+        }
     }
 `;

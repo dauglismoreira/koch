@@ -3,8 +3,8 @@ import {useState, useEffect} from 'react';
 import { useInView } from 'react-intersection-observer';
 
 interface ProgressBarProps {
-    label:string;
-    progress:number;
+    label?:string;
+    progress?:number;
 }
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
@@ -19,7 +19,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     });
 
     useEffect(() => {
-        if (inView) {
+        if (inView && progress) {
             setTimeout(() => {
                 const animationDuration = 2000;
                 const frames = animationDuration / 100;
@@ -42,8 +42,8 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         <ContainerProgressStage ref={ref}>
             <Title>{label}</Title>
             <ProgressBarContainer>
-                <Progress status={progressEnd}></Progress>
-                <Value>{progressEnd}%</Value>
+                <Progress status={Math.ceil(progressEnd)}></Progress>
+                <Value>{Math.ceil(progressEnd)}%</Value>
             </ProgressBarContainer>
         </ContainerProgressStage>
     )

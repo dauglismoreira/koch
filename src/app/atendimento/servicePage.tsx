@@ -8,24 +8,24 @@ import { SectionBodyText } from '../components/sectionBodyText';
 import { SectionTitle } from '../components/sectionTitle';
 import { BrokerCard, CardProps } from '../components/brokerCard';
 import { useState } from 'react';
-import Maps from '../components/map';
 import { InputGenerate, LocalFormData } from '../components/formGenerator';
 import {Mandatory} from '../components/formGenerator/components/notice';
 import { CheckFormAccept } from '../components/formGenerator/components/check';
 import { ContactInfos } from '../components/contactInfos';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { getData } from '@/helpers/getData';
 
 interface ServicePageProps {
     opportunitiesButtons:any;
     oportunitiesInfo:any;
     contactInfo:any;
     formInfo:any;
-    brokersList:CardProps[];
     formInputsLeft:any;
     formInputsRight:any;
-    phone:string;
-    email:string;
-    street:string;
-    city:string;
+    data:any;
+    collaborators?:any;
+    email_origin?:string;
 }
 
 export const ServicePage: React.FC<ServicePageProps> = ({
@@ -33,21 +33,52 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         opportunitiesButtons,
         contactInfo,
         formInfo,
-        brokersList,
         formInputsLeft,
         formInputsRight,
-        phone,
-        email,
-        street,
-        city
+        data,
+        collaborators,
+        email_origin
     }) => {
         
     const [formData, setFormData] = useState<LocalFormData>({});
     const [accept, setAccept] = useState(false);
 
     const handleFormSubmit = () => {
-        console.log(formData);
+        const origin = {
+            origin:'pagina_nosso_time',
+            department: email_origin,
+        }
+
+        const combinedData = {
+            ...formData,
+            ...origin,
+          };
+        
+          getData('contact-send', combinedData)
+          .then(response => handleShowMessage(response))
     };
+
+    const MessageForm = withReactContent(Swal)
+
+    const handleShowMessage = (response:any) => {
+        if(response.success){
+            MessageForm.fire({
+                icon: 'success',
+                title: 'Mensagem enviada',
+                text: 'Em breve entraremos em contato',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }else{
+            MessageForm.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tivemos um problema, tente novamente mais tarde',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }
 
     return (
         <ContainerServicePage>
@@ -60,8 +91,8 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                     <Col flex={10}>
                         <Content>
                             <Title>
-                                <SectionTitle text={oportunitiesInfo.title} color="var(--text-primary)"/>
-                                <SectionBodyText  text={oportunitiesInfo.content} color="var(--text-secondary)"/>
+                                <SectionTitle text={data && data[0].title} color="var(--text-primary)"/>
+                                <SectionBodyText  text={data && data[0].text} color="var(--text-secondary)"/>
                             </Title>
                             <ContainerButtons color="var(--text-white)" background="var(--text-primary)" buttonsList={opportunitiesButtons}/>
                         </Content>
@@ -71,7 +102,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                     <Col className="mobile-no-available" flex={2}></Col>
                     <Col flex={10}>
                         <BrokersListContainer>
-                            {brokersList.map((broker, index) => (
+                            {collaborators && collaborators.map((broker : any, index : number) => (
                                 <BrokerCard key={index} data={broker} />
                             ))}
                         </BrokersListContainer>
@@ -87,28 +118,24 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                     <Col flex={10}>
                         <Content>
                             <Title>
-                                <SectionTitle size="24px" text={contactInfo.title} color="var(--text-primary)"/>
-                                <SectionBodyText  text={contactInfo.content} color="var(--text-secondary)"/>
+                                <SectionTitle size="24px" text={data && data[1].title} color="var(--text-primary)"/>
+                                <SectionBodyText  text={data && data[1].text} color="var(--text-secondary)"/>
                             </Title>
                         </Content>
                     </Col>
                 </Row>
                 <Row  className="break-row">
                     <Col flex={2}></Col>
-                    <Col flex={4}>
+                    <Col flex={4} className="info-container">
                         <ContactInfos
-                            phone={phone}
-                            city={city}
-                            street={street}
-                            email={email}
+                            local={data && data[2]}
+                            hour={data && data[3]}
+                            phone={data && data[4]}
+                            email={data && data[5]}
                         />
                     </Col>
                     <Col flex={6}>
-                        <Maps
-                            latI={-27.120616076517972}
-                            lngI={-48.6081570743573}
-                            zoomLevel={16}
-                        />
+                        <div dangerouslySetInnerHTML={{ __html: data && data[6].iframe }} />
                     </Col>
                 </Row>
                 <Row>
@@ -121,8 +148,8 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                     <Col flex={10}>
                         <Content>
                             <Title>
-                                <SectionTitle size="24px" text={formInfo.title} color="var(--text-primary)"/>
-                                <SectionBodyText  text={formInfo.content} color="var(--text-secondary)"/>
+                                <SectionTitle size="24px" text={data && data[7].title} color="var(--text-primary)"/>
+                                <SectionBodyText  text={data && data[7].text} color="var(--text-secondary)"/>
                             </Title>
                         </Content>
                     </Col>
@@ -144,7 +171,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                     <Col flex={10}>
                         <ActionContainer>
                             <Mandatory color="var(--text-primary)"/>
-                            <CheckFormAccept  onAcceptChange={setAccept} color="var(--text-primary)"/>
+                            <CheckFormAccept data={data[7]}  onAcceptChange={setAccept} color="var(--text-primary)"/>
                                 {accept ?
                                     <ButtonContainer><button onClick={handleFormSubmit}>Enviar</button></ButtonContainer>
                                     :
@@ -173,6 +200,12 @@ const ContainerServicePage = styled.div`
     .mobile-no-available{
         @media(max-width:768px){
             display:none;
+        }
+    }
+
+    @media(max-width:768px){
+        .info-container{
+            width:100%;
         }
     }
 `;
