@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import useScreenSize from '@/hooks/useScreenSize';
 
 export interface MenuItem {
-    href: string;
+    href: any;
     text: string;
 }
 

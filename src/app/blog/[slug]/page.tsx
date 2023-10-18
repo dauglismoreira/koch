@@ -24,19 +24,13 @@ export async function generateMetadata(slug: any) {
     }
   }
 
-  export async function getServerSideProps(context: GetServerSidePropsContext) {
+  PostPageWrapper.getInitialProps = async (context:any) => {
     const { slug } = context.query;
-    const meta = await generateMetadata(slug);
-    const page = await PostPageWrapper(slug);
-
+    const meta = await generateMetadata(`blog/${slug?.params?.slug}`);
+    const page = await fetchData(`blog/${slug?.params?.slug}`);
   
-    return {
-      props: {
-        meta,
-        page,
-      },
-    };
-  }
+    return { meta, page };
+  };
 
 export default async function PostPageWrapper(slug: any) {
 

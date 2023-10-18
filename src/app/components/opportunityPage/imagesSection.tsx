@@ -49,7 +49,7 @@ export const OpportunityImagesSection: React.FC<OpportunityImagesSectionProps> =
 
     return (
         <ImagesSection>
-            <Row breakpoint={!isLargeScreen.isLargeScreen}>
+            <Row breakpoint={!isLargeScreen.isLargeScreen ? "true" : 'false'}>
                 <Col flex={2}>
                     <SectionSubTitle text={`Imagens\ndo empreendimento`} color="var(--text-secondary)"/>
                     <small>Clique para ampliar as imagens</small>
@@ -93,7 +93,7 @@ export const OpportunityImagesSection: React.FC<OpportunityImagesSectionProps> =
                                 <SwiperSlide key={index}>
                                     <Fancybox
                                         options={{ infinite: false }}
-                                        href={image.url}
+                                        href={getStorageFile(image.path)}
                                         delegate="[data-fancybox='gallery']"
                                     >
                                         <Image

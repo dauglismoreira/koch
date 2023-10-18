@@ -5,7 +5,7 @@ import { Col, Container, Row, Section } from "../components/grid";
 import { SectionSubTitle } from '../components/sectionSubTitle';
 import { CardProps, EnterpriseCard } from '../components/enterpriseCard';
 import { EnterpriseFilters } from '../components/catalogFilters';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
 interface EnterprisePageProps {
@@ -88,6 +88,7 @@ export const EnterprisePage: React.FC<EnterprisePageProps> = ({
         }
     }, [situationFilter])
     /* eslint-disable react-hooks/exhaustive-deps */
+
     
     return (
         <EnterpriseSectionContainer id="get-more-items">
@@ -138,14 +139,14 @@ export const EnterprisePage: React.FC<EnterprisePageProps> = ({
                     <Row>
                         <EnterpriseListContainer>
                             {enterprises.map((page: any, i: number) => (
-                                <div key={i}>
-                                {page?.data.length > 0 ?
-                                page?.data.map((enterprise:any, index:number) => (
-                                    <EnterpriseCard key={index} data={enterprise} />
-                                ))
-                                :
-                                <p>Sem resultados encontrados.</p>}
-                                </div>
+                                <React.Fragment key={i}>
+                                    {page?.data.length > 0 ?
+                                    page?.data.map((enterprise:any, index:number) => (
+                                        <EnterpriseCard key={index} data={enterprise} />
+                                    ))
+                                    :
+                                    <p>Sem resultados encontrados.</p>}
+                                </React.Fragment>
                             ))}
                         </EnterpriseListContainer>
                     </Row>

@@ -36,7 +36,7 @@ export const PostPage: React.FC<PostPageProps> = ({post}) => {
                                 {post.post.file && <Cover background={getStorageFile(post.post.file.path)}></Cover>}
                                 <Content>{post.post.content && <div dangerouslySetInnerHTML={{ __html: post.post.content }} />}</Content>
                                 <LineDivider></LineDivider>
-                                <ContainerNavigation single={!post.nextAndPrev.prev ? true : false}>
+                                <ContainerNavigation single={!post.nextAndPrev.prev ? 'true' : 'false'}>
                                     {post.nextAndPrev.prev && <Prev><a href={post.nextAndPrev.prev} target="_parent"><BsArrowLeft/>Anterior</a></Prev>}
                                     {post.nextAndPrev.next && <Next><a href={post.nextAndPrev.next} target="_parent">Próximo<BsArrowRight/></a></Next>}
                                 </ContainerNavigation>
@@ -130,11 +130,11 @@ const LineDivider = styled.div`
     margin:50px 0;
 `;
 
-const ContainerNavigation = styled.div<{single: boolean}>`
+const ContainerNavigation = styled.div<{single: string}>`
     width:100%;
     display:flex;
     flex-direction:row;
-    justify-content: ${props => props.single ? 'flex-end' : 'space-between'};
+    justify-content: ${props => props.single === 'true' ? 'flex-end' : 'space-between'};
 `;
 
 const Next = styled.div`

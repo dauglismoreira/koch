@@ -22,6 +22,7 @@ export default function List(){
         if (query) {
             fetchData(query)
         } else {
+            // @ts-ignore
             fetchData(objectToURLParams(getURLParameters()))
         }
     }, [query])

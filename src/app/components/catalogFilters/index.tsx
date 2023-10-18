@@ -27,7 +27,6 @@ export const EnterpriseFilters: React.FC<EnterpriseFiltersProps> = ({
   clearFilter
 }) => {
 
-  console.log()
 
     const [showModal, setShowModal] = useState(false);
     const [isOptionsListVisible, setIsOptionsListVisible] = useState(true);

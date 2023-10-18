@@ -6,7 +6,7 @@ import { SectionSubTitle } from '../components/sectionSubTitle';
 import { OpportunityCard } from '../components/opportunityCard';
 import { EnterpriseFilters } from '../components/catalogFilters';
 import { CardProps } from '../components/enterpriseCard';
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { OpportunitiesSection } from '../home/sections/opportunitiesSection';
 import { oportunitiesInfo, oppotunitiesButtons } from '../home/data';
@@ -139,14 +139,14 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({
                     <Row>
                         <EnterpriseListContainer>
                             {enterprises.map((page: any, i : number) => (
-                                <div key={i}>
-                                {page?.data.length > 0 ?
-                                page?.data.map((enterprise:any, index:number) => (
-                                    <OpportunityCard key={index} data={enterprise} />
-                                ))
-                                :
-                                <p>Sem resultados encontrados.</p>}
-                                </div>
+                                <React.Fragment key={i}>
+                                    {page?.data.length > 0 ?
+                                    page?.data.map((enterprise:any, index:number) => (
+                                        <OpportunityCard key={index} data={enterprise} />
+                                    ))
+                                    :
+                                    <p>Sem resultados encontrados.</p>}
+                                </React.Fragment>
                             ))}
                         </EnterpriseListContainer>
                     </Row>

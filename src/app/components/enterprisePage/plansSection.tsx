@@ -61,7 +61,7 @@ export const EnterPlansSection: React.FC<EnterPlansSectionProps> = ({
     return (
         <PlansSection>
             <Container>
-            <Row breakpoint={!isLargeScreen.isLargeScreen}>
+            <Row breakpoint={!isLargeScreen.isLargeScreen ? "true" : 'false'}>
                 <Col flex={2}>
                     <SectionSubTitle text={`Plantas do\nempreendimento`} color="var(--text-secondary)"/>
                     <ContainerButton width={isLargeScreen.width}>

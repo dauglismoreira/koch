@@ -15,7 +15,7 @@ import withReactContent from 'sweetalert2-react-content'
 
 interface SocialLinksProps {
     text:string;
-    href:string;
+    href:any;
 }
 
 interface ContatoPageProps {
@@ -82,7 +82,7 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
         <ContatoPageSectionContainer>
             <Section padding={!isLargeScreen.isLargeScreen ? "120px 10px 60px" : "120px 0 60px"} background="var(--background-primary-variation)">
                 <Container>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen ? "true" : 'false'}>
                         <Col flex={2}>
                             <SectionSubTitle text={contactInfo.sectionTitle} color="var(--text-white)"/>
                         </Col>
@@ -103,7 +103,7 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                             </SocialLinks>
                         </Col>}
                     </Row>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen} margin="20px 0 0">
+                    <Row breakpoint={!isLargeScreen.isLargeScreen ? "true" : 'false'} margin="20px 0 0">
                     {isLargeScreen.isLargeScreen && <Col flex={2}></Col>}
                         <Col flex={5} >
                             <ContainerForm>

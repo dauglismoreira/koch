@@ -11,17 +11,8 @@ interface InputProps {
 }
 
 export const TextInput: React.FC<InputProps> = ({ placeholder, clearFilter, icon, onChange, open, param }) => {
-    const [isFocused, setIsFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
-    
-
-    const handleInputFocus = () => {
-      setIsFocused(true);
-    };
   
-    const handleInputBlur = () => {
-      setIsFocused(false);
-    };
 
     useEffect(() => {
       setInputValue('')
@@ -55,12 +46,10 @@ export const TextInput: React.FC<InputProps> = ({ placeholder, clearFilter, icon
       <StyledInput
         type="text"
         placeholder={placeholder}
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
         onChange={handleInputChange}
         value={inputValue}
       />
-      <IconContainer isFocused={isFocused}>
+      <IconContainer>
         {icon}
     </IconContainer>
     </InputContainer>
@@ -94,9 +83,8 @@ const StyledInput = styled.input`
   }
 `;
 
-const IconContainer = styled.div<{ isFocused: boolean }>`
+const IconContainer = styled.div`
     margin-right: 0px;
     transition: opacity 0.3s ease-in-out;
 
-    // opacity: ${(props) => (props.isFocused ? '0' : '1')};
 `;

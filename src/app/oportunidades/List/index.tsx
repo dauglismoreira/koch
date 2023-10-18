@@ -27,6 +27,7 @@ export default function List({ cities, status }: ListProps){
 /* eslint-disable react-hooks/exhaustive-deps */
      useEffect(() => {
          if (objectToURLParams(getURLParameters()) !== '') {
+            // @ts-ignore
             fetchData(objectToURLParams(getURLParameters()))
          } else {
             fetchData(query)
@@ -35,6 +36,7 @@ export default function List({ cities, status }: ListProps){
 /* eslint-disable react-hooks/exhaustive-deps */
     const handleURLParametersChange = () => {
         if (objectToURLParams(getURLParameters()) !== '') {
+            // @ts-ignore
             fetchData(objectToURLParams(getURLParameters()))
         } else {
             fetchData(query)

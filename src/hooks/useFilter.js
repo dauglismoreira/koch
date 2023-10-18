@@ -16,6 +16,7 @@ export default function useFilter(values = {}) {
     }
 
     useEffect(() => {
+
         const queryParameters = objectToURLParams(terms)
 
         if (queryParameters.length) {
@@ -23,7 +24,7 @@ export default function useFilter(values = {}) {
 
             updateURLParameters(queryParameters)
         } else {
-            setQuery(null)
+            setQuery('')
         }
     }, [terms]);
 

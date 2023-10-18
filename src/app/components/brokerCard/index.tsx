@@ -128,7 +128,7 @@ const Phone = styled.div`
     }
 `;
 
-const Button = styled.a`
+const Button = styled.div`
     background-color:transparent;
     color:var(--text-primary);
     border:solid 1px var(--background-primary);

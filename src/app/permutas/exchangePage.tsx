@@ -103,7 +103,7 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
         <>
             <Section padding={!isLargeScreen.isLargeScreen ? "140px 0 40px" : "120px 0 60px"} background="var(--background-secondary)">
                 <Container>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen ? "true" : 'false'}>
                         <Col flex={2}>
                             <SectionSubTitle text={aboutInfo && aboutInfo.sectionTitle} color="var(--text-primary)"/>
                         </Col>
@@ -111,12 +111,12 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
                             <SectionTitle text={data && data.text} color="var(--text-primary)"/>
                         </Col>
                     </Row>
-                    <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                    <Row breakpoint={!isLargeScreen.isLargeScreen ? "true" : 'false'}>
                         <Col flex={2}></Col>
                         <Col flex={10}>
                             <Content>
                                 <SectionBodyText text={data && data.long_text} color="var(--text-secondary)"/>
-                                <Row breakpoint={!isLargeScreen.isLargeScreen} reverse={false}>
+                                <Row breakpoint={!isLargeScreen.isLargeScreen ? "true" : 'false'} reverse={'false'}>
                                     <Col flex={12}>
                                     <InputGenerate
                                         leftInputs={formInputsLeft}
@@ -127,7 +127,7 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
                                     />
                                     </Col>
                                 </Row>
-                                <Row breakpoint={!isLargeScreen.isLargeScreen}>
+                                <Row breakpoint={!isLargeScreen.isLargeScreen ? "true" : 'false'}>
                                     <Col flex={6} padding="15px 10px">
                                         <ActionFormContainer>
                                             <Mandatory color="var(--text-secondary)"/>
