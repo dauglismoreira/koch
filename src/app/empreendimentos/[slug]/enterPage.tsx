@@ -66,7 +66,7 @@ export const EnterPage: React.FC<EnterpriseProps> = ({enterprise}) => {
                     />
                     <div id="sobre"><EnterAboutSection
                         about_text={enterprise.enterprise.description}
-                        about_characteristics={enterprise.enterprise.differentials}
+                        about_characteristics={enterprise.enterprise.featured_features}
                         about_image={enterprise.enterprise.vertical_image.path}
                     /></div>
                     <Row><LineDivider></LineDivider></Row>
@@ -94,6 +94,9 @@ export const EnterPage: React.FC<EnterpriseProps> = ({enterprise}) => {
                         location_description={enterprise.enterprise.location_description}
                     /></div>
                     <Row><LineDivider></LineDivider></Row>
+                    {(enterprise.enterprise.work_progress.length > 0
+                    || enterprise.enterprise.galleries?.filter((gallery : any) => gallery.title === 'Progresso da obra')[0].files.lenght > 0
+                    || enterprise.enterprise.work_progress_videos.lenght > 0) &&
                     <div id="obra"><EnterProgressSection
                         prog={enterprise.enterprise.work_progress}
                         videos={enterprise.enterprise.work_progress_videos}
@@ -101,6 +104,7 @@ export const EnterPage: React.FC<EnterpriseProps> = ({enterprise}) => {
                         begin_date={enterprise.enterprise.begin_date}
                         end_date={enterprise.enterprise.end_date}
                     /></div>
+                  }
                 </Container>
             </Section>
             </>
