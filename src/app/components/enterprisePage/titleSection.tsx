@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Col, Row } from "../../components/grid";
 import { HighSkills } from '@/app/empreendimentos/[slug]/enterPage';
 import { Baskerville } from '@/app/fonts';
+import getStorageFile from '@/helpers/getStorageFile';
 
 interface EnterTitleSectionProps {
     title?:string;
@@ -38,7 +39,7 @@ export const EnterTitleSection: React.FC<EnterTitleSectionProps> = ({
                 <Col flex={2}>
                     {enterprise_logo &&
                     <EnterpriseLogoContainer>
-                        <EnterpriseLogo logo={enterprise_logo}></EnterpriseLogo>
+                        <EnterpriseLogo logo={getStorageFile(enterprise_logo)}></EnterpriseLogo>
                     </EnterpriseLogoContainer>
                     }
                 </Col>
@@ -51,7 +52,7 @@ export const EnterTitleSection: React.FC<EnterTitleSectionProps> = ({
                 </Col>
             </Row>
             {high_image &&
-                <Cover style={{backgroundImage:`url('${high_image}')`}}></Cover>
+                <Cover style={{backgroundImage:`url('${getStorageFile(high_image)}')`}}></Cover>
             }
         </TitleSection>
     )

@@ -60,14 +60,14 @@ export const EnterPage: React.FC<EnterpriseProps> = ({enterprise}) => {
                         title_high={enterprise.enterprise.status}
                         district={enterprise.enterprise.location_type.location_name}
                         city={enterprise.enterprise.city.name}
-                        high_image={getStorageFile(enterprise.enterprise?.horizontal_image?.path)}
-                        enterprise_logo={getStorageFile(enterprise.enterprise?.logo_image?.path)}
+                        high_image={enterprise.enterprise?.horizontal_image?.path}
+                        enterprise_logo={enterprise.enterprise?.logo_image?.path}
                         high_skills={enterprise.enterprise}
                     />
                     <div id="sobre"><EnterAboutSection
                         about_text={enterprise.enterprise.description}
                         about_characteristics={enterprise.enterprise.differentials}
-                        about_image={getStorageFile(enterprise.enterprise.vertical_image.path)}
+                        about_image={enterprise.enterprise.vertical_image.path}
                     /></div>
                     <Row><LineDivider></LineDivider></Row>
                     {enterprise.enterprise.galleries?.filter((gallery : any) => gallery.title === 'Galeria de imagens')[0].files.length > 0 &&

@@ -3,6 +3,7 @@ import { Col, Row } from "../grid";
 import { AboutCharacteristics } from '@/app/empreendimentos/[slug]/enterPage';
 import { SectionBodyText } from '../sectionBodyText';
 import { SectionSubTitle } from '../sectionSubTitle';
+import getStorageFile from '@/helpers/getStorageFile';
 
 interface EnterAboutSectionProps {
     about_text: string;
@@ -37,7 +38,7 @@ export const EnterAboutSection: React.FC<EnterAboutSectionProps> = ({
                     </Content>
                 </Col>
                 <Col flex={5}>
-                    <CoverImage image={about_image}></CoverImage>
+                    <CoverImage image={getStorageFile(about_image)}></CoverImage>
                 </Col>
             </Row>
         </AboutSection>
