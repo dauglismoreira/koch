@@ -60,8 +60,8 @@ export const EnterPage: React.FC<EnterpriseProps> = ({enterprise}) => {
                         title_high={enterprise.enterprise.status}
                         district={enterprise.enterprise.location_type.location_name}
                         city={enterprise.enterprise.city.name}
-                        high_image={getStorageFile(enterprise.enterprise.horizontal_image.path)}
-                        enterprise_logo={getStorageFile(enterprise.enterprise.logo_image.path)}
+                        high_image={getStorageFile(enterprise.enterprise?.horizontal_image?.path)}
+                        enterprise_logo={getStorageFile(enterprise.enterprise?.logo_image?.path)}
                         high_skills={enterprise.enterprise}
                     />
                     <div id="sobre"><EnterAboutSection
