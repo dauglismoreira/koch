@@ -42,9 +42,9 @@ export const BrokerCard: React.FC<CardPropsData> = ({
                     <Phone>{data.telephone}</Phone>
                 </Info>
                 <ContainerButtons>
-                    <Button><a href={`mailto:` + data.email} target="_blank">Email</a></Button>
-                    <Button><a href={`https://api.whatsapp.com/send?phone=` + data.whatsapp.replace(/\D/g, '')} target="_blank">Whatsapp</a></Button>
-                    <Button><a  href={`tel:${data.telephone.replace(/\D/g, '')}`} target="_blank">Ligue agora</a></Button>
+                    <Button><a href={`mailto:` + data?.email} target="_blank">Email</a></Button>
+                    <Button><a href={`https://api.whatsapp.com/send?phone=` + data?.whatsapp?.replace(/\D/g, '')} target="_blank">Whatsapp</a></Button>
+                    <Button><a  href={`tel:${data?.telephone?.replace(/\D/g, '')}`} target="_blank">Ligue agora</a></Button>
                 </ContainerButtons>
             </Content>
         </Card>
