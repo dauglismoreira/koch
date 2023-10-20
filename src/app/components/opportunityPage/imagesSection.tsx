@@ -63,7 +63,7 @@ export const OpportunityImagesSection: React.FC<OpportunityImagesSectionProps> =
                                 href={getStorageFile(image.path)}
                                 delegate="[data-fancybox='gallery']"
                             >
-                                <Image
+                                <img
                                     width={260}
                                     height={200}
                                     loading="eager" 
@@ -96,7 +96,7 @@ export const OpportunityImagesSection: React.FC<OpportunityImagesSectionProps> =
                                         href={getStorageFile(image.path)}
                                         delegate="[data-fancybox='gallery']"
                                     >
-                                        <Image
+                                        <img
                                             width={260}
                                             height={200}
                                             loading="eager" 
