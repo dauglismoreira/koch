@@ -5,7 +5,7 @@ import { Col, Container, Row, Section } from "../components/grid";
 import { SectionSubTitle } from '../components/sectionSubTitle';
 import useScreenSize from '../../hooks/useScreenSize';
 import { SectionTitle } from '../components/sectionTitle';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { InputGenerate, LocalFormData } from '../components/formGenerator';
 import { Mandatory } from '../components/formGenerator/components/notice';
 import { CheckFormAccept } from '../components/formGenerator/components/check';
@@ -27,6 +27,20 @@ interface ContatoPageProps {
     dataLocal:any;
     itemSocialList:SocialLinksProps[];
 }
+
+interface MapComponentProps {
+    dataLocal: {
+      iframe: string;
+    };
+  }
+
+  const MapComponent: React.FC<MapComponentProps> = React.memo(({ dataLocal }) => (
+    <Map>
+      <div dangerouslySetInnerHTML={{ __html: dataLocal && dataLocal.iframe }} />
+    </Map>
+  ));
+
+  MapComponent.displayName = 'MapComponent';
 
 export const ContatoPage: React.FC<ContatoPageProps> = ({
         data,
@@ -127,9 +141,7 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                         </Col>
                         <Col flex={5}>
                             {dataLocal.iframe &&
-                                <Map>
-                                    <div dangerouslySetInnerHTML={{ __html: dataLocal && dataLocal.iframe }} />
-                                </Map>
+                                <MapComponent dataLocal={dataLocal}/>
                             }
                             {dataLocal.text &&
                                 <Local>{dataLocal && dataLocal.text}</Local>
