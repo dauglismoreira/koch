@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google'
 import StyledComponentsRegistry from './lib/registry'
 import { OpenSans } from './fonts'
 import Head from 'next/head';
+import { GoogleTagManager } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,10 +30,13 @@ export default function RootLayout({
 }) {
   
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <GoogleTagManager gtmId="G-R2GT88V90F" />
+
       <body className={`${inter.className} ${OpenSans.className}`}>
           <StyledComponentsRegistry>
             <Header/>
