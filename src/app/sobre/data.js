@@ -1,3 +1,3 @@
  export const aboutInfo = {
-    sectionTitle:'conheça\na kock',
+    sectionTitle:'conheça\na koch',
   };
