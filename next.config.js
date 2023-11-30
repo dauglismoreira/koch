@@ -4,6 +4,6 @@ const nextConfig = {}
 module.exports = {
     reactStrictMode: true,
     images: {
-      domains: ['koch.impacte.com.br'],
+      domains: ['koch.impacte.com.br', 'localhost:8000'],
     },
   };
