@@ -9,9 +9,9 @@ interface ItemProps {
 export const CallNumber: React.FC<ItemProps> = ({number, email}) => {
 
     const formatPhoneNumber = (phoneNumber: string) => {
-          const part1 = phoneNumber.substring(0, 2);
-          const part2 = phoneNumber.substring(2, 7);
-          const part3 = phoneNumber.substring(7, 11);
+          const part1 = phoneNumber?.substring(0, 2);
+          const part2 = phoneNumber?.substring(2, 7);
+          const part3 = phoneNumber?.substring(7, 11);
           return (
             <div>
               <span>{part1}</span>
