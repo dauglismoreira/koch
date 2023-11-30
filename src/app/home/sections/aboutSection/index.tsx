@@ -22,6 +22,10 @@ interface AboutProps {
 
 export const AboutSection: React.FC<AboutProps> = ({ info, data }) => {
 
+    if (!data?.title) {
+        return
+    }
+
     return (
         data.title !== '' &&
         <AboutSectionContainer>

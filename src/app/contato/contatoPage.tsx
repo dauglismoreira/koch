@@ -103,7 +103,7 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                         <Col flex={7}>
                             <ContentContact>
                                 <div>
-                                    <SectionTitle text={data.text} color="var(--text-white)"/>
+                                    <SectionTitle text={data?.text} color="var(--text-white)"/>
                                     {/* <SectionBodyText  text={contactInfo.content} color="var(--text-white)"/> */}
                                     <div dangerouslySetInnerHTML={{ __html: data && data.long_text }} />
                                 </div>
@@ -140,10 +140,10 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({
                             </ContainerActionForm>
                         </Col>
                         <Col flex={5}>
-                            {dataLocal.iframe &&
+                            {dataLocal?.iframe &&
                                 <MapComponent dataLocal={dataLocal}/>
                             }
-                            {dataLocal.text &&
+                            {dataLocal?.text &&
                                 <Local>{dataLocal && dataLocal.text}</Local>
                             }
                         </Col>
