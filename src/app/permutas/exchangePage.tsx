@@ -13,6 +13,7 @@ import { CheckFormAccept } from '../components/formGenerator/components/check';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { getData } from '@/helpers/getData';
+import Dump from "@/impacte/Dump";
 
 interface ExchangePageProps {
     aboutInfo:any;
@@ -83,6 +84,10 @@ export const ExchangePage: React.FC<ExchangePageProps> = ({
 /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         const novoObjeto = dataForm?.intentions.map((select: FormInput) => {
+            if (!select.differentials.length) {
+                return null
+            }
+
             return {
                 placeholder: select.name,
                 name: select.id === 3 ? 'propose_type' : 'sales_proposal',

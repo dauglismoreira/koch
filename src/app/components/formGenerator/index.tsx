@@ -49,7 +49,7 @@ export const InputGenerate: React.FC<InputProps> = ({ dataForm, leftInputs, sing
             <Row className="break" gap="20px">
                 <Col flex={5} padding="15px 0px">
                     <Form color={color}>
-                        {leftInputs.map((input, index) => (
+                        {leftInputs.map((input, index) => input?.name && (
                             <div key={index}>
                                 {renderInput(input, formData[input.name], handleChange, color)}
                             </div>
@@ -60,7 +60,7 @@ export const InputGenerate: React.FC<InputProps> = ({ dataForm, leftInputs, sing
                     <Col flex={5} padding="15px 0px">
                         {rightInputs &&
                         <Form className="right" color={color}>
-                            {rightInputs.map((input, index) => (
+                            {rightInputs.map((input, index) => input?.name && (
                                 <div key={index}>
                                     {renderInput(input, formData[input.name], handleChange, color)}
                                 </div>
