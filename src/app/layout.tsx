@@ -44,9 +44,6 @@ export default function RootLayout({
             <Footer/>
             <Script
               src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/cdcc6f84-8caa-405e-8067-6bf007837cc3-loader.js"
-              onLoad={() => {
-                console.log('Script has loaded')
-              }}
             />
           </StyledComponentsRegistry>
 
