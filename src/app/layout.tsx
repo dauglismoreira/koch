@@ -42,8 +42,14 @@ export default function RootLayout({
             <Header/>
             {children}
             <Footer/>
-            <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/cdcc6f84-8caa-405e-8067-6bf007837cc3-loader.js"></script>
+            <Script
+              src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/cdcc6f84-8caa-405e-8067-6bf007837cc3-loader.js"
+              nonce="XUENAJFW"
+              data-test="script"
+            />
           </StyledComponentsRegistry>
+
+          {/* <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/cdcc6f84-8caa-405e-8067-6bf007837cc3-loader.js"></script> */}
         </body>
     </html>
   )
