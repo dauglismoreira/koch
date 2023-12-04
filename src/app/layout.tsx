@@ -8,6 +8,7 @@ import StyledComponentsRegistry from './lib/registry'
 import { OpenSans } from './fonts'
 import Head from 'next/head';
 import { GoogleTagManager } from '@next/third-parties/google'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -41,9 +42,15 @@ export default function RootLayout({
             <Header/>
             {children}
             <Footer/>
+            <Script
+              src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/cdcc6f84-8caa-405e-8067-6bf007837cc3-loader.js"
+              nonce="XUENAJFW"
+              data-test="script"
+            />
           </StyledComponentsRegistry>
 
-          {/* <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/cdcc6f84-8caa-405e-8067-6bf007837cc3-loader.js"></script> */}
+
+          {/* <script type="text/javascript" async src=""></script> */}
         </body>
     </html>
   )
