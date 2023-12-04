@@ -36,9 +36,9 @@ export default function RootLayout({
 
       <GoogleTagManager gtmId="G-R2GT88V90F" />
 
-      <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/cdcc6f84-8caa-405e-8067-6bf007837cc3-loader.js"></script>
+      {/* <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/cdcc6f84-8caa-405e-8067-6bf007837cc3-loader.js"></script> */}
 
-      <body className={`${inter.className} ${OpenSans.className}`}>
+      <body className={`${inter.className} ${OpenSans.className}`} suppressHydrationWarning>
           <StyledComponentsRegistry>
             <Header/>
             {children}
